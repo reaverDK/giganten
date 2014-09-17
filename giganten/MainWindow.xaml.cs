@@ -27,11 +27,6 @@ namespace giganten
 
 		private void MenuItem_Click(object sender, RoutedEventArgs e)
 		{
-
-		}
-
-		private void Menuitem_Click(Object sender, RoutedEventArgs e)
-		{
 			Application.Current.Shutdown();
 		}
 	}

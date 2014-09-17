@@ -10,7 +10,7 @@
 					<MenuItem Header="_Close"/>
 					<MenuItem Header="_Save"/>
 					<MenuItem Header="_Print"/>
-					<MenuItem Header="_Exit" Click="MenuItem_Click"/>
+					<MenuItem x:Name="exitbutton" Header="_Exit" Click="MenuItem_Click"/>
 				</MenuItem>
 				<MenuItem Header="_Edit"/>
 				<MenuItem Header="_Help">
