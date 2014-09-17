@@ -14,8 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
 
-//using PdfSharp.Drawing;
-//using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 
 namespace giganten
 {
@@ -65,13 +65,13 @@ namespace giganten
 		private void MenuItem_Click_Export(object sender, RoutedEventArgs e)
 		{
 
-/*			PdfDocument document = new PdfDocument();
+			PdfDocument document = new PdfDocument();
 			PdfPage page = document.AddPage();
 			XGraphics gfx = XGraphics.FromPdfPage(page);
 			XFont font = new XFont("Verdana", 11, XFontStyle.Bold);
 			gfx.DrawString("My Graph", font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.TopCenter);
 			const string pdfFileName = "Mygraph.pdf";
-			document.Save(filename + pdfFileName);	*/
+			document.Save(pdfFileName);
 		}
 	}
 }
