@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace giganten {
 	class YearInfo {
 		public readonly int Year;
-		public MonthInfo this[int index] {
+//		public MonthInfo this[int index] {
 			
-		}
+//		}
 
 		MonthInfo[] months = new MonthInfo[12];
 

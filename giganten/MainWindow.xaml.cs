@@ -73,5 +73,11 @@ namespace giganten
 			const string pdfFileName = "Mygraph.pdf";
 			document.Save(pdfFileName);
 		}
+
+		private void MenuItem_Click_About(object sender, RoutedEventArgs e)
+		{
+			AboutWindow aboutwin = new AboutWindow();
+			aboutwin.Show();
+		}
 	}
 }
