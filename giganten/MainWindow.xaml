@@ -3,7 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-		<Button Content="Button" HorizontalAlignment="Left" Margin="341,117,0,0" VerticalAlignment="Top" Width="75"/>
-
+		<DockPanel>
+			<Menu DockPanel.Dock="Top" IsMainMenu="True">
+				<MenuItem Header="_File">
+					<MenuItem Header="_Open"/>
+					<MenuItem Header="_Close"/>
+					<MenuItem Header="_Save"/>
+				</MenuItem>
+				<MenuItem Header="_Edit"/>
+			</Menu>
+			<StackPanel></StackPanel>
+		</DockPanel>
 	</Grid>
 </Window>
