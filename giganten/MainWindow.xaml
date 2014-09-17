@@ -9,9 +9,14 @@
 					<MenuItem Header="_Open"/>
 					<MenuItem Header="_Close"/>
 					<MenuItem Header="_Save"/>
-					<MenuItem Header="Exit"/>
+					<MenuItem Header="_Print"/>
+					<MenuItem x:Name="exitbutton" Header="_Exit" Click="MenuItem_Click"/>
 				</MenuItem>
 				<MenuItem Header="_Edit"/>
+				<MenuItem Header="_Help">
+					<MenuItem Header="_Contact Info"/>
+					<MenuItem Header="_About Us"/>
+				</MenuItem>
 			</Menu>
 			<TabControl Width="Auto" Background="#FFECECEC">
 				<TabItem Header="Main" >
