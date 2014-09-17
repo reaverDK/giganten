@@ -24,7 +24,8 @@ namespace giganten
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		public string filename;
+		string filename;
+		DataHandler datahandler = new DataHandler();
 
 		public MainWindow()
 		{
@@ -38,10 +39,14 @@ namespace giganten
 
 		private void MenuItem_Click_Open(object sender, RoutedEventArgs e)
 		{
-			dialogbox();
+			if (dialogbox()) {
+				StatusBox.Content = "Status: Indlæser fil";
+				bool success = datahandler.AddFile(filename);
+				StatusBox.Content = success ? "Status: Filen blev indlæst" : "Status: Fejl under filindlæsning";
+			}
 		}
 
-		public void dialogbox()
+		public bool dialogbox()
 		{
 			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 			dlg.FileName = "Document"; //default file name
@@ -52,7 +57,9 @@ namespace giganten
 			if (result == true)
 			{
 				filename = dlg.FileName;
+				return true;
 			}
+			return false;
 		}
 
 		private void MenuItem_Click_Export(object sender, RoutedEventArgs e)
