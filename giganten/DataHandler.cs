@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nea;
 
 namespace giganten {
 	class DataHandler {
@@ -20,7 +21,8 @@ namespace giganten {
 		}
 
 		private void ProcessFile(string file) {
-			
+			NeaReader r = new NeaReader(file);
+			String text = r.ReadUntilAny(";,");
 		}
 	}
 }
