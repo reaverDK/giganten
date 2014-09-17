@@ -25,9 +25,23 @@ namespace giganten
 			InitializeComponent();
 		}
 
-		private void MenuItem_Click(object sender, RoutedEventArgs e)
+		private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
 		{
 			Application.Current.Shutdown();
+		}
+
+		private void MenuItem_Click_Open(object sender, RoutedEventArgs e)
+		{
+			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+			dlg.FileName = "Document"; //default file name
+			dlg.DefaultExt = ".txt"; //default file extension
+			dlg.Filter = "Text Documents (.txt)|*.txt"; //filter files by extension
+
+			Nullable<bool> result = dlg.ShowDialog();
+			if(result == true)
+			{
+				string filename = dlg.FileName;
+			}
 		}
 	}
 }
