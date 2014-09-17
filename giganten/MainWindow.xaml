@@ -14,7 +14,7 @@
 				</MenuItem>
 				<MenuItem Header="_Rediger"/>
 				<MenuItem Header="_Hjælp">
-					<MenuItem Header="_Kontakt information"/>
+					<MenuItem Header="_Kontakt information" Click="MenuItem_Click_Contact"/>
 					<MenuItem Header="_Om ElRank" Click="MenuItem_Click_About"/>
 				</MenuItem>
 			</Menu>

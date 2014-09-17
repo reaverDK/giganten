@@ -79,5 +79,11 @@ namespace giganten
 			AboutWindow aboutwin = new AboutWindow();
 			aboutwin.Show();
 		}
+
+		private void MenuItem_Click_Contact(object sender, RoutedEventArgs e)
+		{
+			ContactWindow contactWin = new ContactWindow();
+			contactWin.Show();
+		}
 	}
 }
