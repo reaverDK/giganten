@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nea, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\Dokumenter\Programmer\Visual Studio\Projects\Emperion\Nea\bin\Debug\Nea.dll</HintPath>
+    </Reference>
     <Reference Include="PdfSharp-WPF, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\PdfSharp-WPF.dll</HintPath>
@@ -111,6 +115,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Nea.dll" />
     <Content Include="PdfSharp-WPF.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
