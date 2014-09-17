@@ -8,6 +8,7 @@ using Nea;
 namespace giganten {
 	class DataHandler {
 		List<String> files = new List<string>();
+		List<YearInfo> years = new List<YearInfo>();
 
 		public bool AddFile(string file) {
 			try {
@@ -21,8 +22,19 @@ namespace giganten {
 		}
 
 		private void ProcessFile(string file) {
-			NeaReader r = new NeaReader(file);
-			String text = r.ReadUntilAny(";,");
+			NeaReader reader = new NeaReader(file);
+			while (reader.Peek() != -1) {
+				ProcessEntry(reader, 4);
+			}
+			reader.Close();
+		}
+
+		private void ProcessEntry(NeaReader reader, int fieldcount) {
+			String[] fields = new String[fieldcount];
+			for (int i = 0; i < fieldcount; i++) {
+				fields[i] = reader.ReadUntilAny(";,");
+				if (reader.Peek() == -1) return;
+			}
 		}
 	}
 }
