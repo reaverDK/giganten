@@ -12,7 +12,16 @@
 				</MenuItem>
 				<MenuItem Header="_Edit"/>
 			</Menu>
-			<StackPanel></StackPanel>
+			<StackPanel>
+				<TabControl Width="Auto">
+					<TabItem Header="TabItem">
+						<Grid Background="#FFE5E5E5"/>
+					</TabItem>
+					<TabItem Header="TabItem">
+						<Grid Background="#FFE5E5E5"/>
+					</TabItem>
+				</TabControl>
+			</StackPanel>
 		</DockPanel>
 	</Grid>
 </Window>
