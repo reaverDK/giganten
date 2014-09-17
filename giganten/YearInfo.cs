@@ -8,7 +8,7 @@ namespace giganten {
 	class YearInfo {
 		public readonly int Year;
 		public MonthInfo this[int index] {
-			
+			get { return months[index]; }
 		}
 
 		MonthInfo[] months = new MonthInfo[12];
