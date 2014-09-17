@@ -9,7 +9,7 @@
 				<MenuItem Header="_Filer">
 					<MenuItem Header="_Åben..." Click="MenuItem_Click_Open"/>
 					<MenuItem Header="_Reset"/>
-					<MenuItem Header="_Eksportér som PDF"/>
+					<MenuItem Header="_Eksportér som PDF" Click="MenuItem_Click_Export"/>
 					<MenuItem Header="_Afslut" Click="MenuItem_Click_Exit"/>
 				</MenuItem>
 				<MenuItem Header="_Rediger"/>

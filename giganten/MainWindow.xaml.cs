@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
+
+//using PdfSharp.Drawing;
+//using PdfSharp.Pdf;
 
 namespace giganten
 {
@@ -20,6 +24,8 @@ namespace giganten
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		public string filename;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -32,16 +38,33 @@ namespace giganten
 
 		private void MenuItem_Click_Open(object sender, RoutedEventArgs e)
 		{
+			dialogbox();
+		}
+
+		public void dialogbox()
+		{
 			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 			dlg.FileName = "Document"; //default file name
 			dlg.DefaultExt = ".txt"; //default file extension
 			dlg.Filter = "Text Documents (.txt)|*.txt"; //filter files by extension
 
 			Nullable<bool> result = dlg.ShowDialog();
-			if(result == true)
+			if (result == true)
 			{
-				string filename = dlg.FileName;
+				filename = dlg.FileName;
 			}
+		}
+
+		private void MenuItem_Click_Export(object sender, RoutedEventArgs e)
+		{
+
+/*			PdfDocument document = new PdfDocument();
+			PdfPage page = document.AddPage();
+			XGraphics gfx = XGraphics.FromPdfPage(page);
+			XFont font = new XFont("Verdana", 11, XFontStyle.Bold);
+			gfx.DrawString("My Graph", font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.TopCenter);
+			const string pdfFileName = "Mygraph.pdf";
+			document.Save(filename + pdfFileName);	*/
 		}
 	}
 }
