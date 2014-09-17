@@ -9,6 +9,7 @@
 					<MenuItem Header="_Open"/>
 					<MenuItem Header="_Close"/>
 					<MenuItem Header="_Save"/>
+					<MenuItem Header="Exit"/>
 				</MenuItem>
 				<MenuItem Header="_Edit"/>
 			</Menu>
