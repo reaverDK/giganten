@@ -1,8 +1,8 @@
 ﻿<Window x:Class="giganten.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ElRank" Height="350" Width="525">
-	<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+        Title="ElRank" Height="600" Width="800">
+
 	<Grid Background="#FFECECEC">
 		<DockPanel>
 			<Menu DockPanel.Dock="Top" IsMainMenu="True">
@@ -18,29 +18,39 @@
 					<MenuItem Header="_Om ElRank"/>
 				</MenuItem>
 			</Menu>
-			<TabControl Width="Auto" Background="#FFECECEC">
-				<TabItem Header="Hovedside" >
-					<Grid Background="#FFECECEC">
-						<Label Content="Sælgerkode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,36,0,0"/>
-						<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="0,62,0,0" VerticalAlignment="Top"/>
-						<Label Content="Primær sælger:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="201"/>
-						<TextBox x:Name="SAKodeBox" HorizontalAlignment="Left" Height="23" Margin="91,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="F.eks. BOBBO"/>
-						<TextBox x:Name="SANummerBox" HorizontalAlignment="Left" Height="23" Margin="91,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="F.eks. 123123"/>
-						<Label Content="Sælgerkode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="223,36,0,0"/>
-						<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="223,62,0,0" VerticalAlignment="Top"/>
-						<Label Content="Sælger til sammenligning:" HorizontalAlignment="Left" Margin="233,5,0,0" VerticalAlignment="Top" Width="201"/>
-						<TextBox x:Name="SBKodeBox" HorizontalAlignment="Left" Height="23" Margin="314,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="F.eks. BOBBO"/>
-						<TextBox x:Name="SBNummerBox" HorizontalAlignment="Left" Height="23" Margin="314,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="F.eks. 123123"/>
-						<Label x:Name="SANavnBox" Content="Navn: " HorizontalAlignment="Left" Margin="0,93,0,0" VerticalAlignment="Top"/>
-							<Button Content="Button" HorizontalAlignment="Left" Margin="140,183,0,0" VerticalAlignment="Top" Width="75"/>
+			<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+				<TabControl Width="Auto" Background="#FFECECEC">
+					<TabItem Header="Hovedside" >
+						<Grid Background="#FFECECEC">
+							<Label Content="Sælgerkode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,36,0,0" Height="26" Width="76"/>
+							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="0,62,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
+							<Label Content="Primær sælger:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
+							<TextBox x:Name="SAKodeBox" HorizontalAlignment="Left" Height="23" Margin="91,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. BOBBO"/>
+							<TextBox x:Name="SANummerBox" HorizontalAlignment="Left" Height="23" Margin="91,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
+							<Label Content="Sælgerkode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,36,0,0" Height="26" Width="76"/>
+							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="189,62,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
+							<Label Content="Sælger til sammenligning:" HorizontalAlignment="Left" Margin="199,5,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
+							<TextBox x:Name="SBKodeBox" HorizontalAlignment="Left" Height="23" Margin="280,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. BOBBO"/>
+							<TextBox x:Name="SBNummerBox" HorizontalAlignment="Left" Height="23" Margin="280,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
+							<Label x:Name="SANavnBox" Content="Navn: -" HorizontalAlignment="Left" Margin="0,93,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
+							<Button Content="Indlæs sælgerinformation" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Width="160" Height="22"/>
+							<Label x:Name="SBNavnBox" Content="Navn: -" HorizontalAlignment="Left" Margin="189,93,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
+							<Label x:Name="StatusBox" Content="Status: Ingen filer indlæst" HorizontalAlignment="Left" Margin="189,122,0,0" VerticalAlignment="Top" Width="170"/>
+							<Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="364,10,10,10">
+								<Rectangle Canvas.Left="40" Canvas.Top="31" Width="63" Height="41" Fill="Blue"  />
+								<Ellipse Canvas.Left="130" Canvas.Top="79" Width="58" Height="58" Fill="Blue"  />
+								<Rectangle Canvas.Right="40" Canvas.Bottom="31" Width="63" Height="41" Fill="Green"  />
+								<Ellipse Canvas.Right="130" Canvas.Bottom="79" Width="58" Height="58" Fill="Green"  />
+							</Canvas>
 						</Grid>
-				</TabItem>
-				<TabItem Header="Data filer">
-					<Grid Background="#FFECECEC">
-					</Grid>
-				</TabItem>
-			</TabControl>
+					</TabItem>
+					<TabItem Header="Data filer">
+						<Grid Background="#FFECECEC">
+						</Grid>
+					</TabItem>
+				</TabControl>
+			</ScrollViewer>
 		</DockPanel>
 	</Grid>
-	</ScrollViewer>
+
 </Window>
