@@ -7,8 +7,8 @@ using Nea;
 
 namespace giganten {
 	class DataHandler {
-		private static const int fieldcount = 20;
-		private static const int datefield = 2;
+		private const int fieldcount = 20;
+		private const int datefield = 2;
 		List<String> files = new List<string>();
 		List<YearInfo> years = new List<YearInfo>();
 
