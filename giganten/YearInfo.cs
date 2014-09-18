@@ -17,8 +17,11 @@ namespace giganten {
 			Year = year;
 		}
 
-		public void AddMonth(MonthInfo month) {
-			months[month.Index] = month;
+		public void AddEntry(int month, String[] entry) {
+			if (months[month] == null)
+				months[month] = new MonthInfo(entry);
+			else
+				months[month].AddEntry(entry);
 		}
 	}
 }

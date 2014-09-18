@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace giganten {
 	class MonthInfo {
-		public readonly int Index;
+		public MonthInfo(String[] entry) {
+			
+		}
+
+		public void AddEntry(String[] entry) {
+			
+		}
 	}
 }
