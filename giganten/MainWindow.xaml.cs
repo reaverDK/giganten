@@ -107,7 +107,8 @@ namespace giganten
 			pdfRenderer.Document = document;
 			pdfRenderer.RenderDocument();
 
-			const string myfile = "helloworld.pdf";
+			string time = DateTime.Today.ToShortDateString();
+			string myfile = time + ".pdf";
 			pdfRenderer.PdfDocument.Save(myfile);
 			Process.Start(myfile);
 		}
