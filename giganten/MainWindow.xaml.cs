@@ -13,9 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
+using System.Diagnostics;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
+using MigraDoc.RtfRendering;
 
 namespace giganten
 {
@@ -64,14 +68,7 @@ namespace giganten
 
 		private void MenuItem_Click_Export(object sender, RoutedEventArgs e)
 		{
-
-			PdfDocument document = new PdfDocument();
-			PdfPage page = document.AddPage();
-			XGraphics gfx = XGraphics.FromPdfPage(page);
-			XFont font = new XFont("Verdana", 11, XFontStyle.Bold);
-			gfx.DrawString("My Graph", font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.TopCenter);
-			const string pdfFileName = "Mygraph.pdf";
-			document.Save(pdfFileName);
+			pdfCreater();
 		}
 
 		private void MenuItem_Click_About(object sender, RoutedEventArgs e)
@@ -84,6 +81,35 @@ namespace giganten
 		{
 			ContactWindow contactWin = new ContactWindow();
 			contactWin.Show();
+		}
+
+		public void pdfCreater()
+		{
+			/*PdfDocument pdfdocument = new PdfDocument();
+			PdfPage page = pdfdocument.AddPage();
+			XGraphics gfx = XGraphics.FromPdfPage(page);
+			XFont font = new XFont("Verdana", 11, XFontStyle.Bold);
+			gfx.DrawString("My Graph", font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.TopCenter);
+			const string pdfFileName = "Mygraph.pdf";
+			pdfdocument.Save(pdfFileName);*/
+
+			Document document = new Document();
+			document.UseCmykColor = true;
+
+			MigraDoc.DocumentObjectModel.Section section = document.AddSection();
+			MigraDoc.DocumentObjectModel.Paragraph paragraph = section.AddParagraph();
+			paragraph.Format.Font.Color = MigraDoc.DocumentObjectModel.Color.FromCmyk(100, 20, 30, 50);
+			paragraph.AddFormattedText("Hello World!", TextFormat.Bold);
+
+			const bool unicode = false;
+			const PdfFontEmbedding embedding = PdfFontEmbedding.Always;
+			PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(unicode, embedding);
+			pdfRenderer.Document = document;
+			pdfRenderer.RenderDocument();
+
+			const string myfile = "helloworld.pdf";
+			pdfRenderer.PdfDocument.Save(myfile);
+			Process.Start(myfile);
 		}
 	}
 }
