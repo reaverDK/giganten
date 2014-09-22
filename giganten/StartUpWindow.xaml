@@ -10,7 +10,10 @@
 
 		<Button Content="Button" HorizontalAlignment="Left" Margin="38,110,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold"/>
 		<Border BorderBrush="#BAB2C7D6" BorderThickness="20,2,20,4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-		<Grid Background="#FF1E1A54" HorizontalAlignment="Stretch" Height="66" VerticalAlignment="Top">
+		<Grid HorizontalAlignment="Stretch" Height="66" VerticalAlignment="Top">
+			<Grid.Background>
+				<ImageBrush ImageSource="bg-header.png"/>
+			</Grid.Background>
 			<Grid Margin="0,2,0,-2" HorizontalAlignment="Left" Width="271" Height="66" VerticalAlignment="Top" MouseDown="Grid_MouseDown">
 				<Grid.Background>
 					<ImageBrush ImageSource="logo-large.png" Stretch="Uniform">
