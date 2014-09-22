@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo-large.png" />
+    <Resource Include="bg-header.png" />
     <Content Include="MigraDoc.DocumentObjectModel-WPF.resources.dll" />
     <Content Include="MigraDoc.Rendering-WPF.dll" />
     <Content Include="MigraDoc.RtfRendering-WPF.dll" />

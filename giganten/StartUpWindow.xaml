@@ -10,8 +10,23 @@
 
 		<Button Content="Button" HorizontalAlignment="Left" Margin="38,110,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" Click="Button_Click"/>
 		<Border BorderBrush="#BAB2C7D6" BorderThickness="20,2,20,4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-		<Grid Background="#FF1E1A54" HorizontalAlignment="Stretch" Height="66" VerticalAlignment="Top" MouseDown="Grid_MouseDown">
-			<Label Content="ELGIGANTEN" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="280" Foreground="White" FontSize="36" FontFamily="Consolas" FontWeight="Bold"/>
+		<Grid Background="#FF1E1A54" HorizontalAlignment="Stretch" Height="66" VerticalAlignment="Top">
+			<Grid Margin="0,2,0,-2" HorizontalAlignment="Left" Width="271" Height="66" VerticalAlignment="Top" MouseDown="Grid_MouseDown">
+				<Grid.Background>
+					<ImageBrush ImageSource="logo-large.png" Stretch="Uniform">
+						<ImageBrush.RelativeTransform>
+							<TransformGroup>
+								<ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="1.5" ScaleY="1.5"/>
+								<SkewTransform CenterY="0.5" CenterX="0.5"/>
+								<RotateTransform CenterY="0.5" CenterX="0.5"/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</ImageBrush.RelativeTransform>
+					</ImageBrush>
+				</Grid.Background>
+			</Grid>
+			<Button Style="{StaticResource ResourceKey=ExitButtonTemplate}" Content="X" HorizontalAlignment="Right" Margin="0,4,4,0" VerticalAlignment="Top" Width="25" Height="25" FontFamily="Arial Black" FontSize="16" Click="Exit_Click"/>
+
 		</Grid>
 		<!-- Blue"#FF1E1A54" DarkGreen"#FF88F000" LightGreen"#FF8CE600" LightGray"#FFF0F0F0" BackgroundBlue"#FFA3B6C5"-->
 	</Grid>
