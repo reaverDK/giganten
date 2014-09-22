@@ -45,7 +45,7 @@
 								<Ellipse Canvas.Right="130" Canvas.Bottom="79" Width="58" Height="58" Fill="Green"  />
 							</Canvas>
 							<TextBlock x:Name="DataTextBox" HorizontalAlignment="Left" Margin="10,328,0,10" TextWrapping="Wrap" Text="Infobox" VerticalAlignment="Stretch" Width="349"/>
-							<ComboBox HorizontalAlignment="Left" Height="20" Margin="5,10,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ComboBox_SelectionChanged">
+							<ComboBox HorizontalAlignment="Left" Height="26" Margin="5,10,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ComboBox_SelectionChanged">
 								<ComboBoxItem Content="&lt;Ingen afdelinger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
 								<ComboBoxItem Content="Data" HorizontalAlignment="Left" Width="168"/>
 								<ComboBoxItem Content="Hvidevare" HorizontalAlignment="Left" Width="168"/>
