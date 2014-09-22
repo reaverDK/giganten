@@ -2,16 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!-- CONTROL BACKGROUND -->
-	<SolidColorBrush x:Key="ButtonBaseColor" Color="#FF8CE600"></SolidColorBrush>
-	<SolidColorBrush x:Key="ButtonFocusColor" Color="#FF88F000"></SolidColorBrush>
+	<SolidColorBrush x:Key="ButtonBaseColor" Color="#FF80E000"></SolidColorBrush>
+	<SolidColorBrush x:Key="ButtonFocusColor" Color="#FF90F000"></SolidColorBrush>
+	<SolidColorBrush x:Key="ExitFocusColor" Color="White"></SolidColorBrush>
 	<SolidColorBrush x:Key="ButtonDisabledColor" Color="#FF8CE640"></SolidColorBrush>
 	<SolidColorBrush x:Key="BackgroundBaseColor" Color="#FFA3B6C5"></SolidColorBrush>
 	<!--SolidColorBrush x:Key="BackgroundDarkColor" Color="LightGreen"></SolidColorBrush>
 	<SolidColorBrush x:Key="BackgroundLightColor" Color="LightGreen"></SolidColorBrush-->
 
 	<LinearGradientBrush x:Key="FocusFX" StartPoint="0,0" EndPoint="1,0">
-		<GradientStop Offset="0" Color="#FF88F000"></GradientStop>
-		<GradientStop Offset="1" Color="#FF88F000"></GradientStop>
+		<GradientStop Offset="0" Color="#FF90F000"></GradientStop>
+		<GradientStop Offset="1" Color="#FF90F000"></GradientStop>
 	</LinearGradientBrush>
 
 	<Storyboard x:Key="FocusOut">
@@ -20,9 +21,66 @@
 	<Storyboard x:Key="FocusIn">
 		<DoubleAnimation x:Name="AnimFocus" BeginTime="00:00:00" Storyboard.TargetName="FocusRectangle" Duration="00:00:00.250" From="0" To="1" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
 	</Storyboard>
-
-
-	<!-- BOTON -->
+	<Storyboard x:Key="ExitFocusOut">
+		<DoubleAnimation x:Name="AnimExitFocusOut" BeginTime="00:00:00" Storyboard.TargetName="FocusRectangle" Duration="00:00:00.250" From="0.5" To="0" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+	</Storyboard>
+	<Storyboard x:Key="ExitFocusIn">
+		<DoubleAnimation x:Name="AnimExitFocus" BeginTime="00:00:00" Storyboard.TargetName="FocusRectangle" Duration="00:00:00.250" From="0" To="0.5" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+	</Storyboard>
+	
+	
+	<Style x:Key="ExitButtonTemplate" TargetType="{x:Type Button}">
+		<Setter Property="SnapsToDevicePixels" Value="True" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate x:Name="tmpltButton">
+					<Grid>
+						<Border x:Name="FocusRectangle" 
+                    Background="{StaticResource ExitFocusColor}" 
+										Opacity="0" >
+						</Border>
+						<Border x:Name="Presstangle" 
+                    Background="{StaticResource ExitFocusColor}" 
+										Opacity="0" >
+						</Border>
+						<ContentPresenter x:Name="ButtonContent" 
+                    Opacity="1" 
+                    Content="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" 
+                    HorizontalAlignment="center" 
+                    VerticalAlignment="center">
+						</ContentPresenter>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="Button.MouseLeave">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource ExitFocusOut}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.MouseEnter">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource ExitFocusIn}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.LostFocus">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource ExitFocusOut}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.GotFocus">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource ExitFocusIn}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<Trigger Property="Button.IsPressed" Value="True">
+							<Setter Property="Opacity" TargetName="Presstangle" Value="0.7"></Setter>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
 	<Style TargetType="{x:Type Button}">
 		<Setter Property="OverridesDefaultStyle" Value="True" />
 		<Setter Property="SnapsToDevicePixels" Value="True" />
@@ -82,5 +140,7 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	
 
 </ResourceDictionary>
