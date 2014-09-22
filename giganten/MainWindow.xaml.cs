@@ -112,5 +112,10 @@ namespace giganten
 			pdfRenderer.PdfDocument.Save(myfile);
 			Process.Start(myfile);
 		}
+
+		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			StatusBox.Content = "Status: Combobox selection changed !";
+		}
 	}
 }

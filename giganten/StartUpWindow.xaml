@@ -8,7 +8,7 @@
 
 	<Grid>
 
-		<Button Content="Button" HorizontalAlignment="Left" Margin="38,110,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold"/>
+		<Button Content="Button" HorizontalAlignment="Left" Margin="38,110,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" Click="Button_Click"/>
 		<Border BorderBrush="#BAB2C7D6" BorderThickness="20,2,20,4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 		<Grid Background="#FF1E1A54" HorizontalAlignment="Stretch" Height="66" VerticalAlignment="Top" MouseDown="Grid_MouseDown">
 			<Label Content="ELGIGANTEN" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="280" Foreground="White" FontSize="36" FontFamily="Consolas" FontWeight="Bold"/>

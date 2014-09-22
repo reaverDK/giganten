@@ -23,28 +23,38 @@
 			<ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
 				<TabControl Width="Auto" Background="#FFECECEC">
 					<TabItem Header="Hovedside" >
-						<Grid Background="#FFECECEC">
-							<Label Content="Sælgerkode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,36,0,0" Height="26" Width="76"/>
-							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="0,62,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
-							<Label Content="Primær sælger:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
-							<TextBox x:Name="SAKodeBox" HorizontalAlignment="Left" Height="23" Margin="91,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. BOBBO"/>
-							<TextBox x:Name="SANummerBox" HorizontalAlignment="Left" Height="23" Margin="91,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
-							<Label Content="Sælgerkode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,36,0,0" Height="26" Width="76"/>
-							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="189,62,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
-							<Label Content="Sælger til sammenligning:" HorizontalAlignment="Left" Margin="199,5,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
-							<TextBox x:Name="SBKodeBox" HorizontalAlignment="Left" Height="23" Margin="280,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. BOBBO"/>
-							<TextBox x:Name="SBNummerBox" HorizontalAlignment="Left" Height="23" Margin="280,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
-							<Label x:Name="SANavnBox" Content="Navn: -" HorizontalAlignment="Left" Margin="0,93,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
-							<Button Content="Indlæs sælgerinformation" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Width="160" Height="22"/>
-							<Label x:Name="SBNavnBox" Content="Navn: -" HorizontalAlignment="Left" Margin="189,93,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
-							<Label x:Name="StatusBox" Content="Status: Ingen filer indlæst" HorizontalAlignment="Left" Margin="189,122,0,0" VerticalAlignment="Top" Width="170"/>
-							<Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="364,10,10,10">
+						<Grid Background="#FFECECEC" Margin="0,0,0,-24">
+							<Label Content="Sælgerkode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,180,0,0" Height="26" Width="76"/>
+							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="5,206,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
+							<Label Content="Primær sælger:" HorizontalAlignment="Left" Margin="15,148,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
+							<TextBox x:Name="SAKodeBox" HorizontalAlignment="Left" Height="22" Margin="96,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. BOBBO"/>
+							<TextBox x:Name="SANummerBox" HorizontalAlignment="Left" Height="22" Margin="96,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
+							<Label Content="Sælgerkode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="194,180,0,0" Height="26" Width="76"/>
+							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="194,206,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
+							<Label Content="Sælger til sammenligning:" HorizontalAlignment="Left" Margin="204,148,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
+							<TextBox x:Name="SBKodeBox" HorizontalAlignment="Left" Height="22" Margin="285,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. BOBBO"/>
+							<TextBox x:Name="SBNummerBox" HorizontalAlignment="Left" Height="22" Margin="285,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
+							<Label x:Name="SANavnBox" Content="Navn: -" HorizontalAlignment="Left" Margin="5,236,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
+							<Button Content="Indlæs sælgerinformation" HorizontalAlignment="Left" Margin="15,268,0,0" VerticalAlignment="Top" Width="160" Height="22"/>
+							<Label x:Name="SBNavnBox" Content="Navn: -" HorizontalAlignment="Left" Margin="194,236,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
+							<Label x:Name="StatusBox" Content="Status: Ingen filer indlæst" HorizontalAlignment="Left" Margin="194,266,0,0" VerticalAlignment="Top" Width="170"/>
+							<Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="364,148,10,10">
 								<Rectangle Canvas.Left="40" Canvas.Top="31" Width="63" Height="41" Fill="Blue"  />
 								<Ellipse Canvas.Left="130" Canvas.Top="79" Width="58" Height="58" Fill="Blue"  />
 								<Rectangle Canvas.Right="40" Canvas.Bottom="31" Width="63" Height="41" Fill="Green"  />
 								<Ellipse Canvas.Right="130" Canvas.Bottom="79" Width="58" Height="58" Fill="Green"  />
 							</Canvas>
-							<TextBlock x:Name="DataTextBox" HorizontalAlignment="Left" Margin="10,160,0,10" TextWrapping="Wrap" Text="Infobox" VerticalAlignment="Stretch" Width="349"/>
+							<TextBlock x:Name="DataTextBox" HorizontalAlignment="Left" Margin="10,328,0,10" TextWrapping="Wrap" Text="Infobox" VerticalAlignment="Stretch" Width="349"/>
+							<ComboBox HorizontalAlignment="Left" Height="20" Margin="5,10,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ComboBox_SelectionChanged">
+								<ComboBoxItem Content="&lt;Ingen afdelinger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
+								<ComboBoxItem Content="Data" HorizontalAlignment="Left" Width="168"/>
+								<ComboBoxItem Content="Hvidevare" HorizontalAlignment="Left" Width="168"/>
+								<ComboBoxItem Content="Køkken" HorizontalAlignment="Left" Width="168"/>
+								<ComboBoxItem Content="Små-EL" HorizontalAlignment="Left" Width="168"/>
+								<ComboBoxItem Content="Tele" HorizontalAlignment="Left" Width="168"/>
+								<ComboBoxItem Content="TV" HorizontalAlignment="Left" Width="168"/>
+								<ComboBoxItem Content="ALLE AFDELINGER" HorizontalAlignment="Left" Width="168"/>
+							</ComboBox>
 						</Grid>
 					</TabItem>
 					<TabItem Header="Data filer">
