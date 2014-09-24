@@ -39,18 +39,21 @@ namespace giganten {
 				}
 			
 			if (fileToLoad == null) {
-				SetText(StatusLabel, "Ingen fil fundet");
+				SetText(StatusText, "Ingen fil fundet.\nVælg venligst en at indlæse.");
+				Dispatcher.BeginInvoke(new Action(() => {
+					LoadButton.IsEnabled = true;
+				}));
 			}
 			else {
-				SetText(StatusLabel, "Loader filen: " + fileToLoad);
+				SetText(StatusText, "Indlæser filen: " + fileToLoad);
 			}
 		}
 
-		delegate void SetTextCallback(Label control, string text);
+		delegate void SetTextCallback(TextBlock control, string text);
 
-		private void SetText(Label control, string text) {
+		private void SetText(TextBlock control, string text) {
 			if (control.Dispatcher.CheckAccess()) {
-				control.Content = text;
+				control.Text = text;
 			}
 			else {
 				SetTextCallback d = new SetTextCallback(SetText);
@@ -63,21 +66,24 @@ namespace giganten {
 				this.DragMove();
 		}
 
+		private void Window_Loaded(object sender, RoutedEventArgs e) {
+			StatusText.Text = "Ser efter filer";
+			Thread thread = new Thread(LoadDefaultFiles);
+			thread.Start();
+		}
+
 		private void Exit_Click(object sender, RoutedEventArgs e) {
 			this.Close();
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e)
-		{
+		private void LoadButton_Click(object sender, RoutedEventArgs e) {
 			MainWindow main = new MainWindow();
 			main.Show();
 			this.Close();
 		}
 
-		private void Window_Loaded(object sender, RoutedEventArgs e) {
-			StatusLabel.Content = "Ser efter filer";
-			Thread thread = new Thread(LoadDefaultFiles);
-			thread.Start();
+		private void CloseButton_Click(object sender, RoutedEventArgs e) {
+			this.Close();
 		}
 	}
 }
