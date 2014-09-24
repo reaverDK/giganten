@@ -24,28 +24,28 @@
 				<TabControl Width="Auto" Background="#FFECECEC">
 					<TabItem Header="Hovedside" >
 						<Grid Background="#FFECECEC" Margin="0,0,0,-24">
-							<Label Content="Sælgerkode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,180,0,0" Height="26" Width="76"/>
-							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="5,206,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
-							<Label Content="Primær sælger:" HorizontalAlignment="Left" Margin="15,148,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
-							<TextBox x:Name="SAKodeBox" HorizontalAlignment="Left" Height="22" Margin="96,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. BOBBO"/>
-							<TextBox x:Name="SANummerBox" HorizontalAlignment="Left" Height="22" Margin="96,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
-							<Label Content="Sælgerkode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="194,180,0,0" Height="26" Width="76"/>
-							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="194,206,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
-							<Label Content="Sælger til sammenligning:" HorizontalAlignment="Left" Margin="204,148,0,0" VerticalAlignment="Top" Width="160" Height="26"/>
-							<TextBox x:Name="SBKodeBox" HorizontalAlignment="Left" Height="22" Margin="285,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. BOBBO"/>
-							<TextBox x:Name="SBNummerBox" HorizontalAlignment="Left" Height="22" Margin="285,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
-							<Label x:Name="SANavnBox" Content="Navn: -" HorizontalAlignment="Left" Margin="5,236,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
-							<Button Content="Indlæs sælgerinformation" HorizontalAlignment="Left" Margin="15,268,0,0" VerticalAlignment="Top" Width="160" Height="22"/>
-							<Label x:Name="SBNavnBox" Content="Navn: -" HorizontalAlignment="Left" Margin="194,236,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
-							<Label x:Name="StatusBox" Content="Status: Ingen filer indlæst" HorizontalAlignment="Left" Margin="194,266,0,0" VerticalAlignment="Top" Width="170"/>
-							<Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="364,148,10,10">
+							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="409,86,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
+							<TextBox x:Name="SANummerBox" HorizontalAlignment="Left" Height="22" Margin="500,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
+							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="609,86,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
+							<TextBox x:Name="SBNummerBox" HorizontalAlignment="Left" Height="22" Margin="700,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
+							<Label x:Name="StatusBox" Content="Status: Ingen filer indlæst" HorizontalAlignment="Left" Margin="9,84,0,0" VerticalAlignment="Top" Width="170"/>
+							<Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="9,300,9,9">
 								<Rectangle Canvas.Left="40" Canvas.Top="31" Width="63" Height="41" Fill="Blue"  />
 								<Ellipse Canvas.Left="130" Canvas.Top="79" Width="58" Height="58" Fill="Blue"  />
 								<Rectangle Canvas.Right="40" Canvas.Bottom="31" Width="63" Height="41" Fill="Green"  />
 								<Ellipse Canvas.Right="130" Canvas.Bottom="79" Width="58" Height="58" Fill="Green"  />
 							</Canvas>
-							<TextBlock x:Name="DataTextBox" HorizontalAlignment="Left" Margin="10,328,0,10" TextWrapping="Wrap" Text="Infobox" VerticalAlignment="Stretch" Width="349"/>
-							<ComboBox HorizontalAlignment="Left" Height="26" Margin="5,10,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ComboBox_SelectionChanged">
+							<TextBlock x:Name="DataTextBox" HorizontalAlignment="Left" Margin="6,119,0,219" TextWrapping="Wrap" Text="Infobox" VerticalAlignment="Stretch" Width="768" RenderTransformOrigin="0.5,0.5">
+								<TextBlock.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform AngleY="-0.024"/>
+										<RotateTransform/>
+										<TranslateTransform Y="-3.69"/>
+									</TransformGroup>
+								</TextBlock.RenderTransform>
+							</TextBlock>
+							<ComboBox HorizontalAlignment="Left" Height="26" Margin="7,50,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ComboBox_SelectionChanged">
 								<ComboBoxItem Content="&lt;Ingen afdelinger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
 								<ComboBoxItem Content="Data" HorizontalAlignment="Left" Width="168"/>
 								<ComboBoxItem Content="Hvidevare" HorizontalAlignment="Left" Width="168"/>
@@ -55,6 +55,13 @@
 								<ComboBoxItem Content="TV" HorizontalAlignment="Left" Width="168"/>
 								<ComboBoxItem Content="ALLE AFDELINGER" HorizontalAlignment="Left" Width="168"/>
 							</ComboBox>
+							<ComboBox HorizontalAlignment="Left" Height="26" Margin="207,50,0,0" VerticalAlignment="Top" Width="170"/>
+							<ComboBox HorizontalAlignment="Left" Height="26" Margin="407,50,0,0" VerticalAlignment="Top" Width="170"/>
+							<ComboBox HorizontalAlignment="Left" Height="26" Margin="607,50,0,0" VerticalAlignment="Top" Width="170"/>
+							<Label Content="Vælg Afdeling :" HorizontalAlignment="Left" Height="35" Margin="5,10,0,0" VerticalAlignment="Top" Width="170"/>
+							<Label Content="Vælg Gruppe :" HorizontalAlignment="Left" Height="35" Margin="207,10,0,0" VerticalAlignment="Top" Width="170"/>
+							<Label Content="Vælg Sælger #1 :" HorizontalAlignment="Left" Height="35" Margin="407,10,0,0" VerticalAlignment="Top" Width="170"/>
+							<Label Content="Vælg Sælger #2 :" HorizontalAlignment="Left" Height="35" Margin="612,10,0,0" VerticalAlignment="Top" Width="170"/>
 						</Grid>
 					</TabItem>
 					<TabItem Header="Data filer">
