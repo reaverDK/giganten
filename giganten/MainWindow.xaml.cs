@@ -117,5 +117,39 @@ namespace giganten
 		{
 			StatusBox.Content = "Status: Combobox selection changed !";
 		}
+
+		private void Select_All_Checked(object sender, RoutedEventArgs e)
+		{
+			if (Select_All.IsChecked == true)
+			{
+				this.SA_Aftaler.IsChecked = true;
+				this.Omsætning.IsChecked = true;
+				this.Indtjening.IsChecked = true;
+				this.Abonnement.IsChecked = true;
+				this.Tilbehør.IsChecked = true;
+				this.Vægbeslag_Vs_TV.IsChecked = true;
+				this.RTG_Mobil.IsChecked = true;
+				this.RTG_Ipad.IsChecked = true;
+				this.Tryghedsaftaler.IsChecked = true;
+				this.TDC_TV.IsChecked = true;
+			}
+		}
+
+		private void Select_All_Unchecked(object sender, RoutedEventArgs e)
+		{
+			if (Select_All.IsChecked == false)
+			{
+				this.SA_Aftaler.IsChecked = false;
+				this.Omsætning.IsChecked = false;
+				this.Indtjening.IsChecked = false;
+				this.Abonnement.IsChecked = false;
+				this.Tilbehør.IsChecked = false;
+				this.Vægbeslag_Vs_TV.IsChecked = false;
+				this.RTG_Mobil.IsChecked = false;
+				this.RTG_Ipad.IsChecked = false;
+				this.Tryghedsaftaler.IsChecked = false;
+				this.TDC_TV.IsChecked = false;
+			}
+		}
 	}
 }
