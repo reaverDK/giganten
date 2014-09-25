@@ -1,7 +1,7 @@
 ﻿<Window x:Class="giganten.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ElRank" Height="610" Width="900">
+        Title="ElRank" Height="630" Width="930">
 	<Window.Resources>
 		<ResourceDictionary Source="SuperAwesomeStyle.xaml"></ResourceDictionary>
 	</Window.Resources>
@@ -29,11 +29,36 @@
 							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="590,86,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
 							<TextBox x:Name="SBNummerBox" HorizontalAlignment="Left" Height="22" Margin="681,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
 							<Label x:Name="StatusBox" Content="Status: Ingen filer indlæst" HorizontalAlignment="Left" Margin="9,84,0,0" VerticalAlignment="Top" Width="170"/>
-							<Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="270,117,9,9">
-								<Rectangle Canvas.Left="40" Canvas.Top="31" Width="63" Height="41" Fill="Blue"  />
-								<Ellipse Canvas.Left="130" Canvas.Top="79" Width="58" Height="58" Fill="Blue"  />
-								<Rectangle Canvas.Right="40" Canvas.Bottom="31" Width="63" Height="41" Fill="Green"  />
-								<Ellipse Canvas.Right="130" Canvas.Bottom="79" Width="58" Height="58" Fill="Green"  />
+							<Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="270,117,9,9" Height="400" Width="600">
+								<Border BorderBrush="Black" BorderThickness="1">
+									<Canvas Height="200" Width="600" Name="graph_Person1">							
+										<Canvas.RenderTransform>
+											<TransformGroup>
+												<ScaleTransform ScaleY="-1" />
+												<TranslateTransform Y="200" />
+											</TransformGroup>
+										</Canvas.RenderTransform>
+										<Rectangle Canvas.Left="40" Canvas.Top="31" Width="63" Height="41" Fill="Blue"  />
+										<Ellipse Canvas.Left="130" Canvas.Top="79" Width="58" Height="58" Fill="Blue"  />
+										<Line X1="0" Y1="0" X2="100" Y2="100" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3,1,1"/>
+										<Line X1="100" Y1="100" X2="400" Y2="80" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3,1,1"/>
+									</Canvas>
+								</Border>
+								<Border BorderBrush="Black" BorderThickness="1">
+									<Canvas Height="200" Width="600" Margin="0,200,0,0" Name="graph_Person2">
+										<Canvas.RenderTransform>
+											<TransformGroup>
+												<ScaleTransform ScaleY="-1" />
+												<TranslateTransform Y="200" />
+											</TransformGroup>
+										</Canvas.RenderTransform>
+										<Rectangle Canvas.Right="40" Canvas.Bottom="31" Width="63" Height="41" Fill="Green"  />
+										<Ellipse Canvas.Right="130" Canvas.Bottom="79" Width="58" Height="58" Fill="Green"  />
+										<Line X1="0" Y1="0" X2="100" Y2="100" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3"/>
+										<Line X1="100" Y1="100" X2="400" Y2="150" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3"/>
+										<Polyline Name="polyline1" Stroke="Red" StrokeThickness="2"></Polyline> 
+									</Canvas>
+								</Border>
 							</Canvas>
 							<ComboBox HorizontalAlignment="Left" Height="26" Margin="7,50,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="0" Name="combobox_Afd">
 								<ComboBoxItem Content="&lt;Ingen afdelinger valgt&gt;" HorizontalAlignment="Left" Width="168"/>

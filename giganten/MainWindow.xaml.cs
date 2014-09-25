@@ -37,6 +37,7 @@ namespace giganten
 			datahandler = data;
 			combobox_Person1.IsEnabled = false;
 			combobox_Person2.IsEnabled = false;
+			PolyLines();
 		}
 
 		private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
@@ -172,6 +173,15 @@ namespace giganten
 		{
 			ResetWindow resetWindow = new ResetWindow();
 			resetWindow.Show();
+		}
+
+		public void PolyLines(){
+			for (int i = 0; i < 70; i++)
+			{
+				double x = i * Math.PI;
+				double y = 40 + 30 * Math.Sin(x / 10);
+				polyline1.Points.Add(new Point(x, y));
+			}
 		}
 	}
 }
