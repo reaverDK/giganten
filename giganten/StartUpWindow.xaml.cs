@@ -28,9 +28,6 @@ namespace giganten {
 		private void LoadDefaultFiles() {
 			String[] filePaths = null;
 			string file = null;
-			StreamWriter w = new StreamWriter("ert");
-			w.Write(" 2 ");
-			w.Close();
 			try {
 				filePaths = Directory.GetFiles("rankingdata//", "*.csv");
 			}
