@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace giganten {
-	class MonthInfo {
+	public class MonthInfo {
 		public MonthInfo(String[] entry) {
 			
 		}

@@ -149,11 +149,11 @@
                      EndPoint="1,0"
                      StartPoint="0,0">
 		<LinearGradientBrush.GradientStops>
-			<GradientStop Color="#BABABA"
+			<GradientStop Color="#BAB2C7D6"
                       Offset="0"/>
-			<GradientStop Color="#C7C7C7"
+			<GradientStop Color="#BAB2C7D6"
                       Offset="0.5"/>
-			<GradientStop Color="#BABABA"
+			<GradientStop Color="#BAB2C7D6"
                       Offset="1"/>
 		</LinearGradientBrush.GradientStops>
 	</LinearGradientBrush>
@@ -263,7 +263,7 @@
 	<Style x:Key="{x:Type ProgressBar}"
        TargetType="{x:Type ProgressBar}">
 		<Setter Property="Foreground"
-            Value="#01D328"/>
+            Value="#80E000"/>
 		<Setter Property="Background"
             Value="{StaticResource ProgressBarBackground}"/>
 		<Setter Property="Template">
@@ -282,7 +282,7 @@
 								<Rectangle x:Name="Indicator"
                                        Fill="{TemplateBinding Foreground}"/>
 								<Grid x:Name="Animation" ClipToBounds="true">
-									<Rectangle x:Name="PART_GlowRect" Width="100" 
+									<Rectangle x:Name="PART_GlowRect" Width="200" 
                                             Fill="{StaticResource ProgressBarIndicatorAnimatedFill}"
                                             Margin="-100,0,0,0"
                                             HorizontalAlignment="Left">

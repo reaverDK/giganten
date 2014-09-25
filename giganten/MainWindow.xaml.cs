@@ -29,11 +29,12 @@ namespace giganten
 	public partial class MainWindow : Window
 	{
 		string filename;
-		DataHandler datahandler = new DataHandler();
+		DataHandler datahandler = null;
 
-		public MainWindow()
+		public MainWindow(DataHandler data)
 		{
 			InitializeComponent();
+			datahandler = data;
 			combobox_Person1.IsEnabled = false;
 			combobox_Person2.IsEnabled = false;
 		}
@@ -47,8 +48,8 @@ namespace giganten
 		{
 			if (dialogbox()) {
 				StatusBox.Content = "Status: Indlæser fil";
-				bool success = datahandler.AddFile(filename);
-				StatusBox.Content = success ? "Status: Filen blev indlæst" : "Status: Fejl under filindlæsning";
+				//bool success = datahandler.AddFile(filename);
+				//StatusBox.Content = success ? "Status: Filen blev indlæst" : "Status: Fejl under filindlæsning";
 			}
 		}
 

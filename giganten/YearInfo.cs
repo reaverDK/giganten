@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace giganten {
-	class YearInfo {
+	public class YearInfo {
 		public readonly int Year;
 		public MonthInfo this[int index] {
 			get { return months[index]; }

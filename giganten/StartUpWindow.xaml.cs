@@ -19,7 +19,7 @@ namespace giganten {
 	/// Interaction logic for StartUpWindow.xaml
 	/// </summary>
 	public partial class StartUpWindow : Window {
-		String fileToLoad = null;
+		DataHandler dataHandler = null;
 
 		public StartUpWindow() {
 			InitializeComponent();
@@ -27,6 +27,7 @@ namespace giganten {
 
 		private void LoadDefaultFiles() {
 			String[] filePaths = null;
+			string file = null;
 			try {
 				filePaths = Directory.GetFiles(@"\rankingdata\", "*.csv");
 			}
@@ -35,17 +36,21 @@ namespace giganten {
 			}
 			if(filePaths != null)
 				if (filePaths.Length == 1) {
-					fileToLoad = filePaths[0];
+					file = filePaths[0];
 				}
-			
-			if (fileToLoad == null) {
+
+			if (file == null) {
 				SetText(StatusText, "Ingen fil fundet.\nVælg venligst en at indlæse.");
 				Dispatcher.BeginInvoke(new Action(() => {
 					LoadButton.IsEnabled = true;
 				}));
 			}
 			else {
-				SetText(StatusText, "Indlæser filen: " + fileToLoad);
+				LoadingProgressBar.IsIndeterminate = true;
+				SetText(StatusText, "Indlæser filen: " + file);
+				dataHandler = new DataHandler();
+				Thread thread = new Thread(() => { dataHandler.LoadFile(file, this); });
+				thread.Start();
 			}
 		}
 
@@ -77,13 +82,43 @@ namespace giganten {
 		}
 
 		private void LoadButton_Click(object sender, RoutedEventArgs e) {
-			MainWindow main = new MainWindow();
-			main.Show();
-			this.Close();
+			string file = dialogbox();
+			if (file != null) {
+				LoadingProgressBar.IsIndeterminate = true;
+				SetText(StatusText, "Indlæser filen: " + file);
+				dataHandler = new DataHandler();
+				Thread thread = new Thread(() => { dataHandler.LoadFile(file,this); });
+				thread.Start();
+			}
+		}
+
+		public string dialogbox() {
+			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+			dlg.DefaultExt = ".csv"; //default file extension
+			dlg.Filter = "Ranking file (.csv)|*.csv"; //filter files by extension
+
+			Nullable<bool> result = dlg.ShowDialog();
+			if (result == true) {
+				return dlg.FileName;
+			}
+			return null;
 		}
 
 		private void CloseButton_Click(object sender, RoutedEventArgs e) {
 			this.Close();
+		}
+
+		public void FinishedLoading(bool success) {
+			if (success) {
+				MainWindow main = new MainWindow(dataHandler);
+				main.Show();
+				this.Close();
+			}
+			else {
+				LoadingProgressBar.IsIndeterminate = false;
+				StatusText.Text = "Formåede ikke at loade filen.\nVælg venligst en ny.";
+				dataHandler = null;
+			}
 		}
 	}
 }

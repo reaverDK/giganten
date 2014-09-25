@@ -6,29 +6,27 @@ using System.Threading.Tasks;
 using Nea;
 
 namespace giganten {
-	class DataHandler {
+	public class DataHandler {
+		public bool shouldstop = false;
+
 		private const int fieldcount = 20;
 		private const int datefield = 2;
-		List<String> files = new List<string>();
 		List<YearInfo> years = new List<YearInfo>();
 
-		public bool AddFile(string file) {
+		public void LoadFile(string file, StartUpWindow startwindow) {
+			bool success = true;
 			try {
-				ProcessFile(file);
-				files.Add(file);
+				NeaReader reader = new NeaReader(file);
+				while (reader.Peek() != -1 && !shouldstop) {
+					ProcessEntry(reader);
+				}
+				reader.Close();
 			}
 			catch (Exception e) {
-				return false;
+				success = false;
 			}
-			return true;
-		}
-
-		private void ProcessFile(string file) {
-			NeaReader reader = new NeaReader(file);
-			while (reader.Peek() != -1) {
-				ProcessEntry(reader);
-			}
-			reader.Close();
+			if(!shouldstop)
+				startwindow.Dispatcher.BeginInvoke(new Action(() => { startwindow.FinishedLoading(success); }));
 		}
 
 		private void ProcessEntry(NeaReader reader) {
