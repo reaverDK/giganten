@@ -23,5 +23,10 @@ namespace giganten
 		{
 			InitializeComponent();
 		}
+
+		private void About_Luk_Button_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+		}
 	}
 }
