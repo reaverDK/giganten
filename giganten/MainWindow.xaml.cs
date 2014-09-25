@@ -34,6 +34,8 @@ namespace giganten
 		public MainWindow()
 		{
 			InitializeComponent();
+			combobox_Person1.IsEnabled = false;
+			combobox_Person2.IsEnabled = false;
 		}
 
 		private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
@@ -115,6 +117,19 @@ namespace giganten
 
 		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			if (combobox_Person1 != null && combobox_Person2 != null)
+			{
+				if (combobox_Afd.SelectedIndex == 0)
+				{
+					combobox_Person1.IsEnabled = false;
+					combobox_Person2.IsEnabled = false;
+				}
+				else
+				{
+					combobox_Person1.IsEnabled = true;
+					combobox_Person2.IsEnabled = true;
+				}
+			}
 			StatusBox.Content = "Status: Combobox selection changed !";
 		}
 
@@ -150,6 +165,12 @@ namespace giganten
 				this.Tryghedsaftaler.IsChecked = false;
 				this.TDC_TV.IsChecked = false;
 			}
+		}
+
+		private void MenuItem_Click_Reset(object sender, RoutedEventArgs e)
+		{
+			ResetWindow resetWindow = new ResetWindow();
+			resetWindow.Show();
 		}
 	}
 }

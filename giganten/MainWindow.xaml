@@ -10,7 +10,7 @@
 			<Menu DockPanel.Dock="Top" IsMainMenu="True">
 				<MenuItem Header="_Filer">
 					<MenuItem Header="_Åben..." Click="MenuItem_Click_Open"/>
-					<MenuItem Header="_Reset"/>
+					<MenuItem Header="_Reset" Click="MenuItem_Click_Reset"/>
 					<MenuItem Header="_Eksportér som PDF" Click="MenuItem_Click_Export"/>
 					<MenuItem Header="_Afslut" Click="MenuItem_Click_Exit"/>
 				</MenuItem>
@@ -35,7 +35,7 @@
 								<Rectangle Canvas.Right="40" Canvas.Bottom="31" Width="63" Height="41" Fill="Green"  />
 								<Ellipse Canvas.Right="130" Canvas.Bottom="79" Width="58" Height="58" Fill="Green"  />
 							</Canvas>
-							<ComboBox HorizontalAlignment="Left" Height="26" Margin="7,50,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="0">
+							<ComboBox HorizontalAlignment="Left" Height="26" Margin="7,50,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="0" Name="combobox_Afd">
 								<ComboBoxItem Content="&lt;Ingen afdelinger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
 								<ComboBoxItem Content="Data" HorizontalAlignment="Left" Width="168"/>
 								<ComboBoxItem Content="Hvidevare" HorizontalAlignment="Left" Width="168"/>
@@ -45,10 +45,10 @@
 								<ComboBoxItem Content="TV" HorizontalAlignment="Left" Width="168"/>
 								<ComboBoxItem Content="ALLE AFDELINGER" HorizontalAlignment="Left" Width="168"/>
 							</ComboBox>
-							<ComboBox HorizontalAlignment="Left" Height="26" Margin="388,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0">
+							<ComboBox HorizontalAlignment="Left" Height="26" Margin="388,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person1">
 								<ComboBoxItem Content="&lt;Ingen sælger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
 							</ComboBox>
-							<ComboBox HorizontalAlignment="Left" Height="26" Margin="588,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0">
+							<ComboBox HorizontalAlignment="Left" Height="26" Margin="588,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person2">
 								<ComboBoxItem Content="&lt;Ingen sælger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
 							</ComboBox>
 							<Label Content="Vælg Afdeling :" HorizontalAlignment="Left" Height="35" Margin="5,10,0,0" VerticalAlignment="Top" Width="170"/>
