@@ -40,8 +40,8 @@
 										</Canvas.RenderTransform>
 										<Rectangle Canvas.Left="40" Canvas.Top="31" Width="63" Height="41" Fill="Blue"  />
 										<Ellipse Canvas.Left="130" Canvas.Top="79" Width="58" Height="58" Fill="Blue"  />
-										<Line X1="0" Y1="0" X2="100" Y2="100" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3,1,1"/>
-										<Line X1="100" Y1="100" X2="400" Y2="80" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3,1,1"/>
+										<Polyline Name="Line1Sales2" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3"/>
+										<Polyline Name="Line2Sales2" Stroke="Red" StrokeThickness="2" StrokeDashArray="5,3"/>
 									</Canvas>
 								</Border>
 								<Border BorderBrush="Black" BorderThickness="1">
@@ -54,9 +54,8 @@
 										</Canvas.RenderTransform>
 										<Rectangle Canvas.Right="40" Canvas.Bottom="31" Width="63" Height="41" Fill="Green"  />
 										<Ellipse Canvas.Right="130" Canvas.Bottom="79" Width="58" Height="58" Fill="Green"  />
-										<Line X1="0" Y1="0" X2="100" Y2="100" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3"/>
-										<Line X1="100" Y1="100" X2="400" Y2="150" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3"/>
-										<Polyline Name="polyline1" Stroke="Red" StrokeThickness="2"></Polyline> 
+										<Polyline Name="Line1Sales1" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3"/>
+										<Polyline Name="Line2Sales1" Stroke="Red" StrokeThickness="2" StrokeDashArray="5,3"/>
 									</Canvas>
 								</Border>
 							</Canvas>

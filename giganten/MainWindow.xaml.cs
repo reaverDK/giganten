@@ -37,7 +37,9 @@ namespace giganten
 			datahandler = data;
 			combobox_Person1.IsEnabled = false;
 			combobox_Person2.IsEnabled = false;
-			PolyLines();
+			double[] mylist = new double[]{45,67,12,132,156,4,154,556,6,6,46,54,4,65,4,254,6,46,54};
+			DrawLines(mylist, Line1Sales1);
+			DrawLines(mylist, Line2Sales2);
 		}
 
 		private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
@@ -175,13 +177,13 @@ namespace giganten
 			resetWindow.Show();
 		}
 
-		public void PolyLines(){
-			for (int i = 0; i < 70; i++)
+		public void DrawLines(double[] lineList, Polyline line){
+			double scaleGraph = 200/lineList.Max();
+
+			for (int i = 0; i < lineList.Length; i++)
 			{
-				double x = i * Math.PI;
-				double y = 40 + 30 * Math.Sin(x / 10);
-				polyline1.Points.Add(new Point(x, y));
-			}
+				line.Points.Add(new Point(600*((double)i/(double)lineList.Length),(lineList[i]*scaleGraph)));
+			}			
 		}
 	}
 }
