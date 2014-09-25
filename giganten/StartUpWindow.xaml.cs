@@ -28,8 +28,11 @@ namespace giganten {
 		private void LoadDefaultFiles() {
 			String[] filePaths = null;
 			string file = null;
+			StreamWriter w = new StreamWriter("ert");
+			w.Write(" 2 ");
+			w.Close();
 			try {
-				filePaths = Directory.GetFiles(@"\rankingdata\", "*.csv");
+				filePaths = Directory.GetFiles("rankingdata//", "*.csv");
 			}
 			catch (Exception e) {
 				
@@ -46,7 +49,7 @@ namespace giganten {
 				}));
 			}
 			else {
-				LoadingProgressBar.IsIndeterminate = true;
+				Dispatcher.BeginInvoke(new Action(() => { LoadingProgressBar.IsIndeterminate = true; }));
 				SetText(StatusText, "Indlæser filen: " + file);
 				dataHandler = new DataHandler();
 				Thread thread = new Thread(() => { dataHandler.LoadFile(file, this); });
