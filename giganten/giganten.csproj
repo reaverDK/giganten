@@ -94,10 +94,11 @@
     <Compile Include="ResetWindow.xaml.cs">
       <DependentUpon>ResetWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataHandler\Salesman.cs" />
     <Compile Include="StartUpWindow.xaml.cs">
       <DependentUpon>StartUpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="YearInfo.cs" />
+    <Compile Include="DataHandler\YearInfo.cs" />
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -114,7 +115,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataHandler.cs" />
+    <Compile Include="DataHandler\DataHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -133,7 +134,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MonthInfo.cs" />
+    <Compile Include="DataHandler\MonthInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
