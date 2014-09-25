@@ -86,6 +86,7 @@ namespace giganten {
 			if (file != null) {
 				LoadingProgressBar.IsIndeterminate = true;
 				SetText(StatusText, "Indlæser filen: " + file);
+				LoadButton.IsEnabled = false;
 				dataHandler = new DataHandler();
 				Thread thread = new Thread(() => { dataHandler.LoadFile(file,this); });
 				thread.Start();
@@ -116,6 +117,7 @@ namespace giganten {
 			}
 			else {
 				LoadingProgressBar.IsIndeterminate = false;
+				LoadButton.IsEnabled = true;
 				StatusText.Text = "Formåede ikke at loade filen.\nVælg venligst en ny.";
 				dataHandler = null;
 			}
