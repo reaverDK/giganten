@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using System.Threading;
+using Nea;
 
 namespace giganten {
 	/// <summary>
@@ -20,14 +21,48 @@ namespace giganten {
 	/// </summary>
 	public partial class StartUpWindow : Window {
 		DataHandler dataHandler = null;
+		Dictionary<string, string[]> groups = new Dictionary<string, string[]>();
 
 		public StartUpWindow() {
 			InitializeComponent();
 		}
 
 		private void LoadDefaultFiles() {
-			String[] filePaths = null;
+			string[] filePaths = null;
 			string file = null;
+			//config data
+			try {
+				file = "config.ini";
+				NeaReader r = new NeaReader(new StreamReader(file));
+				while (r.Peek() != -1) {
+					string group = r.ReadLine();
+					List<string> list = new List<string>();
+					while (r.Peek() != -1) {
+						string next = r.ReadUntilAny(";,",false);
+						list.Add(next);
+						if (r.Peek() == (int)',')
+							r.ReadChar();
+						if (r.Peek() == (int)';') {
+							r.ReadChar();
+							break;
+						}
+					}
+					groups.Add(group, list.ToArray());
+					r.SkipWhiteSpace();
+				}
+				r.Close();
+			}
+			catch (FileNotFoundException fnf) {
+				StreamWriter w = new StreamWriter("config.ini");
+				w.Write("Fill this with data");
+				w.Close();
+			}
+			catch (Exception e) {
+
+			}
+			filePaths = null;
+			file = null;
+			//ranking data
 			try {
 				filePaths = Directory.GetFiles("rankingdata//", "*.csv");
 			}
