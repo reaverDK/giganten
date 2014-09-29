@@ -263,7 +263,7 @@ namespace giganten
 
 		private void combobox_Person1_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			salesPerson1 = (string)combobox_Person1.SelectedValue;
+			salesPerson1 = (string)combobox_Person1.SelectedItem;
 			drawGraphs();
 		}
 
