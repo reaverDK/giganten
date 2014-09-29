@@ -28,13 +28,21 @@ using System.Threading.Tasks;
 namespace giganten {
 	public class Salesman {
 		public readonly String Name;
+		public readonly Dictionary<string, int> kgms = new Dictionary<string, int>();
+
 		public Salesman(String[] entry) {
 			Name = entry[3];
 			AddEntry(entry);
 		}
 
 		public void AddEntry(String[] entry) {
-
+			string kgm = entry[12];
+			if (kgms.ContainsKey(kgm)) {
+				kgms[kgm]++;
+			}
+			else {
+				kgms.Add(kgm, 1);
+			}
 		}
 	}
 }

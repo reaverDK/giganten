@@ -39,15 +39,17 @@ namespace giganten {
 			}
 			int month;
 			int year;
-			//try {
+			try {
 				String smonth = fields[datefield].Substring(3, 2);
 				String syear = fields[datefield].Substring(6, 2);
-				month = int.Parse(smonth);
+				month = int.Parse(smonth) - 1;
 				year = int.Parse(syear) + 2000;
-			//}
-			//catch (Exception e) {
-			//	return;
-			//}
+				if (month < 4)
+					year--;
+			}
+			catch (Exception e) {
+				return;
+			}
 			YearInfo y = GetYear(year);
 			if (y == null) {
 				y = new YearInfo(year);

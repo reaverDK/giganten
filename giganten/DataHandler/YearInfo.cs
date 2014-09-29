@@ -23,5 +23,16 @@ namespace giganten {
 			else
 				months[month].AddEntry(entry);
 		}
+
+		public String[] GetSalesmen() {
+			List<String> result = new List<string>();
+			foreach (MonthInfo mi in months) {
+				foreach (String sm in mi.GetSalesmen()) {
+					if (!result.Contains(sm))
+						result.Add(sm);
+				}
+			}
+			return result.ToArray();
+		}
 	}
 }

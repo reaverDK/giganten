@@ -29,5 +29,13 @@ namespace giganten {
 			}
 			return null;
 		}
+
+		public String[] GetSalesmen() {
+			String[] result = new String[Salesmen.Count];
+			for (int i = 0; i < Salesmen.Count; i++) {
+				result[i] = Salesmen[i].Name;
+			}
+			return result;
+		}
 	}
 }
