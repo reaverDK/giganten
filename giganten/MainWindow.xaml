@@ -69,10 +69,10 @@
 								<ComboBoxItem Content="TV" HorizontalAlignment="Left" Width="168"/>
 								<ComboBoxItem Content="ALLE AFDELINGER" HorizontalAlignment="Left" Width="168"/>
 							</ComboBox>
-							<ComboBox HorizontalAlignment="Left" Height="26" Margin="388,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person1" SelectionChanged="combobox_Person1_SelectionChanged">
+							<ComboBox HorizontalAlignment="Left" Height="26" Margin="388,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person1" SelectionChanged="combobox_Person1_SelectionChanged" IsEnabled="False">
 								<ComboBoxItem Content="&lt;Ingen sælger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
 							</ComboBox>
-							<ComboBox HorizontalAlignment="Left" Height="26" Margin="588,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person2" SelectionChanged="combobox_Person2_SelectionChanged">
+							<ComboBox HorizontalAlignment="Left" Height="26" Margin="588,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person2" SelectionChanged="combobox_Person2_SelectionChanged" IsEnabled="False">
 								<ComboBoxItem Content="&lt;Ingen sælger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
 							</ComboBox>
 							<Label Content="Vælg Afdeling :" HorizontalAlignment="Left" Height="35" Margin="5,10,0,0" VerticalAlignment="Top" Width="170"/>

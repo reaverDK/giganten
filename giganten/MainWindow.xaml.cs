@@ -38,12 +38,10 @@ namespace giganten
 		{
 			InitializeComponent();
 			datahandler = data;
-			combobox_Person1.IsEnabled = false;
-			combobox_Person2.IsEnabled = false;
 			//double[] mylist = new double[]{45,67,12,132,156,4,154,556,6,6,46,54,4,65,4,254,6,46,54};
 			//DrawLines(mylist, Line1Sales1);
 			//DrawLines(mylist, Line2Sales2);
-
+			
 			loadComboBoxes();
 			drawGraphs();
 		}
@@ -158,6 +156,7 @@ namespace giganten
 				this.Tryghedsaftaler.IsChecked = true;
 				this.TDC_TV.IsChecked = true;
 			}
+			drawGraphs();
 		}
 
 		private void Select_All_Unchecked(object sender, RoutedEventArgs e)
@@ -175,6 +174,7 @@ namespace giganten
 				this.Tryghedsaftaler.IsChecked = false;
 				this.TDC_TV.IsChecked = false;
 			}
+			drawGraphs();
 		}
 
 		private void MenuItem_Click_Reset(object sender, RoutedEventArgs e)
@@ -192,61 +192,62 @@ namespace giganten
 			}			
 		}
 
-		private void combobox_Person1_Initialized(object sender, EventArgs e)
-		{
-			//TODO
-		}
-
 		private void drawGraphs()
 		{
 			graph_Person1.Background= Brushes.LightBlue;
 			graph_Person2.Background = Brushes.LightGray;
 
 			YearInfo year = datahandler.GetYear(yearSelected);
-			for (int i = 0; i < 12; i++)
+			if (salesPerson1 != null)
 			{
-				Salesman sm = year[i].GetSalesman(salesPerson1);
-				if (Omsætning.IsChecked==true)
+				for (int i = 0; i < 12; i++)
 				{
-					//draw graph function
+					if (year[i] != null)
+					{
+
+						Salesman sm = year[i].GetSalesman(salesPerson1);
+						/*	if (Omsætning.IsChecked==true)
+							{
+								//draw graph function
+							}
+							if (SA_Aftaler.IsChecked == true)
+							{
+								//draw graph function
+							}
+							if (Indtjening.IsChecked == true)
+							{
+								//draw graph function
+							}
+							if (Abonnement.IsChecked == true)
+							{
+								//draw graph function
+							}
+							if (Tilbehør.IsChecked == true)
+							{
+								//draw graph function
+							}
+							if (Vægbeslag_Vs_TV.IsChecked == true)
+							{
+								//draw graph function
+							}
+							if (RTG_Mobil.IsChecked == true)
+							{
+								//draw graph function
+							}
+							if (RTG_Ipad.IsChecked == true)
+							{
+								//draw graph function
+							}
+							if (Tryghedsaftaler.IsChecked == true)
+							{
+								//draw graph function
+							}
+							if (TDC_TV.IsChecked == true)
+							{
+								//draw graph function
+							}*/
+					}
 				}
-				if (Omsætning.IsChecked == true)
-				{
-					//draw graph function
-				}
-				if (Omsætning.IsChecked == true)
-				{
-					//draw graph function
-				}
-				if (Omsætning.IsChecked == true)
-				{
-					//draw graph function
-				}
-				if (Omsætning.IsChecked == true)
-				{
-					//draw graph function
-				}
-				if (Omsætning.IsChecked == true)
-				{
-					//draw graph function
-				}
-				if (Omsætning.IsChecked == true)
-				{
-					//draw graph function
-				}
-				if (Omsætning.IsChecked == true)
-				{
-					//draw graph function
-				}
-				if (Omsætning.IsChecked == true)
-				{
-					//draw graph function
-				}
-				if (Omsætning.IsChecked == true)
-				{
-					//draw graph function
-				}
-				
 			}
 		}
 
