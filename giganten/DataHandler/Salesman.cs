@@ -28,7 +28,8 @@ using System.Threading.Tasks;
 namespace giganten {
 	public class Salesman {
 		public readonly String Name;
-		public readonly Dictionary<string, int> kgms = new Dictionary<string, int>();
+		public readonly Dictionary<string, int> KGMs = new Dictionary<string, int>();
+		public int TotalSales { get; private set; }
 
 		public Salesman(String[] entry) {
 			Name = entry[3];
@@ -37,12 +38,26 @@ namespace giganten {
 
 		public void AddEntry(String[] entry) {
 			string kgm = entry[12];
-			if (kgms.ContainsKey(kgm)) {
-				kgms[kgm]++;
+			if (KGMs.ContainsKey(kgm)) {
+				KGMs[kgm]++;
 			}
 			else {
-				kgms.Add(kgm, 1);
+				KGMs.Add(kgm, 1);
 			}
+			TotalSales++;
+		}
+
+		public double PercentOfTotal(String[] list) {
+			int count = 0;
+			foreach (KeyValuePair<String,int> kgm in KGMs) {
+				foreach (String comp in list) {
+					if (comp == kgm.Key) {
+						count += kgm.Value;
+						break;
+					}
+				}
+			}
+			return ((double)count)/(double)TotalSales;
 		}
 	}
 }
