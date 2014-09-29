@@ -38,6 +38,7 @@ namespace giganten
 		{
 			InitializeComponent();
 			datahandler = data;
+			
 			//double[] mylist = new double[]{45,67,12,132,156,4,154,556,6,6,46,54,4,65,4,254,6,46,54};
 			//DrawLines(mylist, Line1Sales1);
 			//DrawLines(mylist, Line2Sales2);
@@ -254,24 +255,37 @@ namespace giganten
 		private void loadComboBoxes()
 		{
 			YearInfo year = datahandler.GetYear(yearSelected);
-			string[] salesMen = year.GetSalesmen();
-			for (int i = 0; i < salesMen.Length; i++)
+			string[] salesMen = null;
+			combobox_Person1.ItemsSource = salesMen;
+			combobox_Person2.ItemsSource = salesMen;
+			salesMen = year.GetSalesmen();
+			/*for (int i = 0; i < salesMen.Length; i++)
 			{
 				combobox_Person1.Items.Add(salesMen[i]);
 				combobox_Person2.Items.Add(salesMen[i]);
-			}
+			}*/
 		}
 
 		private void combobox_Person1_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			salesPerson1 = (string)combobox_Person1.SelectedItem;
-			drawGraphs();
+			try {
+				salesPerson1 = (string)combobox_Person1.SelectedItem;
+				drawGraphs();
+			}
+			catch (Exception ex) {
+				
+			}
 		}
 
 		private void combobox_Person2_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			salesPerson2 = (string)combobox_Person2.SelectedValue;
-			drawGraphs();
+			try {
+				salesPerson2 = (string)combobox_Person2.SelectedValue;
+				drawGraphs();
+			}
+			catch (Exception ex) {
+
+			}
 		}
 	}
 }
