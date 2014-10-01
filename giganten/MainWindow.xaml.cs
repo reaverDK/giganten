@@ -20,6 +20,7 @@ using PdfSharp.Pdf;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.Rendering;
 using MigraDoc.RtfRendering;
+using System.Collections.ObjectModel;
 
 namespace giganten
 {
@@ -28,22 +29,27 @@ namespace giganten
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		public ObservableCollection<String> SalesmenCollection { get; private set; }
+
 		string filename;
 		DataHandler datahandler = null;
 		int yearSelected = 2014;
 		string salesPerson1 = null;
-		string salesPerson2 = null; 
+		string salesPerson2 = null;
 
 		public MainWindow(DataHandler data)
 		{
-			InitializeComponent();
+			SalesmenCollection = new ObservableCollection<string>();
+			SalesmenCollection.Add("<Ingen sælger valgt>");
 			datahandler = data;
+			YearInfo year = datahandler.GetYear(yearSelected);
+			string[] salesMen = year.GetSalesmen();
+			foreach (string s in salesMen) {
+				SalesmenCollection.Add(s);
+			}
 			
-			//double[] mylist = new double[]{45,67,12,132,156,4,154,556,6,6,46,54,4,65,4,254,6,46,54};
-			//DrawLines(mylist, Line1Sales1);
-			//DrawLines(mylist, Line2Sales2);
-			
-			loadComboBoxes();
+			InitializeComponent();
+
 			drawGraphs();
 		}
 
@@ -250,20 +256,6 @@ namespace giganten
 					}
 				}
 			}
-		}
-
-		private void loadComboBoxes()
-		{
-			YearInfo year = datahandler.GetYear(yearSelected);
-			string[] salesMen = null;
-			combobox_Person1.ItemsSource = salesMen;
-			combobox_Person2.ItemsSource = salesMen;
-			salesMen = year.GetSalesmen();
-			/*for (int i = 0; i < salesMen.Length; i++)
-			{
-				combobox_Person1.Items.Add(salesMen[i]);
-				combobox_Person2.Items.Add(salesMen[i]);
-			}*/
 		}
 
 		private void combobox_Person1_SelectionChanged(object sender, SelectionChangedEventArgs e)

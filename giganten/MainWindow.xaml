@@ -1,6 +1,7 @@
 ﻿<Window x:Class="giganten.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="ElRank" Height="630" Width="930">
 	<Window.Resources>
 		<ResourceDictionary Source="SuperAwesomeStyle.xaml"></ResourceDictionary>
@@ -69,11 +70,9 @@
 								<ComboBoxItem Content="TV" HorizontalAlignment="Left" Width="168"/>
 								<ComboBoxItem Content="ALLE AFDELINGER" HorizontalAlignment="Left" Width="168"/>
 							</ComboBox>
-							<ComboBox HorizontalAlignment="Left" Height="26" Margin="388,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person1" SelectionChanged="combobox_Person1_SelectionChanged" IsEnabled="False">
-								<ComboBoxItem Content="&lt;Ingen sælger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
+							<ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Path=SalesmenCollection}" Height="26" Margin="388,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person1" SelectionChanged="combobox_Person1_SelectionChanged" IsEnabled="False">
 							</ComboBox>
-							<ComboBox HorizontalAlignment="Left" Height="26" Margin="588,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person2" SelectionChanged="combobox_Person2_SelectionChanged" IsEnabled="False">
-								<ComboBoxItem Content="&lt;Ingen sælger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
+							<ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Path=SalesmenCollection}" Height="26" Margin="588,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person2" SelectionChanged="combobox_Person2_SelectionChanged" IsEnabled="False">
 							</ComboBox>
 							<Label Content="Vælg Afdeling :" HorizontalAlignment="Left" Height="35" Margin="5,10,0,0" VerticalAlignment="Top" Width="170"/>
 							<Label Content="Vælg Sælger #1 :" HorizontalAlignment="Left" Height="35" Margin="388,10,0,0" VerticalAlignment="Top" Width="170"/>
