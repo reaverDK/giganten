@@ -30,6 +30,7 @@ namespace giganten
 	public partial class MainWindow : Window
 	{
 		public ObservableCollection<String> SalesmenCollection { get; private set; }
+		Dictionary<string, string[]> Groups;
 
 		string filename;
 		DataHandler datahandler = null;
@@ -37,8 +38,9 @@ namespace giganten
 		string salesPerson1 = null;
 		string salesPerson2 = null;
 
-		public MainWindow(DataHandler data)
+		public MainWindow(DataHandler data, Dictionary<string, string[]> groups)
 		{
+			Groups = groups;
 			SalesmenCollection = new ObservableCollection<string>();
 			SalesmenCollection.Add("<Ingen sælger valgt>");
 			datahandler = data;

@@ -46,6 +46,7 @@ namespace giganten {
 							r.ReadChar();
 							break;
 						}
+						r.SkipWhiteSpace();
 					}
 					groups.Add(group, list.ToArray());
 					r.SkipWhiteSpace();
@@ -82,7 +83,7 @@ namespace giganten {
 			}
 			else {
 				Dispatcher.BeginInvoke(new Action(() => { LoadingProgressBar.IsIndeterminate = true; }));
-				SetText(StatusText, "Indlæser filen: " + file);
+				SetText(StatusText, "Indlæser filen:\n" + file);
 				dataHandler = new DataHandler();
 				Thread thread = new Thread(() => { dataHandler.LoadFile(file, this); });
 				thread.Start();
@@ -120,7 +121,7 @@ namespace giganten {
 			string file = dialogbox();
 			if (file != null) {
 				LoadingProgressBar.IsIndeterminate = true;
-				SetText(StatusText, "Indlæser filen: " + file);
+				SetText(StatusText, "Indlæser filen:\n" + file);
 				LoadButton.IsEnabled = false;
 				dataHandler = new DataHandler();
 				Thread thread = new Thread(() => { dataHandler.LoadFile(file,this); });
@@ -146,7 +147,7 @@ namespace giganten {
 
 		public void FinishedLoading(bool success) {
 			if (success) {
-				MainWindow main = new MainWindow(dataHandler);
+				MainWindow main = new MainWindow(dataHandler, groups);
 				main.Show();
 				this.Close();
 			}
