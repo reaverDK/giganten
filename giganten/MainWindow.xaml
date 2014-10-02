@@ -32,7 +32,7 @@
 							<Label x:Name="StatusBox" Content="Status: Ingen filer indlæst" HorizontalAlignment="Left" Margin="9,84,0,0" VerticalAlignment="Top" Width="170"/>
 							<Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="270,117,9,9" Height="400" Width="600">
 								<Border BorderBrush="Black" BorderThickness="1">
-									<Canvas Height="200" Width="600" Name="graph_Person1">							
+									<Canvas Height="200" Width="600" Name="graph_Person1">
 										<Canvas.RenderTransform>
 											<TransformGroup>
 												<ScaleTransform ScaleY="-1" />
@@ -77,17 +77,11 @@
 							<Label Content="Vælg Afdeling :" HorizontalAlignment="Left" Height="35" Margin="5,10,0,0" VerticalAlignment="Top" Width="170"/>
 							<Label Content="Vælg Sælger #1 :" HorizontalAlignment="Left" Height="35" Margin="388,10,0,0" VerticalAlignment="Top" Width="170"/>
 							<Label Content="Vælg Sælger #2 :" HorizontalAlignment="Left" Height="35" Margin="593,10,0,0" VerticalAlignment="Top" Width="170"/>
-							<CheckBox Content="Omsætning pr. Time" HorizontalAlignment="Left" Height="25" Margin="10,115,0,0" VerticalAlignment="Top" Width="136" Name="Omsætning"/>
-							<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="25" Margin="10,145,0,0" VerticalAlignment="Top" Width="136" Name="Indtjening"/>
-							<CheckBox Content="Abonnement %" HorizontalAlignment="Left" Height="25" Margin="10,205,0,0" VerticalAlignment="Top" Width="136" Name="Abonnement"/>
-							<CheckBox Content="Tilbehør %" HorizontalAlignment="Left" Height="25" Margin="10,175,0,0" VerticalAlignment="Top" Width="136" Name="Tilbehør"/>
-							<CheckBox Content="Vægbeslag vs. TV" HorizontalAlignment="Left" Height="25" Margin="151,175,0,0" VerticalAlignment="Top" Width="114" Name="Vægbeslag_Vs_TV"/>
-							<CheckBox Content="RTG Mobil Tele %" HorizontalAlignment="Left" Height="25" Margin="10,235,0,0" VerticalAlignment="Top" Width="136" Name="RTG_Mobil"/>
-							<CheckBox Content="RTG IPad %" HorizontalAlignment="Left" Height="25" Margin="151,235,0,0" VerticalAlignment="Top" Width="114" Name="RTG_Ipad"/>
-							<CheckBox Content="SA Aftaler %" HorizontalAlignment="Left" Height="25" Margin="151,205,0,0" VerticalAlignment="Top" Width="114" Name="SA_Aftaler"/>
-							<CheckBox Content="Tryghedsaftale %" HorizontalAlignment="Left" Height="25" Margin="151,145,0,0" VerticalAlignment="Top" Width="114" Name="Tryghedsaftaler"/>
-							<CheckBox Content="TDC TV Antal" HorizontalAlignment="Left" Height="25" Margin="151,115,0,0" VerticalAlignment="Top" Width="114" Name="TDC_TV"/>
-							<CheckBox Content="VÆLG ALLE" HorizontalAlignment="Left" Height="25" Margin="84,266,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" Name="Select_All" Checked="Select_All_Checked" Unchecked="Select_All_Unchecked"/>
+							<CheckBox Content="VÆLG ALLE" HorizontalAlignment="Left" Height="26" Margin="10,115,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" Name="Select_All" Checked="Select_All_Checked" Unchecked="Select_All_Unchecked"/>
+							<StackPanel x:Name="CheckBoxPanel" HorizontalAlignment="Left" Margin="10,141,0,10" VerticalAlignment="Stretch" Width="272">
+								<CheckBox Content="Omsætning pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Omsætning"/>
+								<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Indtjening"/>
+							</StackPanel>
 						</Grid>
 					</TabItem>
 					<TabItem Header="Data filer">

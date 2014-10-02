@@ -52,6 +52,11 @@ namespace giganten
 			
 			InitializeComponent();
 
+			foreach (KeyValuePair<String, String[]> group in Groups) {
+				CheckBox cb = new CheckBox();
+				cb.Content = group.Key;
+				CheckBoxPanel.Children.Add(cb);
+			}
 			drawGraphs();
 		}
 
@@ -154,7 +159,7 @@ namespace giganten
 		{
 			if (Select_All.IsChecked == true)
 			{
-				this.SA_Aftaler.IsChecked = true;
+				/*this.SA_Aftaler.IsChecked = true;
 				this.Omsætning.IsChecked = true;
 				this.Indtjening.IsChecked = true;
 				this.Abonnement.IsChecked = true;
@@ -163,7 +168,7 @@ namespace giganten
 				this.RTG_Mobil.IsChecked = true;
 				this.RTG_Ipad.IsChecked = true;
 				this.Tryghedsaftaler.IsChecked = true;
-				this.TDC_TV.IsChecked = true;
+				this.TDC_TV.IsChecked = true;*/
 			}
 			drawGraphs();
 		}
@@ -172,7 +177,7 @@ namespace giganten
 		{
 			if (Select_All.IsChecked == false)
 			{
-				this.SA_Aftaler.IsChecked = false;
+				/*this.SA_Aftaler.IsChecked = false;
 				this.Omsætning.IsChecked = false;
 				this.Indtjening.IsChecked = false;
 				this.Abonnement.IsChecked = false;
@@ -181,7 +186,7 @@ namespace giganten
 				this.RTG_Mobil.IsChecked = false;
 				this.RTG_Ipad.IsChecked = false;
 				this.Tryghedsaftaler.IsChecked = false;
-				this.TDC_TV.IsChecked = false;
+				this.TDC_TV.IsChecked = false;*/
 			}
 			drawGraphs();
 		}
