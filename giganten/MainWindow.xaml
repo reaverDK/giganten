@@ -39,10 +39,6 @@
 												<TranslateTransform Y="200" />
 											</TransformGroup>
 										</Canvas.RenderTransform>
-										<Rectangle Canvas.Left="40" Canvas.Top="31" Width="63" Height="41" Fill="Blue"  />
-										<Ellipse Canvas.Left="130" Canvas.Top="79" Width="58" Height="58" Fill="Blue"  />
-										<Polyline Name="Line1Sales2" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3"/>
-										<Polyline Name="Line2Sales2" Stroke="Red" StrokeThickness="2" StrokeDashArray="5,3"/>
 									</Canvas>
 								</Border>
 								<Border BorderBrush="Black" BorderThickness="1">
@@ -53,10 +49,6 @@
 												<TranslateTransform Y="200" />
 											</TransformGroup>
 										</Canvas.RenderTransform>
-										<Rectangle Canvas.Right="40" Canvas.Bottom="31" Width="63" Height="41" Fill="Green"  />
-										<Ellipse Canvas.Right="130" Canvas.Bottom="79" Width="58" Height="58" Fill="Green"  />
-										<Polyline Name="Line1Sales1" Stroke="Black" StrokeThickness="2" StrokeDashArray="5,3"/>
-										<Polyline Name="Line2Sales1" Stroke="Red" StrokeThickness="2" StrokeDashArray="5,3"/>
 									</Canvas>
 								</Border>
 							</Canvas>
