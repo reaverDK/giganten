@@ -183,53 +183,46 @@ namespace giganten
 			graph_Person1.Background = Brushes.LightBlue;
 			graph_Person2.Background = Brushes.LightGray;
 
-			YearInfo year = datahandler.GetYear(yearSelected);
 			if (salesPerson1 != null) {
-				for (int i = 0; i < 12; i++) {
-					if (year[i] != null) {
+				drawGraphFor(salesPerson1, graph_Person1);
+			}
+			if (salesPerson2 != null) {
+				drawGraphFor(salesPerson2, graph_Person2);
+			}
+		}
 
-						Salesman sm = year[i].GetSalesman(salesPerson1);
-						/*	if (Omsætning.IsChecked==true)
-							{
-								//draw graph function
+		private void drawGraphFor(string salesperson, Canvas canvas) {
+			canvas.Children.Clear();
+			YearInfo year = datahandler.GetYear(yearSelected);
+			if (Omsætning.IsChecked == true) {
+				//draw graph function
+			}
+			if (Indtjening.IsChecked == true) {
+				//draw graph function
+			}
+			foreach (CheckBox cb in checkBoxList) {
+				if (cb.IsChecked == true) {
+					String[] kgms = Groups[(string)cb.Content];
+					double[] percentages = new double[12];
+					for (int i = 0; i < 12; i++) {
+						if (year[i] != null) {
+							Salesman sm = year[i].GetSalesman(salesperson);
+							if (sm != null) {
+								percentages[i] = sm.PercentOfTotal(kgms);
 							}
-							if (SA_Aftaler.IsChecked == true)
-							{
-								//draw graph function
-							}
-							if (Indtjening.IsChecked == true)
-							{
-								//draw graph function
-							}
-							if (Abonnement.IsChecked == true)
-							{
-								//draw graph function
-							}
-							if (Tilbehør.IsChecked == true)
-							{
-								//draw graph function
-							}
-							if (Vægbeslag_Vs_TV.IsChecked == true)
-							{
-								//draw graph function
-							}
-							if (RTG_Mobil.IsChecked == true)
-							{
-								//draw graph function
-							}
-							if (RTG_Ipad.IsChecked == true)
-							{
-								//draw graph function
-							}
-							if (Tryghedsaftaler.IsChecked == true)
-							{
-								//draw graph function
-							}
-							if (TDC_TV.IsChecked == true)
-							{
-								//draw graph function
-							}*/
+							else
+								percentages[i] = 0;
+						}
+						else
+							percentages[i] = 0;
 					}
+					Polyline line = new Polyline();
+					line.StrokeThickness = 2;
+					line.StrokeDashArray = new DoubleCollection(new double[] { 5, 3 });
+					line.Stroke = Brushes.Blue;
+					canvas.Children.Add(line);
+					DrawLines(percentages, line);
+						
 				}
 			}
 		}
@@ -237,6 +230,8 @@ namespace giganten
 		private void combobox_Person1_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 			try {
 				salesPerson1 = (string)combobox_Person1.SelectedItem;
+				if (salesPerson1 == "<Ingen sælger valgt>")
+					salesPerson1 = null;
 				drawGraphs();
 			}
 			catch (Exception ex) {
@@ -247,6 +242,8 @@ namespace giganten
 		private void combobox_Person2_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 			try {
 				salesPerson2 = (string)combobox_Person2.SelectedValue;
+				if (salesPerson2 == "<Ingen sælger valgt>")
+					salesPerson2 = null;
 				drawGraphs();
 			}
 			catch (Exception ex) {
