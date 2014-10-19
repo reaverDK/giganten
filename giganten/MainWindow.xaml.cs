@@ -31,6 +31,7 @@ namespace giganten
 	{
 		public ObservableCollection<String> SalesmenCollection { get; private set; }
 		Dictionary<string, string[]> Groups;
+		List<CheckBox> checkBoxList = new List<CheckBox>();
 
 		string filename;
 		DataHandler datahandler = null;
@@ -38,8 +39,7 @@ namespace giganten
 		string salesPerson1 = null;
 		string salesPerson2 = null;
 
-		public MainWindow(DataHandler data, Dictionary<string, string[]> groups)
-		{
+		public MainWindow(DataHandler data, Dictionary<string, string[]> groups) {
 			Groups = groups;
 			SalesmenCollection = new ObservableCollection<string>();
 			SalesmenCollection.Add("<Ingen sælger valgt>");
@@ -49,24 +49,23 @@ namespace giganten
 			foreach (string s in salesMen) {
 				SalesmenCollection.Add(s);
 			}
-			
+
 			InitializeComponent();
 
 			foreach (KeyValuePair<String, String[]> group in Groups) {
 				CheckBox cb = new CheckBox();
 				cb.Content = group.Key;
 				CheckBoxPanel.Children.Add(cb);
+				checkBoxList.Add(cb);
 			}
 			drawGraphs();
 		}
 
-		private void MenuItem_Click_Exit(object sender, RoutedEventArgs e)
-		{
+		private void MenuItem_Click_Exit(object sender, RoutedEventArgs e) {
 			Application.Current.Shutdown();
 		}
 
-		private void MenuItem_Click_Open(object sender, RoutedEventArgs e)
-		{
+		private void MenuItem_Click_Open(object sender, RoutedEventArgs e) {
 			if (dialogbox()) {
 				StatusBox.Content = "Status: Indlæser fil";
 				//bool success = datahandler.AddFile(filename);
@@ -74,41 +73,35 @@ namespace giganten
 			}
 		}
 
-		public bool dialogbox()
-		{
+		public bool dialogbox() {
 			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 			dlg.FileName = "Document"; //default file name
 			dlg.DefaultExt = ".txt"; //default file extension
 			dlg.Filter = "Text Documents (.txt)|*.txt"; //filter files by extension
 
 			Nullable<bool> result = dlg.ShowDialog();
-			if (result == true)
-			{
+			if (result == true) {
 				filename = dlg.FileName;
 				return true;
 			}
 			return false;
 		}
 
-		private void MenuItem_Click_Export(object sender, RoutedEventArgs e)
-		{
+		private void MenuItem_Click_Export(object sender, RoutedEventArgs e) {
 			pdfCreater();
 		}
 
-		private void MenuItem_Click_About(object sender, RoutedEventArgs e)
-		{
+		private void MenuItem_Click_About(object sender, RoutedEventArgs e) {
 			AboutWindow aboutwin = new AboutWindow();
 			aboutwin.Show();
 		}
 
-		private void MenuItem_Click_Contact(object sender, RoutedEventArgs e)
-		{
+		private void MenuItem_Click_Contact(object sender, RoutedEventArgs e) {
 			ContactWindow contactWin = new ContactWindow();
 			contactWin.Show();
 		}
 
-		public void pdfCreater()
-		{
+		public void pdfCreater() {
 			/*PdfDocument pdfdocument = new PdfDocument();
 			PdfPage page = pdfdocument.AddPage();
 			XGraphics gfx = XGraphics.FromPdfPage(page);
@@ -137,17 +130,13 @@ namespace giganten
 			Process.Start(myfile);
 		}
 
-		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			if (combobox_Person1 != null && combobox_Person2 != null)
-			{
-				if (combobox_Afd.SelectedIndex == 0)
-				{
+		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+			if (combobox_Person1 != null && combobox_Person2 != null) {
+				if (combobox_Afd.SelectedIndex == 0) {
 					combobox_Person1.IsEnabled = false;
 					combobox_Person2.IsEnabled = false;
 				}
-				else
-				{
+				else {
 					combobox_Person1.IsEnabled = true;
 					combobox_Person2.IsEnabled = true;
 				}
@@ -155,69 +144,49 @@ namespace giganten
 			StatusBox.Content = "Status: Combobox selection changed !";
 		}
 
-		private void Select_All_Checked(object sender, RoutedEventArgs e)
-		{
-			if (Select_All.IsChecked == true)
-			{
-				/*this.SA_Aftaler.IsChecked = true;
+		private void Select_All_Checked(object sender, RoutedEventArgs e) {
+			if (Select_All.IsChecked == true) {
 				this.Omsætning.IsChecked = true;
 				this.Indtjening.IsChecked = true;
-				this.Abonnement.IsChecked = true;
-				this.Tilbehør.IsChecked = true;
-				this.Vægbeslag_Vs_TV.IsChecked = true;
-				this.RTG_Mobil.IsChecked = true;
-				this.RTG_Ipad.IsChecked = true;
-				this.Tryghedsaftaler.IsChecked = true;
-				this.TDC_TV.IsChecked = true;*/
+				foreach (CheckBox cb in checkBoxList) {
+					cb.IsChecked = true;
+				}
 			}
 			drawGraphs();
 		}
 
-		private void Select_All_Unchecked(object sender, RoutedEventArgs e)
-		{
-			if (Select_All.IsChecked == false)
-			{
-				/*this.SA_Aftaler.IsChecked = false;
+		private void Select_All_Unchecked(object sender, RoutedEventArgs e) {
+			if (Select_All.IsChecked == false) {
 				this.Omsætning.IsChecked = false;
 				this.Indtjening.IsChecked = false;
-				this.Abonnement.IsChecked = false;
-				this.Tilbehør.IsChecked = false;
-				this.Vægbeslag_Vs_TV.IsChecked = false;
-				this.RTG_Mobil.IsChecked = false;
-				this.RTG_Ipad.IsChecked = false;
-				this.Tryghedsaftaler.IsChecked = false;
-				this.TDC_TV.IsChecked = false;*/
+				foreach (CheckBox cb in checkBoxList) {
+					cb.IsChecked = false;
+				}
 			}
 			drawGraphs();
 		}
 
-		private void MenuItem_Click_Reset(object sender, RoutedEventArgs e)
-		{
+		private void MenuItem_Click_Reset(object sender, RoutedEventArgs e) {
 			ResetWindow resetWindow = new ResetWindow();
 			resetWindow.Show();
 		}
 
-		public void DrawLines(double[] lineList, Polyline line){
-			double scaleGraph = 200/lineList.Max();
+		public void DrawLines(double[] lineList, Polyline line) {
+			double scaleGraph = 200 / lineList.Max();
 
-			for (int i = 0; i < lineList.Length; i++)
-			{
-				line.Points.Add(new Point(600*((double)i/(double)lineList.Length),(lineList[i]*scaleGraph)));
-			}			
+			for (int i = 0; i < lineList.Length; i++) {
+				line.Points.Add(new Point(600 * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
+			}
 		}
 
-		private void drawGraphs()
-		{
-			graph_Person1.Background= Brushes.LightBlue;
+		private void drawGraphs() {
+			graph_Person1.Background = Brushes.LightBlue;
 			graph_Person2.Background = Brushes.LightGray;
 
 			YearInfo year = datahandler.GetYear(yearSelected);
-			if (salesPerson1 != null)
-			{
-				for (int i = 0; i < 12; i++)
-				{
-					if (year[i] != null)
-					{
+			if (salesPerson1 != null) {
+				for (int i = 0; i < 12; i++) {
+					if (year[i] != null) {
 
 						Salesman sm = year[i].GetSalesman(salesPerson1);
 						/*	if (Omsætning.IsChecked==true)
@@ -265,19 +234,17 @@ namespace giganten
 			}
 		}
 
-		private void combobox_Person1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
+		private void combobox_Person1_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 			try {
 				salesPerson1 = (string)combobox_Person1.SelectedItem;
 				drawGraphs();
 			}
 			catch (Exception ex) {
-				
+
 			}
 		}
 
-		private void combobox_Person2_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
+		private void combobox_Person2_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 			try {
 				salesPerson2 = (string)combobox_Person2.SelectedValue;
 				drawGraphs();
