@@ -39,6 +39,8 @@ namespace giganten
 		string salesPerson1 = null;
 		string salesPerson2 = null;
 
+		DateTime lastredraw = DateTime.Now;
+
 		public MainWindow(DataHandler data, Dictionary<string, string[]> groups) {
 			Groups = groups;
 			SalesmenCollection = new ObservableCollection<string>();
@@ -57,6 +59,8 @@ namespace giganten
 				cb.Content = group.Key;
 				CheckBoxPanel.Children.Add(cb);
 				checkBoxList.Add(cb);
+				cb.Checked += Checkbox_Changed;
+				cb.Unchecked += Checkbox_Changed;
 			}
 			drawGraphs();
 		}
@@ -180,6 +184,10 @@ namespace giganten
 		}
 
 		private void drawGraphs() {
+			DateTime now = DateTime.Now;
+			TimeSpan sincelast = now - lastredraw;
+			if (sincelast.TotalMilliseconds < 50)
+				return;
 			graph_Person1.Background = Brushes.LightBlue;
 			graph_Person2.Background = Brushes.LightGray;
 
@@ -189,6 +197,7 @@ namespace giganten
 			if (salesPerson2 != null) {
 				drawGraphFor(salesPerson2, graph_Person2);
 			}
+			lastredraw = DateTime.Now;
 		}
 
 		private void drawGraphFor(string salesperson, Canvas canvas) {
@@ -249,6 +258,10 @@ namespace giganten
 			catch (Exception ex) {
 
 			}
+		}
+
+		private void Checkbox_Changed(object sender, RoutedEventArgs e) {
+			drawGraphs();
 		}
 	}
 }

@@ -79,8 +79,8 @@
 							<Label Content="Vælg Sælger #2 :" HorizontalAlignment="Left" Height="35" Margin="593,10,0,0" VerticalAlignment="Top" Width="170"/>
 							<CheckBox Content="VÆLG ALLE" HorizontalAlignment="Left" Height="26" Margin="10,115,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" Name="Select_All" Checked="Select_All_Checked" Unchecked="Select_All_Unchecked"/>
 							<StackPanel x:Name="CheckBoxPanel" HorizontalAlignment="Left" Margin="10,141,0,10" VerticalAlignment="Stretch" Width="272">
-								<CheckBox Content="Omsætning pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Omsætning"/>
-								<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="136" x:Name="Indtjening"/>
+								<CheckBox Content="Omsætning pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Omsætning" Checked="Checkbox_Changed" Unchecked="Checkbox_Changed"/>
+								<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="136" x:Name="Indtjening" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
                                 <Separator Height="4" Margin="0"/>
                             </StackPanel>
 						</Grid>
