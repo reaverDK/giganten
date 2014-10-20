@@ -62,6 +62,11 @@ namespace giganten
 				cb.Checked += Checkbox_Changed;
 				cb.Unchecked += Checkbox_Changed;
 			}
+			SizeChanged += MainWindow_SizeChanged;
+			drawGraphs();
+		}
+
+		void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e) {
 			drawGraphs();
 		}
 
@@ -156,6 +161,7 @@ namespace giganten
 					cb.IsChecked = true;
 				}
 			}
+			System.Threading.Thread.Sleep(50);
 			drawGraphs();
 		}
 
@@ -167,6 +173,7 @@ namespace giganten
 					cb.IsChecked = false;
 				}
 			}
+			System.Threading.Thread.Sleep(50);
 			drawGraphs();
 		}
 
@@ -175,11 +182,13 @@ namespace giganten
 			resetWindow.Show();
 		}
 
-		public void DrawLines(double[] lineList, Polyline line) {
-			double scaleGraph = 200 / lineList.Max();
+		public void DrawLines(double[] lineList, Polyline line, Canvas canvas) {
+			double height = canvas.Height;
+			double width = canvas.Width;
+			double scaleGraph = height / lineList.Max();
 
 			for (int i = 0; i < lineList.Length; i++) {
-				line.Points.Add(new Point(600 * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
+				line.Points.Add(new Point(width * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
 			}
 		}
 
@@ -188,8 +197,20 @@ namespace giganten
 			TimeSpan sincelast = now - lastredraw;
 			if (sincelast.TotalMilliseconds < 50)
 				return;
+			graph_Person1.Height = canvasgrid1.ActualHeight;
+			graph_Person1.Width = canvasgrid1.ActualWidth;
+			TransformGroup g = new TransformGroup();
+			g.Children.Add(new TranslateTransform(0, -graph_Person1.Height));
+			g.Children.Add(new ScaleTransform(1, -1));
+			graph_Person1.RenderTransform = g;
 			graph_Person1.Background = Brushes.LightBlue;
-			graph_Person2.Background = Brushes.LightGray;
+			graph_Person2.Height = canvasgrid2.ActualHeight;
+			graph_Person2.Width = canvasgrid2.ActualWidth;
+			g = new TransformGroup();
+			g.Children.Add(new TranslateTransform(0, -graph_Person2.Height));
+			g.Children.Add(new ScaleTransform(1, -1));
+			graph_Person2.RenderTransform = g;
+			graph_Person2.Background = Brushes.LightGreen;
 
 			if (salesPerson1 != null) {
 				drawGraphFor(salesPerson1, graph_Person1);
@@ -230,7 +251,7 @@ namespace giganten
 					line.StrokeDashArray = new DoubleCollection(new double[] { 5, 3 });
 					line.Stroke = Brushes.Blue;
 					canvas.Children.Add(line);
-					DrawLines(percentages, line);
+					DrawLines(percentages, line, canvas);
 						
 				}
 			}
