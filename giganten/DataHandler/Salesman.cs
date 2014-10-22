@@ -30,13 +30,27 @@ namespace giganten {
 		public readonly String Name;
 		public readonly Dictionary<string, int> KGMs = new Dictionary<string, int>();
 		public int TotalSales { get; private set; }
+		public double Omsaetning { get; private set; }
+		public double Indtjening { get; private set; }
 
 		public Salesman(String[] entry) {
 			Name = entry[3];
+			Omsaetning = 0;
+			Indtjening = 0;
 			AddEntry(entry);
 		}
 
 		public void AddEntry(String[] entry) {
+			double antal = 0;
+			double salg = 0;
+			double kost = 0;
+			double.TryParse(entry[6], out antal);
+			double.TryParse(entry[7], out salg);
+			double.TryParse(entry[8], out kost);
+
+			Omsaetning += antal * salg;
+			Indtjening += antal * (salg - kost);
+
 			string kgm = entry[12];
 			if (KGMs.ContainsKey(kgm)) {
 				KGMs[kgm]++;

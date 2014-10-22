@@ -225,10 +225,46 @@ namespace giganten
 			canvas.Children.Clear();
 			YearInfo year = datahandler.GetYear(yearSelected);
 			if (Omsætning.IsChecked == true) {
-				//draw graph function
+				double[] omsæts = new double[12];
+				for (int i = 0; i < 12; i++) {
+					if (year[i] != null) {
+						Salesman sm = year[i].GetSalesman(salesperson);
+						if (sm != null) {
+							omsæts[i] = sm.Omsaetning;
+						}
+						else
+							omsæts[i] = 0;
+					}
+					else
+						omsæts[i] = 0;
+				}
+				Polyline line = new Polyline();
+				line.StrokeThickness = 2;
+				//line.StrokeDashArray = new DoubleCollection(new double[] { 5, 3 });
+				line.Stroke = Brushes.Red;
+				canvas.Children.Add(line);
+				DrawLines(omsæts, line, canvas);
 			}
 			if (Indtjening.IsChecked == true) {
-				//draw graph function
+				double[] indtj = new double[12];
+				for (int i = 0; i < 12; i++) {
+					if (year[i] != null) {
+						Salesman sm = year[i].GetSalesman(salesperson);
+						if (sm != null) {
+							indtj[i] = sm.Indtjening;
+						}
+						else
+							indtj[i] = 0;
+					}
+					else
+						indtj[i] = 0;
+				}
+				Polyline line = new Polyline();
+				line.StrokeThickness = 2;
+				line.StrokeDashArray = new DoubleCollection(new double[] { 3, 2 });
+				line.Stroke = Brushes.Green;
+				canvas.Children.Add(line);
+				DrawLines(indtj, line, canvas);
 			}
 			foreach (CheckBox cb in checkBoxList) {
 				if (cb.IsChecked == true) {
