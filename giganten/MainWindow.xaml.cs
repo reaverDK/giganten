@@ -192,6 +192,16 @@ namespace giganten
 			}
 		}
 
+		public void DrawLines(double[] lineList, Polyline line, double max, Canvas canvas) {
+			double height = canvas.Height;
+			double width = canvas.Width;
+			double scaleGraph = height / max;
+
+			for (int i = 0; i < lineList.Length; i++) {
+				line.Points.Add(new Point(width * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
+			}
+		}
+
 		private void drawGraphs() {
 			DateTime now = DateTime.Now;
 			TimeSpan sincelast = now - lastredraw;
@@ -224,47 +234,42 @@ namespace giganten
 		private void drawGraphFor(string salesperson, Canvas canvas) {
 			canvas.Children.Clear();
 			YearInfo year = datahandler.GetYear(yearSelected);
-			if (Omsætning.IsChecked == true) {
-				double[] omsæts = new double[12];
-				for (int i = 0; i < 12; i++) {
+
+			double[] omsætning = new double[12];
+			double[] indtjening = new double[12];
+			Dictionary<String, double[]> kgmgroups = new Dictionary<string, double[]>();
+
+			// Get the data
+			for (int i = 0; i < 12; i++) {
+				if (Omsætning.IsChecked == true) {
 					if (year[i] != null) {
 						Salesman sm = year[i].GetSalesman(salesperson);
 						if (sm != null) {
-							omsæts[i] = sm.Omsaetning;
+							omsætning[i] = sm.Omsaetning;
 						}
 						else
-							omsæts[i] = 0;
+							omsætning[i] = 0;
 					}
 					else
-						omsæts[i] = 0;
+						omsætning[i] = 0;
 				}
-				Polyline line = new Polyline();
-				line.StrokeThickness = 2;
-				//line.StrokeDashArray = new DoubleCollection(new double[] { 5, 3 });
-				line.Stroke = Brushes.Red;
-				canvas.Children.Add(line);
-				DrawLines(omsæts, line, canvas);
-			}
-			if (Indtjening.IsChecked == true) {
-				double[] indtj = new double[12];
-				for (int i = 0; i < 12; i++) {
+				else
+					omsætning[i] = 0;
+				
+				if (Indtjening.IsChecked == true) {
 					if (year[i] != null) {
 						Salesman sm = year[i].GetSalesman(salesperson);
 						if (sm != null) {
-							indtj[i] = sm.Indtjening;
+							indtjening[i] = sm.Indtjening;
 						}
 						else
-							indtj[i] = 0;
+							indtjening[i] = 0;
 					}
 					else
-						indtj[i] = 0;
+						indtjening[i] = 0;
 				}
-				Polyline line = new Polyline();
-				line.StrokeThickness = 2;
-				line.StrokeDashArray = new DoubleCollection(new double[] { 3, 2 });
-				line.Stroke = Brushes.Green;
-				canvas.Children.Add(line);
-				DrawLines(indtj, line, canvas);
+				else
+					indtjening[i] = 0;
 			}
 			foreach (CheckBox cb in checkBoxList) {
 				if (cb.IsChecked == true) {
@@ -282,14 +287,41 @@ namespace giganten
 						else
 							percentages[i] = 0;
 					}
-					Polyline line = new Polyline();
-					line.StrokeThickness = 2;
-					line.StrokeDashArray = new DoubleCollection(new double[] { 5, 3 });
-					line.Stroke = Brushes.Blue;
-					canvas.Children.Add(line);
-					DrawLines(percentages, line, canvas);
-						
+					kgmgroups.Add((string)cb.Content, percentages);
 				}
+			}
+
+			// Actually draw the data
+
+			double maxOms = omsætning.Max();
+			double maxInd = indtjening.Max();
+			double maxPerc = 0;
+			foreach (KeyValuePair<String, double[]> pair in kgmgroups) {
+				var tempmax = pair.Value.Max();
+				if (tempmax > maxPerc)
+					maxPerc = tempmax;
+			}
+
+			Polyline line = new Polyline();
+			line.StrokeThickness = 2;
+			line.Stroke = Brushes.Blue;
+			canvas.Children.Add(line);
+			DrawLines(omsætning, line, maxOms, canvas);
+
+			line = new Polyline();
+			line.StrokeThickness = 2;
+			line.StrokeDashArray = new DoubleCollection(new double[] { 3, 2 });
+			line.Stroke = Brushes.Green;
+			canvas.Children.Add(line);
+			DrawLines(indtjening, line, maxOms, canvas);
+
+			foreach (KeyValuePair<String, double[]> pair in kgmgroups) {
+				line = new Polyline();
+				line.StrokeThickness = 2;
+				line.StrokeDashArray = new DoubleCollection(new double[] { 5, 3 });
+				line.Stroke = Brushes.Red;
+				canvas.Children.Add(line);
+				DrawLines(pair.Value, line, maxPerc, canvas);
 			}
 		}
 
