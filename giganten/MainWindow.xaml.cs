@@ -48,6 +48,7 @@ namespace giganten
 			datahandler = data;
 			YearInfo year = datahandler.GetYear(yearSelected);
 			string[] salesMen = year.GetSalesmen();
+			salesMen = salesMen.OrderBy(x => x).ToArray();
 			foreach (string s in salesMen) {
 				SalesmenCollection.Add(s);
 			}
@@ -214,6 +215,8 @@ namespace giganten
 			g.Children.Add(new ScaleTransform(1, -1));
 			graph_Person1.RenderTransform = g;
 			graph_Person1.Background = Brushes.LightBlue;
+			graph_Person1.Children.Clear();
+
 			graph_Person2.Height = canvasgrid2.ActualHeight;
 			graph_Person2.Width = canvasgrid2.ActualWidth;
 			g = new TransformGroup();
@@ -221,6 +224,7 @@ namespace giganten
 			g.Children.Add(new ScaleTransform(1, -1));
 			graph_Person2.RenderTransform = g;
 			graph_Person2.Background = Brushes.LightGreen;
+			graph_Person2.Children.Clear();
 
 			if (salesPerson1 != null) {
 				drawGraphFor(salesPerson1, graph_Person1);
@@ -232,7 +236,6 @@ namespace giganten
 		}
 
 		private void drawGraphFor(string salesperson, Canvas canvas) {
-			canvas.Children.Clear();
 			YearInfo year = datahandler.GetYear(yearSelected);
 
 			double[] omsætning = new double[12];
@@ -292,9 +295,6 @@ namespace giganten
 			}
 
 			// Actually draw the data
-
-			if (salesperson == "ANDERSNE")
-				salesperson = "ANDERSNE";
 
 			double maxOms = omsætning.Max();
 			double maxInd = indtjening.Max();
