@@ -293,6 +293,9 @@ namespace giganten
 
 			// Actually draw the data
 
+			if (salesperson == "ANDERSNE")
+				salesperson = "ANDERSNE";
+
 			double maxOms = omsætning.Max();
 			double maxInd = indtjening.Max();
 			double maxPerc = 0;
@@ -301,6 +304,13 @@ namespace giganten
 				if (tempmax > maxPerc)
 					maxPerc = tempmax;
 			}
+
+			/*if (maxOms <= 0)
+				maxOms = 10;
+			if (maxInd <= 0)
+				maxInd = 10;
+			if (maxPerc <= 0)
+				maxPerc = 0.1;*/
 
 			Polyline line = new Polyline();
 			line.StrokeThickness = 2;

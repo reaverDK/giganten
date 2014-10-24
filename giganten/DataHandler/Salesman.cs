@@ -45,20 +45,22 @@ namespace giganten {
 			double salg = 0;
 			double kost = 0;
 			double.TryParse(entry[6], out antal);
-			double.TryParse(entry[7], out salg);
-			double.TryParse(entry[8], out kost);
+			if (antal >= 0) {
+				double.TryParse(entry[7], out salg);
+				double.TryParse(entry[8], out kost);
 
-			Omsaetning += antal * salg;
-			Indtjening += antal * (salg - kost);
+				Omsaetning += antal * (Math.Abs(salg) + Math.Abs(kost));
+				Indtjening += antal * (salg - kost);
 
-			string kgm = entry[12];
-			if (KGMs.ContainsKey(kgm)) {
-				KGMs[kgm]++;
+				string kgm = entry[12];
+				if (KGMs.ContainsKey(kgm)) {
+					KGMs[kgm]++;
+				}
+				else {
+					KGMs.Add(kgm, 1);
+				}
+				TotalSales++;
 			}
-			else {
-				KGMs.Add(kgm, 1);
-			}
-			TotalSales++;
 		}
 
 		public double PercentOfTotal(String[] list) {
