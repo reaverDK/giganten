@@ -5,9 +5,7 @@
 	<Window.Resources>
 		<ResourceDictionary Source="SuperAwesomeStyle.xaml"></ResourceDictionary>
 	</Window.Resources>
-
 	<Grid>
-
 		<Border BorderBrush="#BAB2C7D6" BorderThickness="20,2,20,4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 			<Grid Margin="0,64,0,0">
 				<Button x:Name="CloseButton" Content="Luk" HorizontalAlignment="Left" Margin="150,185,0,0" VerticalAlignment="Top" Width="100" Height="35" FontSize="20" FontWeight="Bold" Click="CloseButton_Click"/>

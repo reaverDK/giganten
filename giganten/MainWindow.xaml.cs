@@ -16,6 +16,8 @@ using System.Drawing;
 using System.Diagnostics;
 using System.ComponentModel;
 
+using OxyPlot;
+
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using MigraDoc.DocumentObjectModel;
@@ -98,6 +100,8 @@ namespace giganten
 			SizeChanged += MainWindow_SizeChanged;
 
 			drawGraphs();
+
+			
 		}
 
 		void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e) {
@@ -338,6 +342,7 @@ namespace giganten
 
 		private void drawGraphFor(string salesperson, Canvas canvas, List<List<double>> list, List<Polyline> lines)
 		{
+			var tmp = new PlotModel { Title = "Hello", Subtitle = "World" };
 			YearInfo year = datahandler.GetYear(yearSelected);
 
 			double[] omsætning = new double[12];
