@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:oxy="http://oxyplot.org/wpf"
 				DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="ElRank" Height="630" Width="930">
+        Title="ElRank" Height="830" Width="930">
 	<Window.Resources>
 		<ResourceDictionary Source="SuperAwesomeStyle.xaml"></ResourceDictionary>
 	</Window.Resources>
@@ -32,20 +32,22 @@
 							<TextBox x:Name="SBNummerBox" HorizontalAlignment="Left" Height="22" Margin="681,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
 							<Label x:Name="StatusBox" Content="Status: Ingen filer indlæst" HorizontalAlignment="Left" Margin="9,84,0,0" VerticalAlignment="Top" Width="170"/>
 
-							<Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="184,128,10,10">
+							<Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="184,128,10,0">
 								<Grid.RowDefinitions>
 									<RowDefinition Height="*" />
 									<RowDefinition Height="*" />
-									<RowDefinition Height="20" />
+									<RowDefinition Height="150" />
 								</Grid.RowDefinitions>
 								<Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid1">
 									<Canvas HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="graph_Person1">
 									</Canvas>
-									<oxy:Plot Name="plot1"></oxy:Plot>
 								</Grid>
 								<Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid2">
 									<Canvas HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="graph_Person2">
 									</Canvas>
+								</Grid>
+								<Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+									<oxy:Plot Model="{Binding Model}"></oxy:Plot>
 								</Grid>
 							</Grid>
 
@@ -72,7 +74,7 @@
 								<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="136" x:Name="Indtjening" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
 								<Separator Height="4" Margin="0"/>
 							</StackPanel>
-					</Grid>
+						</Grid>
 					</TabItem>
 					<TabItem Header="Data filer">
 						<Grid Background="#FFECECEC">

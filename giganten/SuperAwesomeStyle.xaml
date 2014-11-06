@@ -336,7 +336,7 @@
 
 	<!-- ###########    ComboBox    ########### -->
 
-	<Style TargetType="{x:Type ComboBox}">
+	<!--Style TargetType="{x:Type ComboBox}">
 		<Setter Property="Foreground" Value="Gray" />
 		<Setter Property="BorderBrush" Value="Gray" />
 		<Setter Property="Background" Value="White" />
@@ -506,7 +506,7 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
+	</Style-->
 
 	<ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
 		<Border x:Name="PART_ContentHost" Focusable="True" />
