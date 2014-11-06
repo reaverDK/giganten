@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 
 using OxyPlot;
+using OxyPlot.Series;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -340,9 +341,19 @@ namespace giganten
 			lastredraw = DateTime.Now;
 		}
 
+		PlotModel Model = null;
+
 		private void drawGraphFor(string salesperson, Canvas canvas, List<List<double>> list, List<Polyline> lines)
 		{
+			//Oxy plot test stuff
 			var tmp = new PlotModel { Title = "Hello", Subtitle = "World" };
+			var series1 = new LineSeries { Title = "yuihu", MarkerType = MarkerType.Circle, MarkerSize = 3 };
+			series1.Points.Add(new DataPoint(1, 10));
+			series1.Points.Add(new DataPoint(1, 20));
+			series1.Points.Add(new DataPoint(1, 40));
+			tmp.Series.Add(series1);
+			this.Model = tmp;
+
 			YearInfo year = datahandler.GetYear(yearSelected);
 
 			double[] omsætning = new double[12];
