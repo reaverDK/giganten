@@ -40,7 +40,6 @@
 								</Grid.RowDefinitions>
 								<Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid1">
 									<Canvas HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="graph_Person1">
-									<oxy:Plot Name="plot1"></oxy:Plot>
 									</Canvas>
 								</Grid>
 								<Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid2">
