@@ -21,6 +21,7 @@ using MigraDoc.DocumentObjectModel;
 using MigraDoc.Rendering;
 using MigraDoc.RtfRendering;
 using System.Collections.ObjectModel;
+using MigraDoc.DocumentObjectModel.Shapes.Charts;
 
 namespace giganten
 {
@@ -38,6 +39,8 @@ namespace giganten
 		int yearSelected = 2014;
 		string salesPerson1 = null;
 		string salesPerson2 = null;
+		List<List<double>> lineList1 = new List<List<double>>();
+		List<List<double>> lineList2 = new List<List<double>>();
 
 		DateTime lastredraw = DateTime.Now;
 
@@ -126,7 +129,36 @@ namespace giganten
 			MigraDoc.DocumentObjectModel.Section section = document.AddSection();
 			MigraDoc.DocumentObjectModel.Paragraph paragraph = section.AddParagraph();
 			paragraph.Format.Font.Color = MigraDoc.DocumentObjectModel.Color.FromCmyk(100, 20, 30, 50);
-			paragraph.AddFormattedText("Hello World!", TextFormat.Bold);
+			
+			salesPerson1 = (string)combobox_Person1.SelectedItem;
+			if (salesPerson1 == "<Ingen sælger valgt>")
+			{
+				salesPerson1 = null;
+			}
+
+			if (salesPerson1 != null)
+			{
+				paragraph.AddFormattedText(combobox_Person1.Text, TextFormat.Bold);
+				paragraph.AddLineBreak();
+				paragraph.AddLineBreak();
+				DefineCharts(document, lineList1);
+			}
+
+			salesPerson2 = (string)combobox_Person2.SelectedItem;
+			if (salesPerson2 == "<Ingen sælger valgt>")
+			{
+				salesPerson2 = null;
+			}
+
+			if (salesPerson2 != null)
+			{
+				MigraDoc.DocumentObjectModel.Section newSection = document.AddSection();
+				MigraDoc.DocumentObjectModel.Paragraph newParagraph = newSection.AddParagraph();
+				newParagraph.AddFormattedText(combobox_Person2.Text, TextFormat.Bold);
+				newParagraph.AddLineBreak();
+				newParagraph.AddLineBreak();
+				DefineCharts(document, lineList2);
+			}
 
 			const bool unicode = false;
 			const PdfFontEmbedding embedding = PdfFontEmbedding.Always;
@@ -138,6 +170,43 @@ namespace giganten
 			string myfile = time + ".pdf";
 			pdfRenderer.PdfDocument.Save(myfile);
 			Process.Start(myfile);
+		}
+
+		public void DefineCharts(Document document, List<List<double>> list)
+		{	
+			MigraDoc.DocumentObjectModel.Paragraph paragraph = document.LastSection.AddParagraph("Sælger Diagram", "Heading1");
+			Chart chart = new Chart();
+			chart.Left = 0;
+			chart.Width = Unit.FromCentimeter(16);
+			chart.Height = Unit.FromCentimeter(10);
+
+			//Series series = chart.SeriesCollection.AddSeries();
+			//series.ChartType = ChartType.Column2D;
+			//series.Add(new double[]{1, 17, 45, 5, 3, 20, 11, 23, 8, 19});
+			//series.HasDataLabel = true;
+			//series = chart.SeriesCollection.AddSeries();
+			//series.ChartType = ChartType.Line;
+			//series.Add(new double[]{41, 7, 5, 45, 13, 10, 21, 13, 18, 9});
+			for (int i = 0; i < list.Count; i++)
+			{
+				Series series = chart.SeriesCollection.AddSeries();
+				series.ChartType = ChartType.Line;
+				series.Add(list[i].ToArray());
+				series.SetNull();
+			}
+
+			XSeries xseries = chart.XValues.AddXSeries();
+			xseries.Add(new string[]{"Jan","Feb","Marts","April","Maj","Juni","Juli","Aug","Sep","Okt","Nov","Dec"});
+			chart.XAxis.MajorTickMark = TickMarkType.Inside;
+			chart.XAxis.Title.Caption = "X-Axis";
+
+			chart.YAxis.MajorTickMark = TickMarkType.Outside;
+			chart.YAxis.MajorTickMark = TickMarkType.Outside;
+			chart.YAxis.HasMajorGridlines = true;
+
+			chart.PlotArea.LineFormat.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
+			chart.PlotArea.LineFormat.Width = 3;
+			document.LastSection.Add(chart);
 		}
 
 		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -189,7 +258,7 @@ namespace giganten
 			double scaleGraph = height / lineList.Max();
 
 			for (int i = 0; i < lineList.Length; i++) {
-				line.Points.Add(new Point(width * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
+				line.Points.Add(new System.Windows.Point(width * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
 			}
 		}
 
@@ -199,7 +268,7 @@ namespace giganten
 			double scaleGraph = height / max;
 
 			for (int i = 0; i < lineList.Length; i++) {
-				line.Points.Add(new Point(width * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
+				line.Points.Add(new System.Windows.Point(width * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
 			}
 		}
 
@@ -227,15 +296,16 @@ namespace giganten
 			graph_Person2.Children.Clear();
 
 			if (salesPerson1 != null) {
-				drawGraphFor(salesPerson1, graph_Person1);
+				drawGraphFor(salesPerson1, graph_Person1, lineList1);
 			}
 			if (salesPerson2 != null) {
-				drawGraphFor(salesPerson2, graph_Person2);
+				drawGraphFor(salesPerson2, graph_Person2, lineList2);
 			}
 			lastredraw = DateTime.Now;
 		}
 
-		private void drawGraphFor(string salesperson, Canvas canvas) {
+		private void drawGraphFor(string salesperson, Canvas canvas, List<List<double>> list)
+		{
 			YearInfo year = datahandler.GetYear(yearSelected);
 
 			double[] omsætning = new double[12];
@@ -325,13 +395,22 @@ namespace giganten
 			canvas.Children.Add(line);
 			DrawLines(indtjening, line, maxOms, canvas);
 
+			int n = 0;
+			list.Clear();
 			foreach (KeyValuePair<String, double[]> pair in kgmgroups) {
 				line = new Polyline();
 				line.StrokeThickness = 2;
 				line.StrokeDashArray = new DoubleCollection(new double[] { 5, 3 });
 				line.Stroke = Brushes.Red;
 				canvas.Children.Add(line);
+
+				if (n>=list.Count)
+				{
+					list.Add(new List<double>());
+				}
+				list[n].AddRange(pair.Value);
 				DrawLines(pair.Value, line, maxPerc, canvas);
+				n++;
 			}
 		}
 
