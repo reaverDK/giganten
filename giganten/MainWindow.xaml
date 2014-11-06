@@ -1,6 +1,7 @@
 ﻿<Window x:Class="giganten.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:oxy="http://oxyplot.org/wpf"
 				DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="ElRank" Height="630" Width="930">
 	<Window.Resources>
@@ -22,7 +23,7 @@
 				</MenuItem>
 			</Menu>
 			<!--ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"-->
-				<TabControl Width="Auto" Background="#FFECECEC">
+				<TabControl Width="Auto" Background="#FFECECEC" Margin="0,0,0,0">
 					<TabItem Header="Hovedside" >
 						<Grid Background="#FFECECEC" Margin="0,0,0,0">
 							<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="390,86,0,0" VerticalAlignment="Top" Height="26" Width="77"/>
@@ -39,6 +40,7 @@
 								</Grid.RowDefinitions>
 								<Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid1">
 									<Canvas HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="graph_Person1">
+									<oxy:Plot Name="plot1"></oxy:Plot>
 									</Canvas>
 								</Grid>
 								<Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid2">
@@ -70,7 +72,7 @@
 								<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="136" x:Name="Indtjening" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
 								<Separator Height="4" Margin="0"/>
 							</StackPanel>
-						</Grid>
+					</Grid>
 					</TabItem>
 					<TabItem Header="Data filer">
 						<Grid Background="#FFECECEC">

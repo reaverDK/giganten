@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
 using System.Diagnostics;
+using System.ComponentModel;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -22,6 +23,7 @@ using MigraDoc.Rendering;
 using MigraDoc.RtfRendering;
 using System.Collections.ObjectModel;
 using MigraDoc.DocumentObjectModel.Shapes.Charts;
+
 
 namespace giganten
 {
@@ -41,7 +43,9 @@ namespace giganten
 		string salesPerson2 = null;
 		List<List<double>> lineList1 = new List<List<double>>();
 		List<List<double>> lineList2 = new List<List<double>>();
-
+		List<Polyline> lines1 = new List<Polyline>();
+		List<Polyline> lines2 = new List<Polyline>();
+		Random random = new Random();
 		DateTime lastredraw = DateTime.Now;
 
 		public MainWindow(DataHandler data, Dictionary<string, string[]> groups) {
@@ -59,6 +63,31 @@ namespace giganten
 			InitializeComponent();
 
 			foreach (KeyValuePair<String, String[]> group in Groups) {
+				Polyline line1 = new Polyline();
+				Polyline line2 = new Polyline();
+				lines1.Add(line1);
+				lines2.Add(line2);
+				line1.StrokeThickness = 3;
+				line2.StrokeThickness = 3;
+
+				//Create a random dashline
+				DoubleCollection dcol = new DoubleCollection(new double[] { random.Next(7), random.Next(4) });
+				line1.StrokeDashArray = dcol;
+				line2.StrokeDashArray = dcol;
+
+				//line1.Stroke = Brushes.Red;
+				//line2.Stroke = Brushes.Red;
+				//Create a random color
+				var properties = typeof(Brushes).GetProperties();
+				var count = properties.Count();
+
+				var colour = properties
+				 .Select(x => new { Property = x, Index = random.Next(count) })
+				 .OrderBy(x => x.Index)
+				  .First();
+				line1.Stroke = (SolidColorBrush)colour.Property.GetValue(colour, null);
+				line2.Stroke = (SolidColorBrush)colour.Property.GetValue(colour, null);
+				
 				CheckBox cb = new CheckBox();
 				cb.Content = group.Key;
 				CheckBoxPanel.Children.Add(cb);
@@ -67,6 +96,7 @@ namespace giganten
 				cb.Unchecked += Checkbox_Changed;
 			}
 			SizeChanged += MainWindow_SizeChanged;
+
 			drawGraphs();
 		}
 
@@ -127,6 +157,7 @@ namespace giganten
 			document.UseCmykColor = true;
 
 			MigraDoc.DocumentObjectModel.Section section = document.AddSection();
+			section.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Landscape;
 			MigraDoc.DocumentObjectModel.Paragraph paragraph = section.AddParagraph();
 			paragraph.Format.Font.Color = MigraDoc.DocumentObjectModel.Color.FromCmyk(100, 20, 30, 50);
 			
@@ -153,6 +184,7 @@ namespace giganten
 			if (salesPerson2 != null)
 			{
 				MigraDoc.DocumentObjectModel.Section newSection = document.AddSection();
+				newSection.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Landscape;
 				MigraDoc.DocumentObjectModel.Paragraph newParagraph = newSection.AddParagraph();
 				newParagraph.AddFormattedText(combobox_Person2.Text, TextFormat.Bold);
 				newParagraph.AddLineBreak();
@@ -177,8 +209,8 @@ namespace giganten
 			MigraDoc.DocumentObjectModel.Paragraph paragraph = document.LastSection.AddParagraph("Sælger Diagram", "Heading1");
 			Chart chart = new Chart();
 			chart.Left = 0;
-			chart.Width = Unit.FromCentimeter(16);
-			chart.Height = Unit.FromCentimeter(10);
+			chart.Width = Unit.FromCentimeter(22);
+			chart.Height = Unit.FromCentimeter(15);
 
 			//Series series = chart.SeriesCollection.AddSeries();
 			//series.ChartType = ChartType.Column2D;
@@ -189,7 +221,7 @@ namespace giganten
 			//series.Add(new double[]{41, 7, 5, 45, 13, 10, 21, 13, 18, 9});
 			for (int i = 0; i < list.Count; i++)
 			{
-				Series series = chart.SeriesCollection.AddSeries();
+				MigraDoc.DocumentObjectModel.Shapes.Charts.Series series = chart.SeriesCollection.AddSeries();
 				series.ChartType = ChartType.Line;
 				series.Add(list[i].ToArray());
 				series.SetNull();
@@ -296,15 +328,15 @@ namespace giganten
 			graph_Person2.Children.Clear();
 
 			if (salesPerson1 != null) {
-				drawGraphFor(salesPerson1, graph_Person1, lineList1);
+				drawGraphFor(salesPerson1, graph_Person1, lineList1, lines1);
 			}
 			if (salesPerson2 != null) {
-				drawGraphFor(salesPerson2, graph_Person2, lineList2);
+				drawGraphFor(salesPerson2, graph_Person2, lineList2, lines2);
 			}
 			lastredraw = DateTime.Now;
 		}
 
-		private void drawGraphFor(string salesperson, Canvas canvas, List<List<double>> list)
+		private void drawGraphFor(string salesperson, Canvas canvas, List<List<double>> list, List<Polyline> lines)
 		{
 			YearInfo year = datahandler.GetYear(yearSelected);
 
@@ -383,13 +415,13 @@ namespace giganten
 				maxPerc = 0.1;*/
 
 			Polyline line = new Polyline();
-			line.StrokeThickness = 2;
+			line.StrokeThickness = 3;
 			line.Stroke = Brushes.Blue;
 			canvas.Children.Add(line);
 			DrawLines(omsætning, line, maxOms, canvas);
 
 			line = new Polyline();
-			line.StrokeThickness = 2;
+			line.StrokeThickness = 3;
 			line.StrokeDashArray = new DoubleCollection(new double[] { 3, 2 });
 			line.Stroke = Brushes.Green;
 			canvas.Children.Add(line);
@@ -398,17 +430,14 @@ namespace giganten
 			int n = 0;
 			list.Clear();
 			foreach (KeyValuePair<String, double[]> pair in kgmgroups) {
-				line = new Polyline();
-				line.StrokeThickness = 2;
-				line.StrokeDashArray = new DoubleCollection(new double[] { 5, 3 });
-				line.Stroke = Brushes.Red;
-				canvas.Children.Add(line);
-
 				if (n>=list.Count)
 				{
 					list.Add(new List<double>());
 				}
 				list[n].AddRange(pair.Value);
+				line = lines[n];
+				line.Points.Clear();
+				canvas.Children.Add(line);
 				DrawLines(pair.Value, line, maxPerc, canvas);
 				n++;
 			}
