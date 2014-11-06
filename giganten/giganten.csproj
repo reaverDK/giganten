@@ -166,14 +166,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="warning_sign.jpg" />
-    <Resource Include="logo-large.png" />
-    <Resource Include="bg-header.png" />
+    <EmbeddedResource Include="warning_sign.jpg" />
+    <EmbeddedResource Include="logo-large.png" />
+    <EmbeddedResource Include="bg-header.png" />
     <Content Include="MigraDoc.DocumentObjectModel-WPF.resources.dll" />
     <Content Include="MigraDoc.Rendering-WPF.dll" />
     <Content Include="MigraDoc.RtfRendering-WPF.dll" />
     <Content Include="PdfSharp.Charting-WPF.dll" />
-    <Resource Include="gigant_icon.ico" />
+    <EmbeddedResource Include="gigant_icon.ico" />
     <Content Include="MigraDoc.DocumentObjectModel-WPF.dll" />
     <Content Include="Nea.dll" />
     <Content Include="PdfSharp-WPF.dll" />
