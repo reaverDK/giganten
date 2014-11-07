@@ -10,6 +10,7 @@
 				<ResourceDictionary Source="Resources.LoadingBar.xaml"/>
 				<ResourceDictionary Source="Resources.CheckBox.xaml"/>
 				<ResourceDictionary Source="Resources.Button.xaml"/>
+				<ResourceDictionary Source="Resources.MenuItem.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

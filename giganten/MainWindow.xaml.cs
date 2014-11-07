@@ -93,6 +93,7 @@ namespace giganten
 				
 				CheckBox cb = new CheckBox();
 				cb.Content = group.Key;
+				cb.Height = 25;
 				CheckBoxPanel.Children.Add(cb);
 				checkBoxList.Add(cb);
 				cb.Checked += Checkbox_Changed;
