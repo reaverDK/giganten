@@ -46,8 +46,12 @@
 									<Canvas HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="graph_Person2">
 									</Canvas>
 								</Grid>
-								<Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-									<oxy:Plot Model="{Binding Model}"></oxy:Plot>
+								<Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="OxyPlot">
+								<oxy:PlotView Model="{Binding MyModel}">
+									<oxy:PlotView.Series>
+										<oxy:LineSeries ItemsSource="{Binding Points}"/>
+									</oxy:PlotView.Series>
+								</oxy:PlotView>
 								</Grid>
 							</Grid>
 

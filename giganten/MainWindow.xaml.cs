@@ -18,6 +18,7 @@ using System.ComponentModel;
 
 using OxyPlot;
 using OxyPlot.Series;
+using OxyPlot.Axes;
 
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -50,6 +51,8 @@ namespace giganten
 		List<Polyline> lines2 = new List<Polyline>();
 		Random random = new Random();
 		DateTime lastredraw = DateTime.Now;
+		PlotModel MyModel;
+		LineSeries Points;
 
 		public MainWindow(DataHandler data, Dictionary<string, string[]> groups) {
 			Groups = groups;
@@ -102,7 +105,7 @@ namespace giganten
 
 			drawGraphs();
 
-			
+			MyModel = plotter();
 		}
 
 		void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e) {
@@ -341,19 +344,25 @@ namespace giganten
 			lastredraw = DateTime.Now;
 		}
 
-		PlotModel Model = null;
+		public PlotModel plotter(){
+			//Oxy plot test stuff
+			var model = new PlotModel { Title = "Hello", Subtitle = "World" };
+			//var points = new List<DataPoint> { new DataPoint(0, 4), new DataPoint(10, 4), new DataPoint(20, 14), new DataPoint(30, 34) };
+			//Points = new LineSeries();	
+			//model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Minimum = 0 });
+			//model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, MaximumPadding = 0.1 });
+			//var series1 = new LineSeries { Title = "yuihu", MarkerType = MarkerType.Circle, MarkerSize = 3, MarkerFill = OxyColor.FromArgb(255,255,1,1)};
+			//series1.LabelFormatString = "{1}";
+			//series1.Points.Add(new DataPoint(1, 10));
+			//series1.Points.Add(new DataPoint(10, 20));
+			//series1.Points.Add(new DataPoint(20, 40));
+			//model.Series.Add(series1);
+			//Points.Points.AddRange(points);
+			return model;
+		}
 
 		private void drawGraphFor(string salesperson, Canvas canvas, List<List<double>> list, List<Polyline> lines)
 		{
-			//Oxy plot test stuff
-			var tmp = new PlotModel { Title = "Hello", Subtitle = "World" };
-			var series1 = new LineSeries { Title = "yuihu", MarkerType = MarkerType.Circle, MarkerSize = 3 };
-			series1.Points.Add(new DataPoint(1, 10));
-			series1.Points.Add(new DataPoint(1, 20));
-			series1.Points.Add(new DataPoint(1, 40));
-			tmp.Series.Add(series1);
-			this.Model = tmp;
-
 			YearInfo year = datahandler.GetYear(yearSelected);
 
 			double[] omsætning = new double[12];
