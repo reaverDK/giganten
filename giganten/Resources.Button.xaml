@@ -1,0 +1,138 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Resources.Color.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+
+	<LinearGradientBrush x:Key="FocusFX" StartPoint="0,0" EndPoint="1,0">
+		<GradientStop Offset="0" Color="#FF90F000"></GradientStop>
+		<GradientStop Offset="1" Color="#FF90F000"></GradientStop>
+	</LinearGradientBrush>
+
+	<Storyboard x:Key="FocusOut">
+		<DoubleAnimation x:Name="AnimFocusOut" BeginTime="00:00:00" Storyboard.TargetName="FocusRectangle" Duration="00:00:00.250" From="1" To="0" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+	</Storyboard>
+	<Storyboard x:Key="FocusIn">
+		<DoubleAnimation x:Name="AnimFocus" BeginTime="00:00:00" Storyboard.TargetName="FocusRectangle" Duration="00:00:00.250" From="0" To="1" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+	</Storyboard>
+	<Storyboard x:Key="ExitFocusOut">
+		<DoubleAnimation x:Name="AnimExitFocusOut" BeginTime="00:00:00" Storyboard.TargetName="FocusRectangle" Duration="00:00:00.250" From="0.5" To="0" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+	</Storyboard>
+	<Storyboard x:Key="ExitFocusIn">
+		<DoubleAnimation x:Name="AnimExitFocus" BeginTime="00:00:00" Storyboard.TargetName="FocusRectangle" Duration="00:00:00.250" From="0" To="0.5" Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+	</Storyboard>
+
+
+	<Style x:Key="ExitButtonTemplate" TargetType="{x:Type Button}">
+		<Setter Property="SnapsToDevicePixels" Value="True" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate x:Name="tmpltButton">
+					<Grid>
+						<Border x:Name="FocusRectangle" 
+                    Background="{StaticResource ExitFocusColor}" 
+										Opacity="0" >
+						</Border>
+						<Border x:Name="Presstangle" 
+                    Background="{StaticResource ExitFocusColor}" 
+										Opacity="0" >
+						</Border>
+						<ContentPresenter x:Name="ButtonContent" 
+                    Opacity="1" 
+                    Content="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" 
+                    HorizontalAlignment="center" 
+                    VerticalAlignment="center">
+						</ContentPresenter>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="Button.MouseLeave">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource ExitFocusOut}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.MouseEnter">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource ExitFocusIn}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.LostFocus">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource ExitFocusOut}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.GotFocus">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource ExitFocusIn}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<Trigger Property="Button.IsPressed" Value="True">
+							<Setter Property="Opacity" TargetName="Presstangle" Value="0.7"></Setter>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type Button}">
+		<Setter Property="OverridesDefaultStyle" Value="True" />
+		<Setter Property="SnapsToDevicePixels" Value="True" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate x:Name="tmpltButton">
+					<Grid>
+						<Border x:Name="BaseRectangle" 
+                    Background="{StaticResource ButtonBaseColor}">
+						</Border>
+						<Border x:Name="FocusRectangle" 
+                    Background="{StaticResource FocusFX}" 
+										Opacity="0" >
+						</Border>
+						<Border x:Name="Presstangle" 
+                    Background="{StaticResource ButtonFocusColor}" 
+										Opacity="0" >
+						</Border>
+						<ContentPresenter x:Name="ButtonContent" 
+                    Opacity="1" 
+                    Content="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" 
+                    HorizontalAlignment="center" 
+                    VerticalAlignment="center">
+						</ContentPresenter>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="Button.MouseLeave">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource FocusOut}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.MouseEnter">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource FocusIn}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.LostFocus">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource FocusOut}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<EventTrigger RoutedEvent="Button.GotFocus">
+							<EventTrigger.Actions>
+								<BeginStoryboard Storyboard="{StaticResource FocusIn}"></BeginStoryboard>
+							</EventTrigger.Actions>
+						</EventTrigger>
+						<Trigger Property="Button.IsPressed" Value="True">
+							<Setter Property="Opacity" TargetName="Presstangle" Value="1"></Setter>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Opacity" TargetName="ButtonContent" Value=".3"></Setter>
+							<Setter Property="Background" TargetName="BaseRectangle" Value="{StaticResource ButtonDisabledColor}"></Setter>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

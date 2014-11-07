@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>gigant_icon.ico</ApplicationIcon>
+    <ApplicationIcon>Images\gigant_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MigraDoc.DocumentObjectModel-WPF, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
@@ -113,6 +113,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources.Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources.Checkbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources.Color.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ContactWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -134,11 +146,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StartUpWindow.xaml">
+    <Page Include="Resources.ComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SuperAwesomeStyle.xaml">
+    <Page Include="Resources.LoadingBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StartUpWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,17 +192,17 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="warning_sign.jpg" />
-    <Resource Include="logo-large.png" />
-    <Resource Include="bg-header.png" />
-    <Content Include="MigraDoc.DocumentObjectModel-WPF.resources.dll" />
-    <Content Include="MigraDoc.Rendering-WPF.dll" />
-    <Content Include="MigraDoc.RtfRendering-WPF.dll" />
-    <Content Include="PdfSharp.Charting-WPF.dll" />
-    <Resource Include="gigant_icon.ico" />
-    <Content Include="MigraDoc.DocumentObjectModel-WPF.dll" />
+    <Resource Include="Images\warning_sign.jpg" />
+    <Resource Include="Images\logo-large.png" />
+    <Resource Include="Images\bg-header.png" />
+    <Content Include="PDF\MigraDoc.DocumentObjectModel-WPF.resources.dll" />
+    <Content Include="PDF\MigraDoc.Rendering-WPF.dll" />
+    <Content Include="PDF\MigraDoc.RtfRendering-WPF.dll" />
+    <Content Include="PDF\PdfSharp.Charting-WPF.dll" />
+    <Resource Include="Images\gigant_icon.ico" />
+    <Content Include="PDF\MigraDoc.DocumentObjectModel-WPF.dll" />
     <Content Include="Nea.dll" />
-    <Content Include="PdfSharp-WPF.dll" />
+    <Content Include="PDF\PdfSharp-WPF.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
