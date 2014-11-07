@@ -37,9 +37,9 @@
 					</Grid>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsEnabled" Value="False">
-							<Setter TargetName="Border" Property="Background" Value="{StaticResource ComboBoxDisabledColor}" />
+							<Setter TargetName="Border" Property="Background" Value="{StaticResource ElBrushBaseGreyGreen}" />
 							<Setter TargetName="Border" Property="BorderBrush" Value="Gray" />
-							<Setter Property="Foreground" Value="Gray"/>
+							<Setter Property="Foreground" Value="White"/>
 							<Setter TargetName="Arrow" Property="Fill" Value="White" />
 							<Setter Property="Opacity" Value=".3"></Setter>
 						</Trigger>
@@ -56,7 +56,7 @@
 	<Style TargetType="{x:Type ComboBox}">
 		<Setter Property="Foreground" Value="White" />
 		<!--Setter Property="BorderBrush" Value="Gray" /-->
-		<Setter Property="Background" Value="{StaticResource ComboBoxEnabledColor}" />
+		<Setter Property="Background" Value="{StaticResource ElBrushBaseGreen}" />
 		<Setter Property="SnapsToDevicePixels" Value="true"/>
 		<Setter Property="OverridesDefaultStyle" Value="true"/>
 		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -113,7 +113,7 @@
 									MaxHeight="{TemplateBinding MaxDropDownHeight}">
 								<Border
 										x:Name="DropDownBorder"
-										Background="#FFA0FF60"
+										Background="{StaticResource ElBrushBaseLightGreen}"
 										BorderThickness="0"
 										BorderBrush="#FF8CE640"/>
 								<ScrollViewer Margin="1,1,1,1" SnapsToDevicePixels="True">
@@ -173,7 +173,7 @@
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsHighlighted" Value="true">
 							<Setter TargetName="Border" Property="BorderBrush" Value="Gray"/>
-							<Setter TargetName="Border" Property="Background" Value="{StaticResource ComboBoxEnabledColor}"/>
+							<Setter TargetName="Border" Property="Background" Value="{StaticResource ElBrushBaseGreen}"/>
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>

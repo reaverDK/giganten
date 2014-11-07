@@ -1,15 +1,26 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-	<SolidColorBrush x:Key="ButtonBaseColor" Color="#FF80E000"></SolidColorBrush>
+	<Color x:Key="ElColorGreyBlue" R="#C0" G="#D0" B="#E0"></Color>
+	<SolidColorBrush x:Key="ElBrushGreyBlue" Color="#FFC0D0E0"></SolidColorBrush>
+	<Color x:Key="ElColorDarkBlue" R="#23" G="#1A" B="#7C"></Color>
+	<SolidColorBrush x:Key="ElBrushDarkBlue" Color="#FF231A7C"></SolidColorBrush>
+	<Color x:Key="ElColorBaseGreen" R="#80" G="#E0" B="#00"></Color>
+	<SolidColorBrush x:Key="ElBrushBaseGreen" Color="#FF80E000"></SolidColorBrush>
+	<Color x:Key="ElColorBaseLightGreen" R="#90" G="#F0" B="#00"></Color>
+	<SolidColorBrush x:Key="ElBrushBaseLightGreen" Color="#FF90F000"></SolidColorBrush>
+	<Color x:Key="ElColorBaseGreyGreen" R="#8C" G="#E6" B="#40"></Color>
+	<SolidColorBrush x:Key="ElBrushBaseGreyGreen" Color="#FF8CE640"></SolidColorBrush>
+
+	<!--SolidColorBrush x:Key="ButtonBaseColor" Color="#FF80E000"></SolidColorBrush>
 	<SolidColorBrush x:Key="ButtonFocusColor" Color="#FF90F000"></SolidColorBrush>
 	<SolidColorBrush x:Key="ExitFocusColor" Color="White"></SolidColorBrush>
 	<SolidColorBrush x:Key="ButtonDisabledColor" Color="#FF8CE640"></SolidColorBrush>
 	<SolidColorBrush x:Key="BackgroundBaseColor" Color="#FFA3B6C5"></SolidColorBrush>
-	<!--SolidColorBrush x:Key="BackgroundDarkColor" Color="LightGreen"></SolidColorBrush>
-	<SolidColorBrush x:Key="BackgroundLightColor" Color="LightGreen"></SolidColorBrush-->
 	<SolidColorBrush x:Key="ComboBoxChosenItemColor" Color="#FFA3B6C5"></SolidColorBrush>
 	<SolidColorBrush x:Key="ComboBoxEnabledColor" Color="#FF80E000"></SolidColorBrush>
-	<SolidColorBrush x:Key="ComboBoxDisabledColor" Color="#FF8CE640"></SolidColorBrush>
+	<SolidColorBrush x:Key="ComboBoxDisabledColor" Color="#FF8CE640"></SolidColorBrush-->
+
+	<!-- "{StaticResource ElBrushBaseLightGreen}" -->
 
 </ResourceDictionary>

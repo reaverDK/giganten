@@ -5,8 +5,8 @@
 	</ResourceDictionary.MergedDictionaries>
 
 	<LinearGradientBrush x:Key="FocusFX" StartPoint="0,0" EndPoint="1,0">
-		<GradientStop Offset="0" Color="#FF90F000"></GradientStop>
-		<GradientStop Offset="1" Color="#FF90F000"></GradientStop>
+		<GradientStop Offset="0" Color="{StaticResource ElColorBaseLightGreen}"></GradientStop>
+		<GradientStop Offset="1" Color="{StaticResource ElColorBaseLightGreen}" ></GradientStop>
 	</LinearGradientBrush>
 
 	<Storyboard x:Key="FocusOut">
@@ -31,11 +31,11 @@
 				<ControlTemplate x:Name="tmpltButton">
 					<Grid>
 						<Border x:Name="FocusRectangle" 
-                    Background="{StaticResource ExitFocusColor}" 
+                    Background="White" 
 										Opacity="0" >
 						</Border>
 						<Border x:Name="Presstangle" 
-                    Background="{StaticResource ExitFocusColor}" 
+                    Background="White" 
 										Opacity="0" >
 						</Border>
 						<ContentPresenter x:Name="ButtonContent" 
@@ -84,14 +84,14 @@
 				<ControlTemplate x:Name="tmpltButton">
 					<Grid>
 						<Border x:Name="BaseRectangle" 
-                    Background="{StaticResource ButtonBaseColor}">
+                    Background="{StaticResource ElBrushBaseGreen}">
 						</Border>
 						<Border x:Name="FocusRectangle" 
                     Background="{StaticResource FocusFX}" 
 										Opacity="0" >
 						</Border>
 						<Border x:Name="Presstangle" 
-                    Background="{StaticResource ButtonFocusColor}" 
+                    Background="{StaticResource ElBrushBaseLightGreen}"
 										Opacity="0" >
 						</Border>
 						<ContentPresenter x:Name="ButtonContent" 
@@ -127,7 +127,7 @@
 						</Trigger>
 						<Trigger Property="IsEnabled" Value="False">
 							<Setter Property="Opacity" TargetName="ButtonContent" Value=".3"></Setter>
-							<Setter Property="Background" TargetName="BaseRectangle" Value="{StaticResource ButtonDisabledColor}"></Setter>
+							<Setter Property="Background" TargetName="BaseRectangle" Value="{StaticResource ElBrushBaseGreyGreen}"></Setter>
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>

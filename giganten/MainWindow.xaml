@@ -5,7 +5,7 @@
 				DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="ElRank" Height="600" Width="800">
 	<DockPanel>
-		<Menu DockPanel.Dock="Top" IsMainMenu="True" Background="#FF231A7C" Foreground="White" FontWeight="Bold">
+		<Menu DockPanel.Dock="Top" IsMainMenu="True" Background="{StaticResource ElBrushDarkBlue}" Foreground="White" FontWeight="Bold">
 			<MenuItem Header="_Filer">
 				<MenuItem Header="_Åben..." Click="MenuItem_Click_Open"/>
 				<MenuItem Header="_Reset" Click="MenuItem_Click_Reset"/>
@@ -18,7 +18,7 @@
 				<MenuItem Header="_Om ElRank" Click="MenuItem_Click_About"/>
 			</MenuItem>
 		</Menu>
-		<Border BorderBrush="#BAB2C7D6" BorderThickness="20,0,20,4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+		<Border BorderBrush="{StaticResource ElBrushGreyBlue}" BorderThickness="20,0,20,4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 			<Grid Margin="0,0,0,0">
 				<!--Background="#FFECECEC" -->
 				<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="220,86,0,0" VerticalAlignment="Top" Height="26" Width="86" FontWeight="Bold"/>
@@ -62,11 +62,11 @@
 				<Label Content="Vælg Afdeling :" HorizontalAlignment="Left" Height="35" Margin="5,10,0,0" VerticalAlignment="Top" Width="170" FontWeight="Bold"/>
 				<Label Content="Vælg Sælger #1 :" HorizontalAlignment="Left" Height="35" Margin="218,10,0,0" VerticalAlignment="Top" Width="170" FontWeight="Bold"/>
 				<Label Content="Vælg Sælger #2 :" HorizontalAlignment="Left" Height="35" Margin="423,10,0,0" VerticalAlignment="Top" Width="170" FontWeight="Bold"/>
-				<CheckBox Content="VÆLG ALLE" HorizontalAlignment="Left" Height="26" Margin="10,115,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" Name="Select_All" Checked="Select_All_Checked" Unchecked="Select_All_Unchecked"/>
+				<CheckBox Content="VÆLG ALLE" HorizontalAlignment="Left" Height="25" Margin="10,115,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" Name="Select_All" Checked="Select_All_Checked" Unchecked="Select_All_Unchecked"/>
 				<StackPanel x:Name="CheckBoxPanel" HorizontalAlignment="Left" Margin="10,141,0,10" VerticalAlignment="Stretch" Width="169">
 					<CheckBox Content="Omsætning pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Omsætning" Checked="Checkbox_Changed" Unchecked="Checkbox_Changed"/>
-					<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="136" x:Name="Indtjening" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
-					<Separator Height="4" Margin="0"/>
+					<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Indtjening" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
+					<Separator Height="4" Margin="0,5,0,5"/>
 				</StackPanel>
 			</Grid>
 		</Border>
