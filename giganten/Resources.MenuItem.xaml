@@ -25,25 +25,25 @@
 		<Border Name="Border" >
 			<Grid>
 				<ContentPresenter 
-        Margin="6,3,6,3" 
-        ContentSource="Header"
-        RecognizesAccessKey="True" />
+					Margin="6,3,6,3" 
+					ContentSource="Header"
+					RecognizesAccessKey="True" />
 				<Popup 
-        Name="Popup"
-        Placement="Bottom"
-        IsOpen="{TemplateBinding IsSubmenuOpen}"
-        AllowsTransparency="True" 
-        Focusable="False"
-        PopupAnimation="Fade">
+					Name="Popup"
+					Placement="Bottom"
+					IsOpen="{TemplateBinding IsSubmenuOpen}"
+					AllowsTransparency="True" 
+					Focusable="False"
+					PopupAnimation="Slide">
 					<Border 
-          Name="SubmenuBorder"
-          SnapsToDevicePixels="True"
-          Background="{StaticResource WindowBackgroundBrush}"
-          BorderBrush="{StaticResource SolidBorderBrush}"
-          BorderThickness="1" >
+						Name="SubmenuBorder"
+						SnapsToDevicePixels="True"
+						Background="{StaticResource ElBrushDarkBlue}"
+						BorderBrush="{StaticResource ElBrushGreyBlue}"
+						BorderThickness="1,0,8,2" >
 						<StackPanel  
-            IsItemsHost="True" 
-            KeyboardNavigation.DirectionalNavigation="Cycle" />
+							IsItemsHost="True" 
+							KeyboardNavigation.DirectionalNavigation="Cycle" />
 					</Border>
 				</Popup>
 			</Grid>
@@ -54,13 +54,13 @@
 			</Trigger>
 			<Trigger Property="IsHighlighted" Value="true">
 				<Setter TargetName="Border" Property="Background"
-              Value="{StaticResource NormalBrush}"/>
+              Value="{StaticResource ElBrushBaseGreen}"/>
 				<Setter TargetName="Border" Property="BorderBrush"
               Value="Transparent"/>
 			</Trigger>
 			<Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="True">
-				<Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="0,0,4,4"/>
-				<Setter TargetName="SubmenuBorder" Property="Padding" Value="0,0,0,3"/>
+				<Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="0,0,0,0"/>
+				<Setter TargetName="SubmenuBorder" Property="Padding" Value="0,0,0,0"/>
 			</Trigger>
 			<Trigger Property="IsEnabled" Value="False">
 				<Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
@@ -83,7 +83,7 @@
 		<ControlTemplate.Triggers>
 			<Trigger Property="IsHighlighted" Value="true">
 				<Setter TargetName="Border" Property="Background"
-              Value="{StaticResource NormalBrush}"/>
+              Value="{StaticResource ElBrushBaseGreen}"/>
 				<Setter TargetName="Border" Property="BorderBrush" Value="Transparent"/>
 			</Trigger>
 			<Trigger Property="IsEnabled" Value="False">
@@ -107,37 +107,37 @@
 					<ColumnDefinition Width="13"/>
 				</Grid.ColumnDefinitions>
 				<ContentPresenter 
-        Name="Icon"
-        Margin="6,0,6,0"
-        VerticalAlignment="Center"
-        ContentSource="Icon"/>
+					Name="Icon"
+					Margin="6,0,6,0"
+					VerticalAlignment="Center"
+					ContentSource="Icon"/>
 				<Border 
-        Name="Check"  
-        Width="13" Height="13" 
-        Visibility="Collapsed"
-        Margin="6,0,6,0" 
-        Background="{StaticResource NormalBrush}"
-        BorderThickness="1"
-        BorderBrush="{StaticResource NormalBorderBrush}">
+					Name="Check"  
+					Width="13" Height="13" 
+					Visibility="Collapsed"
+					Margin="6,0,6,0" 
+					Background="{StaticResource ElBrushGreyBlue}"
+					BorderThickness="0"
+					BorderBrush="{StaticResource ElBrushGreyBlue}">
 					<Path 
-          Name="CheckMark"
-          Width="7" Height="7" 
-          Visibility="Hidden" 
-          SnapsToDevicePixels="False" 
-          Stroke="{StaticResource GlyphBrush}"
-          StrokeThickness="2"
-          Data="M 0 0 L 7 7 M 0 7 L 7 0" />
+						Name="CheckMark"
+						Width="7" Height="7" 
+						Visibility="Hidden" 
+						SnapsToDevicePixels="False" 
+						Stroke="{StaticResource ElBrushDarkBlue}"
+						StrokeThickness="2"
+						Data="M 0 0 L 7 7 M 0 7 L 7 0" />
 				</Border>
 				<ContentPresenter 
-        Name="HeaderHost"
-        Grid.Column="1"
-        ContentSource="Header"
-        RecognizesAccessKey="True"/>
+					Name="HeaderHost"
+					Grid.Column="1"
+					ContentSource="Header"
+					RecognizesAccessKey="True"/>
 				<TextBlock x:Name="InputGestureText"
-        Grid.Column="2"
-        Text="{TemplateBinding InputGestureText}"
-        Margin="5,2,0,2"
-        DockPanel.Dock="Right" />
+					Grid.Column="2"
+					Text="{TemplateBinding InputGestureText}"
+					Margin="5,2,0,2"
+					DockPanel.Dock="Right" />
 			</Grid>
 		</Border>
 		<ControlTemplate.Triggers>
@@ -153,7 +153,7 @@
 			</Trigger>
 			<Trigger Property="IsHighlighted" Value="true">
 				<Setter TargetName="Border" Property="Background"
-              Value="{StaticResource SelectedBackgroundBrush}"/>
+              Value="{StaticResource ElBrushGreyBlue}"/>
 			</Trigger>
 			<Trigger Property="IsEnabled" Value="false">
 				<Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
@@ -206,9 +206,9 @@
 					<Border 
           Name="SubmenuBorder"
           SnapsToDevicePixels="True"
-          Background="{StaticResource WindowBackgroundBrush}"
+          Background="{StaticResource ElBrushGreyBlue}"
           BorderBrush="{StaticResource SolidBorderBrush}"
-          BorderThickness="1" >
+          BorderThickness="0" >
 						<StackPanel  
             IsItemsHost="True" 
             KeyboardNavigation.DirectionalNavigation="Cycle" />
@@ -222,11 +222,11 @@
 			</Trigger>
 			<Trigger Property="IsHighlighted" Value="true">
 				<Setter TargetName="Border" Property="Background"
-              Value="{StaticResource SelectedBackgroundBrush}"/>
+              Value="{StaticResource ElBrushGreyBlue}"/>
 			</Trigger>
 			<Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="True">
-				<Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="4"/>
-				<Setter TargetName="SubmenuBorder" Property="Padding" Value="0,3,0,3"/>
+				<Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="0"/>
+				<Setter TargetName="SubmenuBorder" Property="Padding" Value="0,0,0,0"/>
 			</Trigger>
 			<Trigger Property="IsEnabled" Value="false">
 				<Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
