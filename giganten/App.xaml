@@ -5,13 +5,13 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="Resources.Color.xaml"/>
-				<ResourceDictionary Source="Resources.ComboBox.xaml"/>
-				<ResourceDictionary Source="Resources.LoadingBar.xaml"/>
-				<ResourceDictionary Source="Resources.CheckBox.xaml"/>
-				<ResourceDictionary Source="Resources.Button.xaml"/>
-				<ResourceDictionary Source="Resources.MenuItem.xaml"/>
-				<ResourceDictionary Source="Resources.TextBox.xaml"/>
+				<ResourceDictionary Source="Styles/Resources.Color.xaml"/>
+				<ResourceDictionary Source="Styles/Resources.ComboBox.xaml"/>
+				<ResourceDictionary Source="Styles/Resources.LoadingBar.xaml"/>
+				<ResourceDictionary Source="Styles/Resources.CheckBox.xaml"/>
+				<ResourceDictionary Source="Styles/Resources.Button.xaml"/>
+				<ResourceDictionary Source="Styles/Resources.MenuItem.xaml"/>
+				<ResourceDictionary Source="Styles/Resources.TextBox.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
