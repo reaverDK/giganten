@@ -28,15 +28,8 @@
                 Padding="2"
                 BorderThickness="1"
 								Background="White"
-								BorderBrush="{StaticResource ElBrushBaseGreen}"
-									>
-						<!--Border.Background>
-							<SolidColorBrush Color="{DynamicResource ControlLightColor}" />
-						</Border.Background>
-						<Border.BorderBrush>
-							<SolidColorBrush Color="{StaticResource ElColorDarkBlue}" />
-						</Border.BorderBrush-->
-						<!--VisualStateManager.VisualStateGroups>
+								BorderBrush="{StaticResource ElBrushBaseGreen}">
+						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="Disabled">
@@ -61,7 +54,7 @@
 								</VisualState>
 								<VisualState x:Name="MouseOver" />
 							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups-->
+						</VisualStateManager.VisualStateGroups>
 						<ScrollViewer Margin="0"
                         x:Name="PART_ContentHost" />
 					</Border>
