@@ -22,9 +22,9 @@
 			<Grid Margin="0,0,0,0">
 				<!--Background="#FFECECEC" -->
 				<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="220,86,0,0" VerticalAlignment="Top" Height="26" Width="86" FontWeight="Bold"/>
-				<TextBox x:Name="SANummerBox" HorizontalAlignment="Left" Height="22" Margin="311,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
+				<TextBox x:Name="SANummerBox" HorizontalAlignment="Left" Height="22" Margin="311,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77" ToolTip="F.eks. 123123"/>
 				<Label Content="Lønnummer:" HorizontalAlignment="Left" Margin="420,86,0,0" VerticalAlignment="Top" Height="26" Width="86" FontWeight="Bold"/>
-				<TextBox x:Name="SBNummerBox" HorizontalAlignment="Left" Height="22" Margin="511,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" ToolTip="F.eks. 123123"/>
+				<TextBox x:Name="SBNummerBox" HorizontalAlignment="Left" Height="22" Margin="511,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77" ToolTip="F.eks. 123123"/>
 				<Label x:Name="StatusBox" Content="Status: Ingen filer indlæst" HorizontalAlignment="Left" Margin="9,84,0,0" VerticalAlignment="Top" Width="170" FontWeight="Bold"/>
 
 				<Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="184,128,10,0">
