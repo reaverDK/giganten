@@ -284,6 +284,29 @@ namespace giganten {
 			}
 		}
 
+		private void drawXAxes(Canvas canvas)
+		{
+			Polyline axes = new Polyline();
+			axes.StrokeThickness = 4;
+			axes.Stroke = Brushes.Black;
+			canvas.Children.Add(axes);
+
+			axes.Points.Add(new System.Windows.Point(0, 16));
+			axes.Points.Add(new System.Windows.Point(canvas.Width, 16));
+		}
+
+		private void drawYAxes(Canvas canvas, double x)
+		{
+			Polyline axes = new Polyline();
+			axes.StrokeThickness = 4;
+			axes.Stroke = Brushes.Black;
+			canvas.Children.Add(axes);
+
+			axes.Points.Add(new System.Windows.Point(x, 0));
+			axes.Points.Add(new System.Windows.Point(x, canvas.Height));
+		}
+
+
 		/*private void drawGraphs() {
 			DateTime now = DateTime.Now;
 			TimeSpan sincelast = now - lastredraw;

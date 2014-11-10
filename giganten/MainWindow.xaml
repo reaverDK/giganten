@@ -41,7 +41,9 @@
 						<Canvas HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="graph_Person2">
 						</Canvas>
 					</Grid>
-					<Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+					<Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid3">
+						<Canvas HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="axes_graph">
+						</Canvas>
 					</Grid>
 				</Grid>
 
