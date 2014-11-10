@@ -101,6 +101,7 @@
       <DependentUpon>ContactWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataHandler\KGMGroup.cs" />
+    <Compile Include="ElGraph.cs" />
     <Compile Include="ResetWindow.xaml.cs">
       <DependentUpon>ResetWindow.xaml</DependentUpon>
     </Compile>
@@ -113,15 +114,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources.Button.xaml">
+    <Page Include="Styles\Resources.Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources.Checkbox.xaml">
+    <Page Include="Styles\Resources.Checkbox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources.Color.xaml">
+    <Page Include="Styles\Resources.Color.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,23 +147,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources.ComboBox.xaml">
+    <Page Include="Styles\Resources.ComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources.DefaultBrushes.xaml">
+    <Page Include="Styles\Resources.DefaultBrushes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources.LoadingBar.xaml">
+    <Page Include="Styles\Resources.LoadingBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources.MenuItem.xaml">
+    <Page Include="Styles\Resources.MenuItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources.TextBox.xaml">
+    <Page Include="Styles\Resources.TextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
