@@ -342,18 +342,18 @@ namespace giganten
 			lastredraw = DateTime.Now;
 		}
 
-		PlotModel Model = null;
+		//PlotModel Model = null;
 
 		private void drawGraphFor(string salesperson, Canvas canvas, List<List<double>> list, List<Polyline> lines)
 		{
 			//Oxy plot test stuff
-			var tmp = new PlotModel { Title = "Hello", Subtitle = "World" };
+			/*var tmp = new PlotModel { Title = "Hello", Subtitle = "World" };
 			var series1 = new LineSeries { Title = "yuihu", MarkerType = MarkerType.Circle, MarkerSize = 3 };
 			series1.Points.Add(new DataPoint(1, 10));
 			series1.Points.Add(new DataPoint(1, 20));
 			series1.Points.Add(new DataPoint(1, 40));
 			tmp.Series.Add(series1);
-			this.Model = tmp;
+			this.Model = tmp;*/
 
 			YearInfo year = datahandler.GetYear(yearSelected);
 
@@ -362,11 +362,15 @@ namespace giganten
 			Dictionary<String, double[]> kgmgroups = new Dictionary<string, double[]>();
 
 			// Get the data
-			for (int i = 0; i < 12; i++) {
-				if (Omsætning.IsChecked == true) {
-					if (year[i] != null) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (Omsætning.IsChecked == true)
+				{
+					if (year[i] != null)
+					{
 						Salesman sm = year[i].GetSalesman(salesperson);
-						if (sm != null) {
+						if (sm != null)
+						{
 							omsætning[i] = sm.Omsaetning;
 						}
 						else
@@ -377,11 +381,14 @@ namespace giganten
 				}
 				else
 					omsætning[i] = 0;
-				
-				if (Indtjening.IsChecked == true) {
-					if (year[i] != null) {
+
+				if (Indtjening.IsChecked == true)
+				{
+					if (year[i] != null)
+					{
 						Salesman sm = year[i].GetSalesman(salesperson);
-						if (sm != null) {
+						if (sm != null)
+						{
 							indtjening[i] = sm.Indtjening;
 						}
 						else
@@ -393,14 +400,19 @@ namespace giganten
 				else
 					indtjening[i] = 0;
 			}
-			foreach (CheckBox cb in checkBoxList) {
-				if (cb.IsChecked == true) {
+			foreach (CheckBox cb in checkBoxList)
+			{
+				if (cb.IsChecked == true)
+				{
 					String[] kgms = Groups[(string)cb.Content];
 					double[] percentages = new double[12];
-					for (int i = 0; i < 12; i++) {
-						if (year[i] != null) {
+					for (int i = 0; i < 12; i++)
+					{
+						if (year[i] != null)
+						{
 							Salesman sm = year[i].GetSalesman(salesperson);
-							if (sm != null) {
+							if (sm != null)
+							{
 								percentages[i] = sm.PercentOfTotal(kgms);
 							}
 							else
@@ -418,7 +430,8 @@ namespace giganten
 			double maxOms = omsætning.Max();
 			double maxInd = indtjening.Max();
 			double maxPerc = 0;
-			foreach (KeyValuePair<String, double[]> pair in kgmgroups) {
+			foreach (KeyValuePair<String, double[]> pair in kgmgroups)
+			{
 				var tempmax = pair.Value.Max();
 				if (tempmax > maxPerc)
 					maxPerc = tempmax;
@@ -446,8 +459,9 @@ namespace giganten
 
 			int n = 0;
 			list.Clear();
-			foreach (KeyValuePair<String, double[]> pair in kgmgroups) {
-				if (n>=list.Count)
+			foreach (KeyValuePair<String, double[]> pair in kgmgroups)
+			{
+				if (n >= list.Count)
 				{
 					list.Add(new List<double>());
 				}
