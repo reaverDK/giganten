@@ -44,6 +44,22 @@ namespace giganten {
 		Polyline LineIndA;
 		Polyline LineIndB;
 
+		Polyline Hori100A;
+		Polyline Hori75A;
+		Polyline Hori50A;
+		Polyline Hori25A;
+		Polyline Hori0A;
+		Polyline Hori100B;
+		Polyline Hori75B;
+		Polyline Hori50B;
+		Polyline Hori25B;
+		Polyline Hori0B;
+
+		Polyline VertLeftA;
+		Polyline VertRightA;
+		Polyline VertLeftB;
+		Polyline VertRightB;
+
 		DataHandler datahandler;
 		Dictionary<string, string[]> Groups;
 		CheckBox[] CheckBoxes;
@@ -51,6 +67,7 @@ namespace giganten {
 		CheckBox CheckBoxInd;
 
 		Random random = new Random();
+		const double horisontalmargin = 30;
 
 		public ElGraph(
 			DataHandler data, 
@@ -72,7 +89,48 @@ namespace giganten {
 			if (Groups.Count != CheckBoxes.Length)
 				throw new ArgumentException("There need to be similar numbers of KGM groups and checkboxes");
 
-			#region Line initialisation
+			#region Helping-line initialisation
+
+			Hori100A = new Polyline();
+			Hori75A = new Polyline();
+			Hori50A = new Polyline();
+			Hori25A = new Polyline();
+			Hori0A = new Polyline();
+			Hori100B = new Polyline();
+			Hori75B = new Polyline();
+			Hori50B = new Polyline();
+			Hori25B = new Polyline();
+			Hori0B = new Polyline();
+
+			VertLeftA = new Polyline();
+			VertRightA = new Polyline();
+			VertLeftB = new Polyline();
+			VertRightB = new Polyline();
+
+			Hori100A.Stroke = Brushes.Black;
+			Hori75A.Stroke = Brushes.Black;
+			Hori50A.Stroke = Brushes.Black;
+			Hori25A.Stroke = Brushes.Black;
+			Hori0A.Stroke = Brushes.Black;
+			Hori100B.Stroke = Brushes.Black;
+			Hori75B.Stroke = Brushes.Black;
+			Hori50B.Stroke = Brushes.Black;
+			Hori25B.Stroke = Brushes.Black;
+			Hori0B.Stroke = Brushes.Black;
+
+			VertLeftA.Stroke = Brushes.Black;
+			VertRightA.Stroke = Brushes.Black;
+			VertLeftB.Stroke = Brushes.Black;
+			VertRightB.Stroke = Brushes.Black;
+
+			VertLeftA.StrokeThickness = 2;
+			VertRightA.StrokeThickness = 2;
+			VertLeftB.StrokeThickness = 2;
+			VertRightB.StrokeThickness = 2;
+
+			#endregion
+
+			#region Data-line initialisation
 
 			LinesA = new Polyline[Groups.Count];
 			LinesB = new Polyline[Groups.Count];
@@ -115,6 +173,22 @@ namespace giganten {
 
 			#region Canvas initialisation
 
+			CanvasA.Children.Add(Hori100A);
+			CanvasA.Children.Add(Hori75A);
+			CanvasA.Children.Add(Hori50A);
+			CanvasA.Children.Add(Hori25A);
+			CanvasA.Children.Add(Hori0A);
+			CanvasB.Children.Add(Hori100B);
+			CanvasB.Children.Add(Hori75B);
+			CanvasB.Children.Add(Hori50B);
+			CanvasB.Children.Add(Hori25B);
+			CanvasB.Children.Add(Hori0B);
+
+			CanvasA.Children.Add(VertLeftA);
+			CanvasA.Children.Add(VertRightA);
+			CanvasB.Children.Add(VertLeftB);
+			CanvasB.Children.Add(VertRightB);
+
 			CanvasA.Children.Add(LineOmsA);
 			CanvasA.Children.Add(LineIndA);
 			foreach (Polyline line in LinesA)
@@ -132,6 +206,7 @@ namespace giganten {
 		}
 
 		public void SetSize(double width, double height) {
+			// Update canvas sizes
 			CanvasA.Height = height;
 			CanvasB.Height = height;
 			CanvasA.Width = width;
@@ -143,6 +218,54 @@ namespace giganten {
 			
 			CanvasA.RenderTransform = g;
 			CanvasB.RenderTransform = g;
+
+			// Update helping lines
+			Hori100A.Points.Clear();
+			Hori75A.Points.Clear();
+			Hori50A.Points.Clear();
+			Hori25A.Points.Clear();
+			Hori0A.Points.Clear();
+			Hori100B.Points.Clear();
+			Hori75B.Points.Clear();
+			Hori50B.Points.Clear();
+			Hori25B.Points.Clear();
+			Hori0B.Points.Clear();
+
+			VertLeftA.Points.Clear();
+			VertRightA.Points.Clear();
+			VertLeftB.Points.Clear();
+			VertRightB.Points.Clear();
+
+			Hori100A.Points.Add(new Point(horisontalmargin - 5, height - 10));
+			Hori100A.Points.Add(new Point(width - horisontalmargin + 5, height - 10));
+			Hori75A.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.75));
+			Hori75A.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.75));
+			Hori50A.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.5));
+			Hori50A.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.5));
+			Hori25A.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.25));
+			Hori25A.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.25));
+			Hori0A.Points.Add(new Point(horisontalmargin - 5, 1));
+			Hori0A.Points.Add(new Point(width - horisontalmargin + 5, 1));
+
+			Hori100B.Points.Add(new Point(horisontalmargin - 5, height - 10));
+			Hori100B.Points.Add(new Point(width - horisontalmargin + 5, height - 10));
+			Hori75B.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.75));
+			Hori75B.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.75));
+			Hori50B.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.5));
+			Hori50B.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.5));
+			Hori25B.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.25));
+			Hori25B.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.25));
+			Hori0B.Points.Add(new Point(horisontalmargin - 5, 1));
+			Hori0B.Points.Add(new Point(width - horisontalmargin + 5, 1));
+
+			VertLeftA.Points.Add(new Point(horisontalmargin, height - 5));
+			VertLeftA.Points.Add(new Point(horisontalmargin, 0));
+			VertRightA.Points.Add(new Point(width - horisontalmargin, height - 5));
+			VertRightA.Points.Add(new Point(width - horisontalmargin, 0));
+			VertLeftB.Points.Add(new Point(horisontalmargin, height - 5));
+			VertLeftB.Points.Add(new Point(horisontalmargin, 0));
+			VertRightB.Points.Add(new Point(width - horisontalmargin, height - 5));
+			VertRightB.Points.Add(new Point(width - horisontalmargin, 0));
 
 			UpdateGraph();
 		}
@@ -172,14 +295,10 @@ namespace giganten {
 			Dictionary<String, double[]> kgmgroups = new Dictionary<string, double[]>();
 
 			for (int i = 0; i < 12; i++) {
-				if (CheckBoxOms.IsChecked == true) {
-					if (year[i] != null) {
-						Salesman sm = year[i].GetSalesman(person);
-						if (sm != null) {
-							omsætning[i] = sm.Omsaetning;
-						}
-						else
-							omsætning[i] = 0;
+				if (year[i] != null) {
+					Salesman sm = year[i].GetSalesman(person);
+					if (sm != null) {
+						omsætning[i] = sm.Omsaetning;
 					}
 					else
 						omsætning[i] = 0;
@@ -187,14 +306,10 @@ namespace giganten {
 				else
 					omsætning[i] = 0;
 
-				if (CheckBoxInd.IsChecked == true) {
-					if (year[i] != null) {
-						Salesman sm = year[i].GetSalesman(person);
-						if (sm != null) {
-							indtjening[i] = sm.Indtjening;
-						}
-						else
-							indtjening[i] = 0;
+				if (year[i] != null) {
+					Salesman sm = year[i].GetSalesman(person);
+					if (sm != null) {
+						indtjening[i] = sm.Indtjening;
 					}
 					else
 						indtjening[i] = 0;
@@ -239,16 +354,11 @@ namespace giganten {
 					maxPerc = tempmax;
 			}
 
-			/*if (maxOms <= 0)
-				maxOms = 10;
-			if (maxInd <= 0)
-				maxInd = 10;
-			if (maxPerc <= 0)
-				maxPerc = 0.1;*/
+			if (CheckBoxOms.IsChecked == true)
+				DrawLines(omsætning, lineoms, maxOms, canvas);
 
-			DrawLines(omsætning, lineoms, maxOms, canvas);
-
-			DrawLines(indtjening, lineind, maxOms, canvas);
+			if (CheckBoxInd.IsChecked == true)
+				DrawLines(indtjening, lineind, maxOms, canvas);
 
 			int n = 0;
 			foreach (KeyValuePair<String, string[]> pair in Groups) {
@@ -282,28 +392,6 @@ namespace giganten {
 			for (int i = 0; i < lineList.Length; i++) {
 				line.Points.Add(new System.Windows.Point(width * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
 			}
-		}
-
-		private void drawXAxes(Canvas canvas)
-		{
-			Polyline axes = new Polyline();
-			axes.StrokeThickness = 4;
-			axes.Stroke = Brushes.Black;
-			canvas.Children.Add(axes);
-
-			axes.Points.Add(new System.Windows.Point(0, 16));
-			axes.Points.Add(new System.Windows.Point(canvas.Width, 16));
-		}
-
-		private void drawYAxes(Canvas canvas, double x)
-		{
-			Polyline axes = new Polyline();
-			axes.StrokeThickness = 4;
-			axes.Stroke = Brushes.Black;
-			canvas.Children.Add(axes);
-
-			axes.Points.Add(new System.Windows.Point(x, 0));
-			axes.Points.Add(new System.Windows.Point(x, canvas.Height));
 		}
 
 
