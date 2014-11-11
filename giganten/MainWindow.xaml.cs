@@ -77,11 +77,11 @@ namespace giganten
 				Omsætning,
 				Indtjening);
 
-			graph.SetSize(canvasgrid1.ActualWidth, canvasgrid1.ActualHeight);
+			graph.UpdateSize(canvasgrid1.ActualWidth, canvasgrid1.ActualHeight);
 		}
 
 		void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e) {
-			graph.SetSize(canvasgrid1.ActualWidth, canvasgrid1.ActualHeight);
+			graph.UpdateSize(canvasgrid1.ActualWidth, canvasgrid1.ActualHeight);
 		}
 
 		private void MenuItem_Click_Exit(object sender, RoutedEventArgs e) {
