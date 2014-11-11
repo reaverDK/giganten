@@ -67,7 +67,8 @@ namespace giganten {
 		CheckBox CheckBoxInd;
 
 		Random random = new Random();
-		const double horisontalmargin = 30;
+		const double MarginHorisontal = 30;
+		const double MarginTop = 10;
 
 		public ElGraph(
 			DataHandler data, 
@@ -236,36 +237,36 @@ namespace giganten {
 			VertLeftB.Points.Clear();
 			VertRightB.Points.Clear();
 
-			Hori100A.Points.Add(new Point(horisontalmargin - 5, height - 10));
-			Hori100A.Points.Add(new Point(width - horisontalmargin + 5, height - 10));
-			Hori75A.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.75));
-			Hori75A.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.75));
-			Hori50A.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.5));
-			Hori50A.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.5));
-			Hori25A.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.25));
-			Hori25A.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.25));
-			Hori0A.Points.Add(new Point(horisontalmargin - 5, 1));
-			Hori0A.Points.Add(new Point(width - horisontalmargin + 5, 1));
+			Hori100A.Points.Add(new Point(MarginHorisontal - 5, height - MarginTop));
+			Hori100A.Points.Add(new Point(width - MarginHorisontal + 5, height - MarginTop));
+			Hori75A.Points.Add(new Point(MarginHorisontal - 5, (height - MarginTop) * 0.75));
+			Hori75A.Points.Add(new Point(width - MarginHorisontal + 5, (height - MarginTop) * 0.75));
+			Hori50A.Points.Add(new Point(MarginHorisontal - 5, (height - MarginTop) * 0.5));
+			Hori50A.Points.Add(new Point(width - MarginHorisontal + 5, (height - MarginTop) * 0.5));
+			Hori25A.Points.Add(new Point(MarginHorisontal - 5, (height - MarginTop) * 0.25));
+			Hori25A.Points.Add(new Point(width - MarginHorisontal + 5, (height - MarginTop) * 0.25));
+			Hori0A.Points.Add(new Point(MarginHorisontal - 5, 1));
+			Hori0A.Points.Add(new Point(width - MarginHorisontal + 5, 1));
 
-			Hori100B.Points.Add(new Point(horisontalmargin - 5, height - 10));
-			Hori100B.Points.Add(new Point(width - horisontalmargin + 5, height - 10));
-			Hori75B.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.75));
-			Hori75B.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.75));
-			Hori50B.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.5));
-			Hori50B.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.5));
-			Hori25B.Points.Add(new Point(horisontalmargin - 5, (height - 10) * 0.25));
-			Hori25B.Points.Add(new Point(width - horisontalmargin + 5, (height - 10) * 0.25));
-			Hori0B.Points.Add(new Point(horisontalmargin - 5, 1));
-			Hori0B.Points.Add(new Point(width - horisontalmargin + 5, 1));
+			Hori100B.Points.Add(new Point(MarginHorisontal - 5, height - MarginTop));
+			Hori100B.Points.Add(new Point(width - MarginHorisontal + 5, height - MarginTop));
+			Hori75B.Points.Add(new Point(MarginHorisontal - 5, (height - MarginTop) * 0.75));
+			Hori75B.Points.Add(new Point(width - MarginHorisontal + 5, (height - MarginTop) * 0.75));
+			Hori50B.Points.Add(new Point(MarginHorisontal - 5, (height - MarginTop) * 0.5));
+			Hori50B.Points.Add(new Point(width - MarginHorisontal + 5, (height - MarginTop) * 0.5));
+			Hori25B.Points.Add(new Point(MarginHorisontal - 5, (height - MarginTop) * 0.25));
+			Hori25B.Points.Add(new Point(width - MarginHorisontal + 5, (height - MarginTop) * 0.25));
+			Hori0B.Points.Add(new Point(MarginHorisontal - 5, 1));
+			Hori0B.Points.Add(new Point(width - MarginHorisontal + 5, 1));
 
-			VertLeftA.Points.Add(new Point(horisontalmargin, height - 5));
-			VertLeftA.Points.Add(new Point(horisontalmargin, 0));
-			VertRightA.Points.Add(new Point(width - horisontalmargin, height - 5));
-			VertRightA.Points.Add(new Point(width - horisontalmargin, 0));
-			VertLeftB.Points.Add(new Point(horisontalmargin, height - 5));
-			VertLeftB.Points.Add(new Point(horisontalmargin, 0));
-			VertRightB.Points.Add(new Point(width - horisontalmargin, height - 5));
-			VertRightB.Points.Add(new Point(width - horisontalmargin, 0));
+			VertLeftA.Points.Add(new Point(MarginHorisontal, height - MarginTop + 5));
+			VertLeftA.Points.Add(new Point(MarginHorisontal, 0));
+			VertRightA.Points.Add(new Point(width - MarginHorisontal, height - MarginTop + 5));
+			VertRightA.Points.Add(new Point(width - MarginHorisontal, 0));
+			VertLeftB.Points.Add(new Point(MarginHorisontal, height - MarginTop + 5));
+			VertLeftB.Points.Add(new Point(MarginHorisontal, 0));
+			VertRightB.Points.Add(new Point(width - MarginHorisontal, height - MarginTop + 5));
+			VertRightB.Points.Add(new Point(width - MarginHorisontal, 0));
 
 			UpdateGraph();
 		}
@@ -276,7 +277,6 @@ namespace giganten {
 		}
 
 		private void UpdateGraph(string person, Canvas canvas, Polyline[] lines, Polyline lineoms, Polyline lineind) {
-			
 			foreach (Polyline line in lines) {
 				line.Points.Clear();
 			}
@@ -288,11 +288,37 @@ namespace giganten {
 
 			YearInfo year = datahandler.GetYear(2014);
 
-			#region Calculate lines
+			double[] omsætning = CalculateOmsætning(person, year);
+			double[] indtjening = CalculateIndtjening(person, year);
+			Dictionary<String, double[]> kgmdata = CalculateKGMData(person, year);
 
+			double maxkroner = CalculateMaxKroner(omsætning);
+
+			double maxPerc = 0.01;
+			foreach (KeyValuePair<String, double[]> pair in kgmdata) {
+				var tempmax = pair.Value.Max();
+				if (tempmax > maxPerc)
+					maxPerc = tempmax;
+			}
+
+			if (CheckBoxOms.IsChecked == true)
+				DrawLines(omsætning, lineoms, maxkroner, canvas);
+
+			if (CheckBoxInd.IsChecked == true)
+				DrawLines(indtjening, lineind, maxkroner, canvas);
+
+			int n = 0;
+			foreach (KeyValuePair<String, string[]> pair in Groups) {
+				if (kgmdata.ContainsKey(pair.Key)) {
+					Polyline line = lines[n];
+					DrawLines(kgmdata[pair.Key], line, maxPerc, canvas);
+				}
+				n++;
+			}
+		}
+
+		private double[] CalculateOmsætning(string person, YearInfo year) {
 			double[] omsætning = new double[12];
-			double[] indtjening = new double[12];
-			Dictionary<String, double[]> kgmgroups = new Dictionary<string, double[]>();
 
 			for (int i = 0; i < 12; i++) {
 				if (year[i] != null) {
@@ -305,7 +331,15 @@ namespace giganten {
 				}
 				else
 					omsætning[i] = 0;
+			}
 
+			return omsætning;
+		}
+
+		private double[] CalculateIndtjening(string person, YearInfo year) {
+			double[] indtjening = new double[12];
+
+			for (int i = 0; i < 12; i++) {
 				if (year[i] != null) {
 					Salesman sm = year[i].GetSalesman(person);
 					if (sm != null) {
@@ -317,6 +351,13 @@ namespace giganten {
 				else
 					indtjening[i] = 0;
 			}
+
+			return indtjening;
+		}
+
+		private Dictionary<string, double[]> CalculateKGMData(string person, YearInfo year) {
+			Dictionary<String, double[]> kgmdata = new Dictionary<string, double[]>();
+
 			foreach (CheckBox cb in CheckBoxes) {
 				if (cb.IsChecked == true) {
 					String[] kgms = Groups[(string)cb.Content];
@@ -333,181 +374,33 @@ namespace giganten {
 						else
 							percentages[i] = 0;
 					}
-					kgmgroups.Add((string)cb.Content, percentages);
+					kgmdata.Add((string)cb.Content, percentages);
 				}
 			}
 
-			#endregion
-
-			#region Draw background
-
-			#endregion
-
-			#region Draw data lines
-
-			double maxOms = omsætning.Max();
-			double maxInd = indtjening.Max();
-			double maxPerc = 0;
-			foreach (KeyValuePair<String, double[]> pair in kgmgroups) {
-				var tempmax = pair.Value.Max();
-				if (tempmax > maxPerc)
-					maxPerc = tempmax;
-			}
-
-			if (CheckBoxOms.IsChecked == true)
-				DrawLines(omsætning, lineoms, maxOms, canvas);
-
-			if (CheckBoxInd.IsChecked == true)
-				DrawLines(indtjening, lineind, maxOms, canvas);
-
-			int n = 0;
-			foreach (KeyValuePair<String, string[]> pair in Groups) {
-				if (kgmgroups.ContainsKey(pair.Key)) {
-					Polyline line = lines[n];
-					DrawLines(kgmgroups[pair.Key], line, maxPerc, canvas);
-				}
-				n++;
-			}
-
-			#endregion
+			return kgmdata;
 		}
 
-		#region Mess
+		private double CalculateMaxKroner(double[] kronelist) {
+			double listmax = kronelist.Max();
 
-		public void DrawLines(double[] lineList, Polyline line, Canvas canvas) {
+			return listmax;
+		}
+
+		private void DrawLines(double[] lineList, Polyline line, double max, Canvas canvas) {
 			double height = canvas.Height;
 			double width = canvas.Width;
-			double scaleGraph = height / lineList.Max();
+			double graphheight = height - MarginTop;
+			double graphwidth = width - (2 * MarginHorisontal);
 
 			for (int i = 0; i < lineList.Length; i++) {
-				line.Points.Add(new System.Windows.Point(width * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
+				double offset = ((double)i / (double)(lineList.Length - 1));
+				line.Points.Add(
+					new Point(
+						MarginHorisontal + graphwidth * offset, // x coordinate
+						((lineList[i] / max) * graphheight) // y coordinate
+						));
 			}
 		}
-
-		public void DrawLines(double[] lineList, Polyline line, double max, Canvas canvas) {
-			double height = canvas.Height;
-			double width = canvas.Width;
-			double scaleGraph = height / max;
-
-			for (int i = 0; i < lineList.Length; i++) {
-				line.Points.Add(new System.Windows.Point(width * ((double)i / (double)lineList.Length), (lineList[i] * scaleGraph)));
-			}
-		}
-
-
-		/*private void drawGraphs() {
-			DateTime now = DateTime.Now;
-			TimeSpan sincelast = now - lastredraw;
-			if (sincelast.TotalMilliseconds < 50)
-				return;
-
-			if (salesPerson1 != null) {
-				drawGraphFor(salesPerson1, graph_Person1, lineList1, lines1);
-			}
-			if (salesPerson2 != null) {
-				drawGraphFor(salesPerson2, graph_Person2, lineList2, lines2);
-			}
-			lastredraw = DateTime.Now;
-		}
-
-		private void drawGraphFor(string salesperson, Canvas canvas, List<List<double>> list, List<Polyline> lines) {
-			YearInfo year = datahandler.GetYear(yearSelected);
-
-			double[] omsætning = new double[12];
-			double[] indtjening = new double[12];
-			Dictionary<String, double[]> kgmgroups = new Dictionary<string, double[]>();
-
-			// Get the data
-			for (int i = 0; i < 12; i++) {
-				if (Omsætning.IsChecked == true) {
-					if (year[i] != null) {
-						Salesman sm = year[i].GetSalesman(salesperson);
-						if (sm != null) {
-							omsætning[i] = sm.Omsaetning;
-						}
-						else
-							omsætning[i] = 0;
-					}
-					else
-						omsætning[i] = 0;
-				}
-				else
-					omsætning[i] = 0;
-
-				if (Indtjening.IsChecked == true) {
-					if (year[i] != null) {
-						Salesman sm = year[i].GetSalesman(salesperson);
-						if (sm != null) {
-							indtjening[i] = sm.Indtjening;
-						}
-						else
-							indtjening[i] = 0;
-					}
-					else
-						indtjening[i] = 0;
-				}
-				else
-					indtjening[i] = 0;
-			}
-			foreach (CheckBox cb in checkBoxList) {
-				if (cb.IsChecked == true) {
-					String[] kgms = Groups[(string)cb.Content];
-					double[] percentages = new double[12];
-					for (int i = 0; i < 12; i++) {
-						if (year[i] != null) {
-							Salesman sm = year[i].GetSalesman(salesperson);
-							if (sm != null) {
-								percentages[i] = sm.PercentOfTotal(kgms);
-							}
-							else
-								percentages[i] = 0;
-						}
-						else
-							percentages[i] = 0;
-					}
-					kgmgroups.Add((string)cb.Content, percentages);
-				}
-			}
-
-			// Actually draw the data
-
-			double maxOms = omsætning.Max();
-			double maxInd = indtjening.Max();
-			double maxPerc = 0;
-			foreach (KeyValuePair<String, double[]> pair in kgmgroups) {
-				var tempmax = pair.Value.Max();
-				if (tempmax > maxPerc)
-					maxPerc = tempmax;
-			}
-
-			Polyline line = new Polyline();
-			line.StrokeThickness = 3;
-			line.Stroke = Brushes.Blue;
-			canvas.Children.Add(line);
-			DrawLines(omsætning, line, maxOms, canvas);
-
-			line = new Polyline();
-			line.StrokeThickness = 3;
-			line.StrokeDashArray = new DoubleCollection(new double[] { 3, 2 });
-			line.Stroke = Brushes.Green;
-			canvas.Children.Add(line);
-			DrawLines(indtjening, line, maxOms, canvas);
-
-			int n = 0;
-			list.Clear();
-			foreach (KeyValuePair<String, double[]> pair in kgmgroups) {
-				if (n >= list.Count) {
-					list.Add(new List<double>());
-				}
-				list[n].AddRange(pair.Value);
-				line = lines[n];
-				line.Points.Clear();
-				canvas.Children.Add(line);
-				DrawLines(pair.Value, line, maxPerc, canvas);
-				n++;
-			}
-		}*/
-
-		#endregion
 	}
 }
