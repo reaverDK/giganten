@@ -15,15 +15,7 @@ using System.Windows.Shapes;
 using System.Drawing;
 using System.Diagnostics;
 using System.ComponentModel;
-
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-using MigraDoc.DocumentObjectModel;
-using MigraDoc.Rendering;
-using MigraDoc.RtfRendering;
 using System.Collections.ObjectModel;
-using MigraDoc.DocumentObjectModel.Shapes.Charts;
-
 
 namespace giganten
 {
@@ -111,7 +103,7 @@ namespace giganten
 		}
 
 		private void MenuItem_Click_Export(object sender, RoutedEventArgs e) {
-			pdfCreater();
+			PDF.CreatePdf(salesPerson1, salesPerson2, datahandler, Groups);
 		}
 
 		private void MenuItem_Click_About(object sender, RoutedEventArgs e) {
@@ -122,88 +114,6 @@ namespace giganten
 		private void MenuItem_Click_Contact(object sender, RoutedEventArgs e) {
 			ContactWindow contactWin = new ContactWindow();
 			contactWin.Show();
-		}
-
-		public void pdfCreater() {
-			Document document = new Document();
-			document.UseCmykColor = true;
-
-			MigraDoc.DocumentObjectModel.Section section = document.AddSection();
-			section.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Landscape;
-			MigraDoc.DocumentObjectModel.Paragraph paragraph = section.AddParagraph();
-			paragraph.Format.Font.Color = MigraDoc.DocumentObjectModel.Color.FromCmyk(100, 20, 30, 50);
-			
-			salesPerson1 = (string)combobox_Person1.SelectedItem;
-			if (salesPerson1 == "<Ingen sælger valgt>")
-			{
-				salesPerson1 = null;
-			}
-
-			if (salesPerson1 != null)
-			{
-				paragraph.AddFormattedText(combobox_Person1.Text, TextFormat.Bold);
-				paragraph.AddLineBreak();
-				paragraph.AddLineBreak();
-				//DefineCharts(document, lineList1);
-			}
-
-			salesPerson2 = (string)combobox_Person2.SelectedItem;
-			if (salesPerson2 == "<Ingen sælger valgt>")
-			{
-				salesPerson2 = null;
-			}
-
-			if (salesPerson2 != null)
-			{
-				MigraDoc.DocumentObjectModel.Section newSection = document.AddSection();
-				newSection.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Landscape;
-				MigraDoc.DocumentObjectModel.Paragraph newParagraph = newSection.AddParagraph();
-				newParagraph.AddFormattedText(combobox_Person2.Text, TextFormat.Bold);
-				newParagraph.AddLineBreak();
-				newParagraph.AddLineBreak();
-				//DefineCharts(document, lineList2);
-			}
-
-			const bool unicode = false;
-			const PdfFontEmbedding embedding = PdfFontEmbedding.Always;
-			PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(unicode, embedding);
-			pdfRenderer.Document = document;
-			pdfRenderer.RenderDocument();
-
-			string time = DateTime.Today.ToShortDateString();
-			string myfile = time + ".pdf";
-			pdfRenderer.PdfDocument.Save(myfile);
-			Process.Start(myfile);
-		}
-
-		public void DefineCharts(Document document, List<List<double>> list)
-		{	
-			MigraDoc.DocumentObjectModel.Paragraph paragraph = document.LastSection.AddParagraph("Sælger Diagram", "Heading1");
-			Chart chart = new Chart();
-			chart.Left = 0;
-			chart.Width = Unit.FromCentimeter(22);
-			chart.Height = Unit.FromCentimeter(15);
-
-			for (int i = 0; i < list.Count; i++)
-			{
-				MigraDoc.DocumentObjectModel.Shapes.Charts.Series series = chart.SeriesCollection.AddSeries();
-				series.ChartType = ChartType.Line;
-				series.Add(list[i].ToArray());
-				series.SetNull();
-			}
-
-			XSeries xseries = chart.XValues.AddXSeries();
-			xseries.Add(new string[]{"Jan","Feb","Marts","April","Maj","Juni","Juli","Aug","Sep","Okt","Nov","Dec"});
-			chart.XAxis.MajorTickMark = TickMarkType.Inside;
-			chart.XAxis.Title.Caption = "X-Axis";
-
-			chart.YAxis.MajorTickMark = TickMarkType.Outside;
-			chart.YAxis.MajorTickMark = TickMarkType.Outside;
-			chart.YAxis.HasMajorGridlines = true;
-
-			chart.PlotArea.LineFormat.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
-			chart.PlotArea.LineFormat.Width = 3;
-			document.LastSection.Add(chart);
 		}
 
 		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {

@@ -102,6 +102,7 @@
     </Compile>
     <Compile Include="DataHandler\KGMGroup.cs" />
     <Compile Include="ElGraph.cs" />
+    <Compile Include="PDF.cs" />
     <Compile Include="ResetWindow.xaml.cs">
       <DependentUpon>ResetWindow.xaml</DependentUpon>
     </Compile>
