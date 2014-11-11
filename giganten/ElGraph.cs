@@ -43,7 +43,7 @@ namespace giganten {
 		CheckBox CheckBoxInd;
 
 		Random random = new Random();
-		internal const double MarginHorisontal = 30;
+		internal const double MarginHorisontal = 60;
 		internal const double MarginTop = 10;
 
 		public ElGraph(
@@ -76,7 +76,7 @@ namespace giganten {
 				LinesA[i].StrokeThickness = 3;
 				LinesB[i].StrokeThickness = 3;
 
-				DoubleCollection dcol = new DoubleCollection(new double[] { random.Next(7), random.Next(4) });
+				DoubleCollection dcol = new DoubleCollection(new double[] { random.Next(3, 7), random.Next(2, 4) });
 				LinesA[i].StrokeDashArray = dcol;
 				LinesB[i].StrokeDashArray = dcol;
 
@@ -134,6 +134,11 @@ namespace giganten {
 				if (tempmax > maxPerc)
 					maxPerc = tempmax;
 			}
+
+			canvasgroup.Percent100.Content = String.Format("{0:0.0}", maxPerc * 100);
+			canvasgroup.Percent75.Content = String.Format("{0:0.0}", maxPerc * 75);
+			canvasgroup.Percent50.Content = String.Format("{0:0.0}", maxPerc * 50);
+			canvasgroup.Percent25.Content = String.Format("{0:0.0}", maxPerc * 25);
 
 			if (CheckBoxOms.IsChecked == true)
 				DrawLines(omsætning, canvasgroup.LineOms, maxkroner, canvasgroup.Canvas);
@@ -274,6 +279,13 @@ namespace giganten {
 		internal Label Krone75;
 		internal Label Krone50;
 		internal Label Krone25;
+		Label KroneLabel;
+
+		internal Label Percent100;
+		internal Label Percent75;
+		internal Label Percent50;
+		internal Label Percent25;
+		Label PercentLabel;
 
 		public CanvasGroup(Canvas canvas) {
 			Canvas = canvas;
@@ -303,17 +315,37 @@ namespace giganten {
 			Krone75 = new Label();
 			Krone50 = new Label();
 			Krone25 = new Label();
+			KroneLabel = new Label();
+
+			Percent100 = new Label();
+			Percent75 = new Label();
+			Percent50 = new Label();
+			Percent25 = new Label();
+			PercentLabel = new Label();
 
 			Krone100.RenderTransform = new ScaleTransform(1, -1, 0, 6);
 			Krone75.RenderTransform = new ScaleTransform(1, -1, 0, 6);
 			Krone50.RenderTransform = new ScaleTransform(1, -1, 0, 6);
 			Krone25.RenderTransform = new ScaleTransform(1, -1, 0, 6);
+			KroneLabel.RenderTransform = new ScaleTransform(1, -1, 0, 6);
+
+			Percent100.RenderTransform = new ScaleTransform(1, -1, 0, 6);
+			Percent75.RenderTransform = new ScaleTransform(1, -1, 0, 6);
+			Percent50.RenderTransform = new ScaleTransform(1, -1, 0, 6);
+			Percent25.RenderTransform = new ScaleTransform(1, -1, 0, 6);
+			PercentLabel.RenderTransform = new ScaleTransform(1, -1, 0, 6);
 
 			Krone100.Content = "100000";
 			Krone75.Content = "75000";
 			Krone50.Content = "50000";
 			Krone25.Content = "25000";
+			KroneLabel.Content = "Kroner";
 
+			Percent100.Content = "100";
+			Percent75.Content = "75";
+			Percent50.Content = "50";
+			Percent25.Content = "25";
+			PercentLabel.Content = "Procent";
 
 			LineOms = new Polyline();
 			LineInd = new Polyline();
@@ -337,11 +369,22 @@ namespace giganten {
 			Canvas.Children.Add(Krone75);
 			Canvas.Children.Add(Krone50);
 			Canvas.Children.Add(Krone25);
+			Canvas.Children.Add(KroneLabel);
+
+			Canvas.Children.Add(Percent100);
+			Canvas.Children.Add(Percent75);
+			Canvas.Children.Add(Percent50);
+			Canvas.Children.Add(Percent25);
+			Canvas.Children.Add(PercentLabel);
 
 			Canvas.Children.Add(LineOms);
 			Canvas.Children.Add(LineInd);
 
-			Canvas.Background = Brushes.LightBlue;
+			Color greyblue = Color.FromRgb(192,208, 224);
+			Color basegreen = Color.FromRgb(225, 255, 190);
+			LinearGradientBrush br = new LinearGradientBrush(basegreen, basegreen, 90);
+
+			Canvas.Background = br;
 		}
 
 		internal void InitKGMLines(Polyline[] lines) {
@@ -386,14 +429,26 @@ namespace giganten {
 
 			Canvas.SetLeft(Krone100, 0);
 			Canvas.SetTop(Krone100, height - ElGraph.MarginTop);
-			Krone100.Foreground = Brushes.Black;
-
 			Canvas.SetLeft(Krone75, 0);
 			Canvas.SetTop(Krone75, (height - ElGraph.MarginTop) * 0.75);
 			Canvas.SetLeft(Krone50, 0);
 			Canvas.SetTop(Krone50, (height - ElGraph.MarginTop) * 0.50);
 			Canvas.SetLeft(Krone25, 0);
 			Canvas.SetTop(Krone25, (height - ElGraph.MarginTop) * 0.25);
+
+			Canvas.SetLeft(Percent100, width - ElGraph.MarginHorisontal + 5);
+			Canvas.SetTop(Percent100, height - ElGraph.MarginTop);
+			Canvas.SetLeft(Percent75, width - ElGraph.MarginHorisontal + 5);
+			Canvas.SetTop(Percent75, (height - ElGraph.MarginTop) * 0.75);
+			Canvas.SetLeft(Percent50, width - ElGraph.MarginHorisontal + 5);
+			Canvas.SetTop(Percent50, (height - ElGraph.MarginTop) * 0.50);
+			Canvas.SetLeft(Percent25, width - ElGraph.MarginHorisontal + 5);
+			Canvas.SetTop(Percent25, (height - ElGraph.MarginTop) * 0.25);
+
+			Canvas.SetLeft(KroneLabel, 0);
+			Canvas.SetTop(KroneLabel, 10);
+			Canvas.SetLeft(PercentLabel, width - ElGraph.MarginHorisontal + 5);
+			Canvas.SetTop(PercentLabel, 10);
 		}
 	}
 }
