@@ -384,6 +384,22 @@ namespace giganten {
 		private double CalculateMaxKroner(double[] kronelist) {
 			double listmax = kronelist.Max();
 
+			double nicenumber = 10000;
+
+			if (listmax < nicenumber)
+				return nicenumber;
+
+			while (listmax > nicenumber * 10)
+				nicenumber *= 10;
+
+			if (listmax < nicenumber * 1.5)
+				return nicenumber * 1.5;
+
+			for (int i = 2; i <= 10; i++) {
+				if (listmax < nicenumber * i)
+					return nicenumber * i;
+			}
+
 			return listmax;
 		}
 
