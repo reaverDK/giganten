@@ -115,7 +115,7 @@ namespace giganten {
 			if (canvasgroup.Person == null || canvasgroup.Person == "" || canvasgroup.Person == "<Ingen sælger valgt>")
 				return;
 
-			YearInfo year = datahandler.GetYear(2014);
+			YearInfo year = datahandler.GetYear(datahandler.FirstAvailableYear);
 
 			double[] omsætning = CalculateOmsætning(canvasgroup.Person, year);
 			double[] indtjening = CalculateIndtjening(canvasgroup.Person, year);

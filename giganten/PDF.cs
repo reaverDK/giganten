@@ -66,7 +66,7 @@ namespace giganten {
 			List<double[]> list = new List<double[]>();
 
 			foreach (KeyValuePair<string, string[]> pair in groups) {
-				YearInfo year = datahandler.GetYear(2014);
+				YearInfo year = datahandler.GetYear(datahandler.FirstAvailableYear);
 				String[] kgms = pair.Value;
 				double[] percentages = new double[12];
 				for (int i = 0; i < 12; i++) {

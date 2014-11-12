@@ -46,6 +46,11 @@ namespace giganten {
 				year = int.Parse(syear) + 2000;
 				if (month < 4)
 					year--;
+
+				//make month 0 be May, and month 11 be April
+				month -= 4;
+				if (month < 0)
+					month += 12;
 			}
 			catch (Exception e) {
 				return;
@@ -65,6 +70,21 @@ namespace giganten {
 					return y;
 			}
 			return null;
+		}
+
+		public int FirstAvailableYear {
+			get {
+				if (years.Count < 1)
+					return -1;
+				if (years.Count == 1)
+					return years[0].Year;
+				int year = years[0].Year;
+				foreach (YearInfo y in years) {
+					if (y.Year < year)
+						year = y.Year;
+				}
+				return year;
+			}
 		}
 	}
 }

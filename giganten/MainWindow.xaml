@@ -31,10 +31,10 @@
 					<Grid.RowDefinitions>
 						<RowDefinition Height="*" />
 						<RowDefinition Height="*" />
-						<RowDefinition Height="20" />
+						<RowDefinition Height="40" />
 					</Grid.RowDefinitions>
 					<Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid1">
-						<Canvas HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="graph_Person1">
+						<Canvas Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="graph_Person1">
 						</Canvas>
 					</Grid>
 					<Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid2">
@@ -43,6 +43,7 @@
 					</Grid>
 					<Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid3">
 						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="40" />
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="*" />
@@ -55,43 +56,20 @@
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="40" />
 						</Grid.ColumnDefinitions>
-						<Grid Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Jan" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Feb" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Marts" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="April" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Maj" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Juni" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Juli" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Aug" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Sep" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Okt" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Nov" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
-						<Grid Grid.Column="11" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-							<Label Content="Dec" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-						</Grid>
+						<Label Grid.Column="1" x:Name="TextMay" Content="Maj" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="2" x:Name="TextJune" Content="Juni" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="3" x:Name="TextJuly" Content="Juli" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="4" x:Name="TextAug" Content="Aug" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="5" x:Name="TextSep" Content="Sep" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="6" x:Name="TextOct" Content="Okt" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="7" x:Name="TextNov" Content="Nov" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="8" x:Name="TextDec" Content="Dec" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="9" x:Name="TextJan" Content="Jan" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="10" x:Name="TextFeb" Content="Feb" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="11" x:Name="TextMarch" Content="Marts" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+						<Label Grid.Column="12" x:Name="TextApril" Content="April" Padding="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
 					</Grid>
 				</Grid>
 

@@ -30,7 +30,7 @@ namespace giganten
 
 		string filename;
 		DataHandler datahandler = null;
-		int yearSelected = 2014;
+		//int yearSelected = 2014;
 		string salesPerson1 = null;
 		string salesPerson2 = null;
 		ElGraph graph;
@@ -40,7 +40,7 @@ namespace giganten
 			SalesmenCollection = new ObservableCollection<string>();
 			SalesmenCollection.Add("<Ingen sælger valgt>");
 			datahandler = data;
-			YearInfo year = datahandler.GetYear(yearSelected);
+			YearInfo year = datahandler.GetYear(datahandler.FirstAvailableYear);
 			string[] salesMen = year.GetSalesmen();
 			salesMen = salesMen.OrderBy(x => x).ToArray();
 			foreach (string s in salesMen) {
@@ -59,6 +59,18 @@ namespace giganten
 				cb.Unchecked += Checkbox_Changed;
 			}
 			SizeChanged += MainWindow_SizeChanged;
+			TextMay.Content = "Maj\n" + year.Year;
+			TextJune.Content = "Juni\n" + year.Year;
+			TextJuly.Content = "Juli\n" + year.Year;
+			TextAug.Content = "Aug\n" + year.Year;
+			TextSep.Content = "Sep\n" + year.Year;
+			TextOct.Content = "Okt\n" + year.Year;
+			TextNov.Content = "Nov\n" + year.Year;
+			TextDec.Content = "Dec\n" + year.Year;
+			TextJan.Content = "Jan\n" + (year.Year + 1);
+			TextFeb.Content = "Feb\n" + (year.Year + 1);
+			TextMarch.Content = "Marts\n" + (year.Year + 1);
+			TextApril.Content = "April\n" + (year.Year + 1);
 
 			graph = new ElGraph(
 				datahandler, 
