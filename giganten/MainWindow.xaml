@@ -92,8 +92,34 @@
 				<Label Content="Vælg Sælger #2 :" HorizontalAlignment="Left" Height="35" Margin="423,10,0,0" VerticalAlignment="Top" Width="170" FontWeight="Bold"/>
 				<CheckBox Content="VÆLG ALLE" HorizontalAlignment="Left" Height="25" Margin="10,115,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" Name="Select_All" Checked="Select_All_Checked" Unchecked="Select_All_Unchecked"/>
 				<StackPanel x:Name="CheckBoxPanel" HorizontalAlignment="Left" Margin="10,141,0,10" VerticalAlignment="Stretch" Width="169">
-					<CheckBox Content="Omsætning pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Omsætning" Checked="Checkbox_Changed" Unchecked="Checkbox_Changed"/>
-					<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Indtjening" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
+					<Grid>
+						<CheckBox Content="Omsætning pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Omsætning" Checked="Checkbox_Changed" Unchecked="Checkbox_Changed"/>
+						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFE1FFBE">
+							<Polyline Stroke="Blue" StrokeThickness="4">
+								<Polyline.Points>
+									<Point X="3" Y="3"/>
+									<Point X="3" Y="20"/>
+									<Point X="20" Y="20"/>
+									<Point X="20" Y="3"/>
+									<Point X="3" Y="3"/>
+								</Polyline.Points>
+							</Polyline>
+						</Canvas>
+					</Grid>
+					<Grid>
+						<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Indtjening" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
+						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFE1FFBE">
+							<Polyline Stroke="Green" StrokeThickness="4">
+								<Polyline.Points>
+									<Point X="3" Y="3"/>
+									<Point X="3" Y="20"/>
+									<Point X="20" Y="20"/>
+									<Point X="20" Y="3"/>
+									<Point X="3" Y="3"/>
+								</Polyline.Points>
+							</Polyline>
+						</Canvas>
+					</Grid>
 					<Separator Height="4" Margin="0,5,0,5"/>
 				</StackPanel>
 			</Grid>

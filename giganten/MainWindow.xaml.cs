@@ -50,15 +50,39 @@ namespace giganten
 
 			InitializeComponent();
 
+			colors = GetColors(Groups.Count);
+
+			int i = 0;
 			foreach (KeyValuePair<String, String[]> group in Groups) {
 				CheckBox cb = new CheckBox();
+				Grid grid = new Grid();
+				Canvas canv = new Canvas();
+				canv.Background = new SolidColorBrush(Color.FromRgb(225, 255, 190));
+				canv.Height = 25;
+				canv.Width = 23;
+				canv.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+				Polyline line = new Polyline();
+				line.Points.Add(new Point(3, 3));
+				line.Points.Add(new Point(3, 20));
+				line.Points.Add(new Point(20, 20));
+				line.Points.Add(new Point(20, 3));
+				line.Points.Add(new Point(3, 3));
+				line.Stroke = new SolidColorBrush(colors[i]);
+				line.StrokeThickness = 4;
+				line.StrokeDashArray = new DoubleCollection(new double[] { 2, 2 });
+				canv.Children.Add(line);
+				
 				cb.Content = group.Key;
 				cb.Height = 25;
-				CheckBoxPanel.Children.Add(cb);
+				grid.Children.Add(cb);
+				grid.Children.Add(canv);
+				CheckBoxPanel.Children.Add(grid);
 				checkBoxList.Add(cb);
 				cb.Checked += Checkbox_Changed;
 				cb.Unchecked += Checkbox_Changed;
+				i++;
 			}
+
 			SizeChanged += MainWindow_SizeChanged;
 			TextMay.Content = "Maj\n" + year.Year;
 			TextJune.Content = "Juni\n" + year.Year;
@@ -72,8 +96,6 @@ namespace giganten
 			TextFeb.Content = "Feb\n" + (year.Year + 1);
 			TextMarch.Content = "Marts\n" + (year.Year + 1);
 			TextApril.Content = "April\n" + (year.Year + 1);
-
-			colors = GetColors(Groups.Count);
 
 			graph = new ElGraph(
 				datahandler, 
@@ -216,11 +238,18 @@ namespace giganten
 					if (colors[i].R + colors[i].G + colors[i].B > 600)
 						continue;
 					bool cont = false;
+
+					int dif = Math.Abs(colors[i].R - 225);
+					dif += Math.Abs(colors[i].G - 255);
+					dif += Math.Abs(colors[i].B - 190);
+					if (dif < 1000.0 / (double)number)
+						continue;
+
 					for (int j = 0; j < i; j++) {
-						int dif = Math.Abs(colors[i].R - colors[j].R);
+						dif = Math.Abs(colors[i].R - colors[j].R);
 						dif += Math.Abs(colors[i].G - colors[j].G);
 						dif += Math.Abs(colors[i].B - colors[j].B);
-						if (dif < 600.0 / (((double)number))) {
+						if (dif < 1000.0 / (double)number) {
 							cont = true;
 							break;
 						}
