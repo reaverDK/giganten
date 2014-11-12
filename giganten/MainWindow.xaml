@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:oxy="http://oxyplot.org/wpf"
 				DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="ElRank" Height="600" Width="800">
+        Title="ElRank" Height="600" Width="800" MinHeight="500" MinWidth="700">
 	<DockPanel>
 		<Menu DockPanel.Dock="Top" IsMainMenu="True" Background="{StaticResource ElBrushDarkBlue}" Foreground="White" FontWeight="Bold">
 			<MenuItem Header="_Filer">
@@ -31,7 +31,7 @@
 					<Grid.RowDefinitions>
 						<RowDefinition Height="*" />
 						<RowDefinition Height="*" />
-						<RowDefinition Height="40" />
+						<RowDefinition Height="35" />
 					</Grid.RowDefinitions>
 					<Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="canvasgrid1">
 						<Canvas Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="graph_Person1">
