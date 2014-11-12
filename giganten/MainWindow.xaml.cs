@@ -34,6 +34,7 @@ namespace giganten
 		string salesPerson1 = null;
 		string salesPerson2 = null;
 		ElGraph graph;
+		Color[] colors;
 
 		public MainWindow(DataHandler data, Dictionary<string, string[]> groups) {
 			Groups = groups;
@@ -72,6 +73,8 @@ namespace giganten
 			TextMarch.Content = "Marts\n" + (year.Year + 1);
 			TextApril.Content = "April\n" + (year.Year + 1);
 
+			colors = GetColors(Groups.Count);
+
 			graph = new ElGraph(
 				datahandler, 
 				graph_Person1,
@@ -79,7 +82,8 @@ namespace giganten
 				Groups, 
 				checkBoxList.ToArray(),
 				Omsætning,
-				Indtjening);
+				Indtjening,
+				colors);
 
 			graph.UpdateSize(canvasgrid1.ActualWidth, canvasgrid1.ActualHeight);
 		}
@@ -193,6 +197,41 @@ namespace giganten
 
 		private void Checkbox_Changed(object sender, RoutedEventArgs e) {
 			graph.UpdateGraph();
+		}
+
+		private static Color[] GetColors(int number) {
+			Color[] colors = new Color[number];
+			Random random = new Random();
+
+			for (int i = 0; i < number; i++) {
+				int tries = 0;
+				do {
+					tries++;
+					colors[i] = new Color();
+					colors[i].A = 255;
+					colors[i].R = (byte)random.Next(256);
+					colors[i].G = (byte)random.Next(256);
+					colors[i].B = (byte)random.Next(256);
+
+					if (colors[i].R + colors[i].G + colors[i].B > 600)
+						continue;
+					bool cont = false;
+					for (int j = 0; j < i; j++) {
+						int dif = Math.Abs(colors[i].R - colors[j].R);
+						dif += Math.Abs(colors[i].G - colors[j].G);
+						dif += Math.Abs(colors[i].B - colors[j].B);
+						if (dif < 600.0 / (((double)number))) {
+							cont = true;
+							break;
+						}
+					}
+					if (cont)
+						continue;
+					break;
+				} while (tries < 10);
+			}
+
+			return colors;
 		}
 	}
 }

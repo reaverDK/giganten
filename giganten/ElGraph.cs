@@ -52,7 +52,8 @@ namespace giganten {
 			Dictionary<string, string[]> groups, 
 			CheckBox[] checkboxes,
 			CheckBox checkboxoms,
-			CheckBox checkboxind
+			CheckBox checkboxind,
+			Color[] colors
 			) 
 		{
 			datahandler = data;
@@ -63,11 +64,13 @@ namespace giganten {
 			CanvasGroupA = new CanvasGroup(a);
 			CanvasGroupB = new CanvasGroup(b);
 
-			if (Groups.Count != CheckBoxes.Length)
+			if (Groups.Count != CheckBoxes.Length || Groups.Count != colors.Length)
 				throw new ArgumentException("There need to be similar numbers of KGM groups and checkboxes");
 
 			Polyline[] LinesA = new Polyline[Groups.Count];
 			Polyline[] LinesB = new Polyline[Groups.Count];
+
+			DoubleCollection dcol = new DoubleCollection(new double[] { 2, 2 });
 
 			for (int i = 0; i < Groups.Count; i++) {
 				LinesA[i] = new Polyline();
@@ -76,17 +79,11 @@ namespace giganten {
 				LinesA[i].StrokeThickness = 3;
 				LinesB[i].StrokeThickness = 3;
 
-				DoubleCollection dcol = new DoubleCollection(new double[] { random.Next(3, 7), random.Next(2, 4) });
 				LinesA[i].StrokeDashArray = dcol;
 				LinesB[i].StrokeDashArray = dcol;
 
-				var properties = typeof(Brushes).GetProperties();
-				var count = properties.Count();
-				var colour = properties
-				 .Select(x => new { Property = x, Index = random.Next(count) })
-				 .OrderBy(x => x.Index).First();
-				LinesA[i].Stroke = (SolidColorBrush)colour.Property.GetValue(colour, null);
-				LinesB[i].Stroke = (SolidColorBrush)colour.Property.GetValue(colour, null);
+				LinesA[i].Stroke = new SolidColorBrush(colors[i]);
+				LinesB[i].Stroke = new SolidColorBrush(colors[i]);
 			}
 
 			CanvasGroupA.InitKGMLines(LinesA);
