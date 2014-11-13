@@ -64,11 +64,15 @@ namespace giganten {
 
 		private static void DefineCharts(Document document, string person, Dictionary<string, string[]> groups, DataHandler datahandler) {
 			List<double[]> list = new List<double[]>();
+			List<String> names = new List<string>();
+			YearInfo year = datahandler.GetYear(datahandler.FirstAvailableYear);
+
+			/***** Calculate series data ******/
 
 			foreach (KeyValuePair<string, string[]> pair in groups) {
-				YearInfo year = datahandler.GetYear(datahandler.FirstAvailableYear);
 				String[] kgms = pair.Value;
 				double[] percentages = new double[12];
+				names.Add(pair.Key);
 				for (int i = 0; i < 12; i++) {
 					if (year[i] != null) {
 						Salesman sm = year[i].GetSalesman(person);
@@ -84,21 +88,57 @@ namespace giganten {
 				list.Add(percentages);
 			}
 
+			double[] oms = new double[12];
+			for (int i = 0; i < 12; i++) {
+				if (year[i] != null) {
+					Salesman sm = year[i].GetSalesman(person);
+					if (sm != null) {
+						oms[i] = sm.Omsaetning;
+					}
+					else
+						oms[i] = 0;
+				}
+				else
+					oms[i] = 0;
+			}
+
+			double[] ind = new double[12];
+			for (int i = 0; i < 12; i++) {
+				if (year[i] != null) {
+					Salesman sm = year[i].GetSalesman(person);
+					if (sm != null) {
+						ind[i] = sm.Indtjening;
+					}
+					else
+						ind[i] = 0;
+				}
+				else
+					ind[i] = 0;
+			}
+
+			/***** Create chart for omsætning/indtjening series ******/
+
 			MigraDoc.DocumentObjectModel.Paragraph paragraph = document.LastSection.AddParagraph("Sælger Diagram", "Heading1");
 			Chart chart = new Chart();
 			chart.Left = 0;
 			chart.Width = Unit.FromCentimeter(22);
 			chart.Height = Unit.FromCentimeter(15);
 
-			for (int i = 0; i < list.Count; i++) {
-				MigraDoc.DocumentObjectModel.Shapes.Charts.Series series = chart.SeriesCollection.AddSeries();
-				series.ChartType = ChartType.Line;
-				series.Add(list[i]);
-				series.SetNull();
-			}
+			MigraDoc.DocumentObjectModel.Shapes.Charts.Series series = chart.SeriesCollection.AddSeries();
+			series.ChartType = ChartType.Line;
+			series.Add(oms);
+			series.SetNull();
+			series.Name = "Omsætning";
+
+			series = chart.SeriesCollection.AddSeries();
+			series.ChartType = ChartType.Line;
+			series.LineFormat.Width = 3;
+			series.Add(ind);
+			series.SetNull();
+			series.Name = "Indtjening";
 
 			XSeries xseries = chart.XValues.AddXSeries();
-			xseries.Add(new string[] { "Jan", "Feb", "Marts", "April", "Maj", "Juni", "Juli", "Aug", "Sep", "Okt", "Nov", "Dec" });
+			xseries.Add(new string[] { "Maj", "Juni", "Juli", "Aug", "Sep", "Okt", "Nov", "Dec", "Jan", "Feb", "Marts", "April" });
 			chart.XAxis.MajorTickMark = TickMarkType.Inside;
 			chart.XAxis.Title.Caption = "X-Axis";
 
@@ -108,6 +148,38 @@ namespace giganten {
 
 			chart.PlotArea.LineFormat.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
 			chart.PlotArea.LineFormat.Width = 3;
+			chart.LeftArea.AddLegend();
+			document.LastSection.Add(chart);
+
+			/***** Create chart for KGM series ******/
+
+			paragraph = document.LastSection.AddParagraph("Sælger Diagram", "Heading1");
+			chart = new Chart();
+			chart.Left = 0;
+			chart.Width = Unit.FromCentimeter(22);
+			chart.Height = Unit.FromCentimeter(15);
+
+			for (int i = 0; i < list.Count; i++) {
+				series = chart.SeriesCollection.AddSeries();
+				series.ChartType = ChartType.Line;
+				series.Add(list[i]);
+				series.SetNull();
+				series.Name = names[i];
+			}
+
+			xseries = chart.XValues.AddXSeries();
+			xseries.Add(new string[] { "Maj", "Juni", "Juli", "Aug", "Sep", "Okt", "Nov", "Dec", "Jan", "Feb", "Marts", "April" });
+			chart.XAxis.MajorTickMark = TickMarkType.Inside;
+			chart.XAxis.Title.Caption = "X-Axis";
+
+			chart.YAxis.TickLabels.Format = "#0%";
+			chart.YAxis.MajorTickMark = TickMarkType.Outside;
+			chart.YAxis.MajorTickMark = TickMarkType.Outside;
+			chart.YAxis.HasMajorGridlines = true;
+
+			chart.PlotArea.LineFormat.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
+			chart.PlotArea.LineFormat.Width = 3;
+			chart.LeftArea.AddLegend();
 			document.LastSection.Add(chart);
 		}
 	}
