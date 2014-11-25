@@ -86,7 +86,7 @@
 				<CheckBox Content="VÆLG ALLE" HorizontalAlignment="Left" Height="25" Margin="10,115,0,0" VerticalAlignment="Top" Width="114" FontWeight="Bold" Name="Select_All" Checked="Select_All_Checked" Unchecked="Select_All_Unchecked"/>
 				<StackPanel x:Name="CheckBoxPanel" HorizontalAlignment="Left" Margin="10,141,0,10" VerticalAlignment="Stretch" Width="169">
 					<Grid>
-						<CheckBox Content="Omsætning pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Omsætning" Checked="Checkbox_Changed" Unchecked="Checkbox_Changed"/>
+						<CheckBox Content="Omsætning" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Omsætning" Checked="Checkbox_Changed" Unchecked="Checkbox_Changed"/>
 						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFE1FFBE">
 							<Polyline Stroke="Blue" StrokeThickness="4">
 								<Polyline.Points>
@@ -100,7 +100,7 @@
 						</Canvas>
 					</Grid>
 					<Grid>
-						<CheckBox Content="Indtjening pr. Time" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Indtjening" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
+						<CheckBox Content="Indtjening" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Indtjening" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
 						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFE1FFBE">
 							<Polyline Stroke="Green" StrokeThickness="4">
 								<Polyline.Points>
