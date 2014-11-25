@@ -49,7 +49,7 @@ namespace giganten {
 				double.TryParse(entry[7], out salg);
 				double.TryParse(entry[8], out kost);
 
-				Omsaetning += antal * (Math.Abs(salg) + Math.Abs(kost));
+				Omsaetning += antal * (Math.Abs(salg));
 				Indtjening += antal * (salg - kost);
 
 				string kgm = entry[12];

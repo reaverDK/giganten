@@ -16,6 +16,8 @@ using System.Drawing;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.IO;
+using Nea;
 
 namespace giganten
 {
@@ -28,27 +30,34 @@ namespace giganten
 		Dictionary<string, string[]> Groups;
 		List<CheckBox> checkBoxList = new List<CheckBox>();
 
+		List<string> allSalesMen = new List<string>();
+
+		Dictionary<string, string[]> departments;
 		string filename;
+		string depfilename;
 		DataHandler datahandler = null;
 		//int yearSelected = 2014;
 		string salesPerson1 = null;
 		string salesPerson2 = null;
+		string brugernavn = null;
 		ElGraph graph;
 		Color[] colors;
 
 		public MainWindow(DataHandler data, Dictionary<string, string[]> groups) {
 			Groups = groups;
 			SalesmenCollection = new ObservableCollection<string>();
-			SalesmenCollection.Add("<Ingen sælger valgt>");
+			SalesmenCollection.Add("<INGEN SÆLGER VALGT>");
 			datahandler = data;
 			YearInfo year = datahandler.GetYear(datahandler.FirstAvailableYear);
 			string[] salesMen = year.GetSalesmen();
 			salesMen = salesMen.OrderBy(x => x).ToArray();
 			foreach (string s in salesMen) {
-				SalesmenCollection.Add(s);
+				allSalesMen.Add(s);
 			}
 
 			InitializeComponent();
+
+			LoadDepFiles();
 
 			colors = GetColors(Groups.Count);
 
@@ -155,14 +164,42 @@ namespace giganten
 		}
 
 		private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+			
 			if (combobox_Person1 != null && combobox_Person2 != null) {
 				if (combobox_Afd.SelectedIndex == 0) {
 					combobox_Person1.IsEnabled = false;
 					combobox_Person2.IsEnabled = false;
 				}
+				else if (combobox_Afd.Items[combobox_Afd.SelectedIndex] == "ALLE AFDELINGER")
+				{
+					combobox_Person1.IsEnabled = true;
+					combobox_Person2.IsEnabled = true;
+					string[] sm = datahandler.GetYear(datahandler.FirstAvailableYear).GetSalesmen();
+
+					SalesmenCollection.Clear();
+					SalesmenCollection.Add("<INGEN SÆLGER VALGT>");
+
+					foreach (string s in sm)
+					{
+						SalesmenCollection.Add(s);
+					}
+				}
 				else {
 					combobox_Person1.IsEnabled = true;
 					combobox_Person2.IsEnabled = true;
+					foreach (string afdeling in departments.Keys)
+					{
+						if (afdeling == (string)combobox_Afd.Items[combobox_Afd.SelectedIndex])
+						{
+							SalesmenCollection.Clear();
+							SalesmenCollection.Add("<INGEN SÆLGER VALGT>");
+
+							for (int i = 0; i < departments[afdeling].Length; i++)
+							{
+								SalesmenCollection.Add(departments[afdeling][i]);
+							}
+						}
+					}				
 				}
 			}
 			StatusBox.Content = "Status: Combobox selection changed !";
@@ -200,7 +237,7 @@ namespace giganten
 		private void combobox_Person1_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 			try {
 				salesPerson1 = (string)combobox_Person1.SelectedItem;
-				if (salesPerson1 == "<Ingen sælger valgt>")
+				if (salesPerson1 == "<INGEN SÆLGER VALGT>")
 					salesPerson1 = null;
 				graph.PersonA = salesPerson1;
 			}
@@ -210,7 +247,7 @@ namespace giganten
 		private void combobox_Person2_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 			try {
 				salesPerson2 = (string)combobox_Person2.SelectedValue;
-				if (salesPerson2 == "<Ingen sælger valgt>")
+				if (salesPerson2 == "<INGEN SÆLGER VALGT>")
 					salesPerson2 = null;
 				graph.PersonB = salesPerson2;
 			}
@@ -261,6 +298,82 @@ namespace giganten
 			}
 
 			return colors;
+		}
+
+		private void LoadDepFiles()
+		{
+			//string[] filePaths = null;
+			string file = null;
+			departments = new Dictionary<string, string[]>();
+			//config data
+			try
+			{
+				file = "Personale liste Know How.txt";
+				NeaReader r = new NeaReader(new StreamReader(file));
+				while (r.Peek() != -1)
+				{
+					char next = (char)r.Peek();
+					while (char.IsWhiteSpace(next))
+					{
+						r.ReadLine();
+						next = (char)r.Peek();
+					}
+					
+					string departmentname = "ERROR";
+					List<string> strings = new List<string>();
+
+					while (r.Peek() != -1)
+					{
+						next = (char)r.Peek();
+						if (!char.IsWhiteSpace(next))
+						{
+							if (departmentname != "ERROR")
+							{
+								departments.Add(departmentname, strings.ToArray());
+								strings.Clear();
+							}
+							departmentname = r.ReadWord().ToUpper();
+							r.ReadLine();
+						}
+						else
+						{
+							r.SkipWhiteSpace();
+							r.ReadUntil('\t'); //løn nr
+							r.SkipWhiteSpace();
+							r.ReadUntil('\t'); // efternavn
+							r.SkipWhiteSpace();
+							r.ReadUntil('\t'); // fornavn
+							r.SkipWhiteSpace();
+							r.ReadUntil('\t'); // afdeling
+							if (r.Peek() == -1)
+								break;
+							r.SkipWhiteSpace();
+							brugernavn = r.ReadWord(); // brugernavn
+							strings.Add(brugernavn.ToUpper());
+
+							r.ReadLine();
+						}
+					}
+					departments.Add(departmentname, strings.ToArray());
+				}
+				r.Close();
+			}
+			catch (FileNotFoundException fnf)
+			{
+				StreamWriter w = new StreamWriter("Personale liste Know How.txt");
+				w.Write("Fill this with data");
+				w.Close();
+			}
+			catch (Exception e)
+			{
+
+			}
+
+			foreach (string afdeling in departments.Keys)
+			{
+				combobox_Afd.Items.Add(afdeling);
+			}
+			combobox_Afd.Items.Add("ALLE AFDELINGER");
 		}
 	}
 }

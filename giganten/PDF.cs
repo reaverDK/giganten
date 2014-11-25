@@ -126,13 +126,14 @@ namespace giganten {
 
 			MigraDoc.DocumentObjectModel.Shapes.Charts.Series series = chart.SeriesCollection.AddSeries();
 			series.ChartType = ChartType.Line;
+			series.LineFormat.Width = 10;
 			series.Add(oms);
 			series.SetNull();
 			series.Name = "Omsætning";
 
 			series = chart.SeriesCollection.AddSeries();
 			series.ChartType = ChartType.Line;
-			series.LineFormat.Width = 3;
+			series.LineFormat.Width = 10;
 			series.Add(ind);
 			series.SetNull();
 			series.Name = "Indtjening";
@@ -140,14 +141,14 @@ namespace giganten {
 			XSeries xseries = chart.XValues.AddXSeries();
 			xseries.Add(new string[] { "Maj", "Juni", "Juli", "Aug", "Sep", "Okt", "Nov", "Dec", "Jan", "Feb", "Marts", "April" });
 			chart.XAxis.MajorTickMark = TickMarkType.Inside;
-			chart.XAxis.Title.Caption = "X-Axis";
+			chart.XAxis.Title.Caption = "MÅNEDER";
 
 			chart.YAxis.MajorTickMark = TickMarkType.Outside;
 			chart.YAxis.MajorTickMark = TickMarkType.Outside;
 			chart.YAxis.HasMajorGridlines = true;
 
 			chart.PlotArea.LineFormat.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
-			chart.PlotArea.LineFormat.Width = 3;
+			chart.PlotArea.LineFormat.Width = 1;
 			chart.LeftArea.AddLegend();
 			document.LastSection.Add(chart);
 
@@ -162,6 +163,7 @@ namespace giganten {
 			for (int i = 0; i < list.Count; i++) {
 				series = chart.SeriesCollection.AddSeries();
 				series.ChartType = ChartType.Line;
+				series.LineFormat.Width = 10;
 				series.Add(list[i]);
 				series.SetNull();
 				series.Name = names[i];
@@ -170,7 +172,7 @@ namespace giganten {
 			xseries = chart.XValues.AddXSeries();
 			xseries.Add(new string[] { "Maj", "Juni", "Juli", "Aug", "Sep", "Okt", "Nov", "Dec", "Jan", "Feb", "Marts", "April" });
 			chart.XAxis.MajorTickMark = TickMarkType.Inside;
-			chart.XAxis.Title.Caption = "X-Axis";
+			chart.XAxis.Title.Caption = "MÅNEDER";
 
 			chart.YAxis.TickLabels.Format = "#0%";
 			chart.YAxis.MajorTickMark = TickMarkType.Outside;
@@ -178,7 +180,7 @@ namespace giganten {
 			chart.YAxis.HasMajorGridlines = true;
 
 			chart.PlotArea.LineFormat.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
-			chart.PlotArea.LineFormat.Width = 3;
+			chart.PlotArea.LineFormat.Width = 1;
 			chart.LeftArea.AddLegend();
 			document.LastSection.Add(chart);
 		}

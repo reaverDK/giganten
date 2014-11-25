@@ -74,14 +74,7 @@
 				</Grid>
 
 				<ComboBox HorizontalAlignment="Left" Height="26" Margin="7,50,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="0" Name="combobox_Afd">
-					<ComboBoxItem Content="&lt;Ingen afdelinger valgt&gt;" HorizontalAlignment="Left" Width="168"/>
-					<ComboBoxItem Content="Data" HorizontalAlignment="Left" Width="168"/>
-					<ComboBoxItem Content="Hvidevare" HorizontalAlignment="Left" Width="168"/>
-					<ComboBoxItem Content="Køkken" HorizontalAlignment="Left" Width="168"/>
-					<ComboBoxItem Content="Små-EL" HorizontalAlignment="Left" Width="168"/>
-					<ComboBoxItem Content="Tele" HorizontalAlignment="Left" Width="168"/>
-					<ComboBoxItem Content="TV" HorizontalAlignment="Left" Width="168"/>
-					<ComboBoxItem Content="ALLE AFDELINGER" HorizontalAlignment="Left" Width="168"/>
+					<ComboBoxItem Content="&lt;INGEN AFDELING VALGT&gt;" HorizontalAlignment="Left" Width="168"/>
 				</ComboBox>
 				<ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Path=SalesmenCollection}" Height="26" Margin="218,50,0,0" VerticalAlignment="Top" Width="170" SelectedIndex="0" Name="combobox_Person1" SelectionChanged="combobox_Person1_SelectionChanged" IsEnabled="False">
 				</ComboBox>
