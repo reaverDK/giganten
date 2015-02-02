@@ -63,32 +63,7 @@ namespace giganten
 
 			int i = 0;
 			foreach (KeyValuePair<String, String[]> group in Groups) {
-				CheckBox cb = new CheckBox();
-				Grid grid = new Grid();
-				Canvas canv = new Canvas();
-				canv.Background = new SolidColorBrush(Color.FromRgb(225, 255, 190));
-				canv.Height = 25;
-				canv.Width = 23;
-				canv.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-				Polyline line = new Polyline();
-				line.Points.Add(new Point(3, 3));
-				line.Points.Add(new Point(3, 20));
-				line.Points.Add(new Point(20, 20));
-				line.Points.Add(new Point(20, 3));
-				line.Points.Add(new Point(3, 3));
-				line.Stroke = new SolidColorBrush(colors[i]);
-				line.StrokeThickness = 4;
-				line.StrokeDashArray = new DoubleCollection(new double[] { 2, 2 });
-				canv.Children.Add(line);
-				
-				cb.Content = group.Key;
-				cb.Height = 25;
-				grid.Children.Add(cb);
-				grid.Children.Add(canv);
-				CheckBoxPanel.Children.Add(grid);
-				checkBoxList.Add(cb);
-				cb.Checked += Checkbox_Changed;
-				cb.Unchecked += Checkbox_Changed;
+				AddGroupCheckboxEntry(group.Key, colors[i]);
 				i++;
 			}
 
@@ -117,6 +92,35 @@ namespace giganten
 				colors);
 
 			graph.UpdateSize(canvasgrid1.ActualWidth, canvasgrid1.ActualHeight);
+		}
+
+		private void AddGroupCheckboxEntry(string groupname, Color color) {
+			CheckBox cb = new CheckBox();
+			Grid grid = new Grid();
+			Canvas canv = new Canvas();
+			canv.Background = new SolidColorBrush(Color.FromRgb(225, 255, 190));
+			canv.Height = 25;
+			canv.Width = 23;
+			canv.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+			Polyline line = new Polyline();
+			line.Points.Add(new Point(3, 3));
+			line.Points.Add(new Point(3, 20));
+			line.Points.Add(new Point(20, 20));
+			line.Points.Add(new Point(20, 3));
+			line.Points.Add(new Point(3, 3));
+			line.Stroke = new SolidColorBrush(color);
+			line.StrokeThickness = 4;
+			line.StrokeDashArray = new DoubleCollection(new double[] { 2, 2 });
+			canv.Children.Add(line);
+
+			cb.Content = groupname;
+			cb.Height = 25;
+			grid.Children.Add(cb);
+			grid.Children.Add(canv);
+			CheckBoxPanel.Children.Add(grid);
+			checkBoxList.Add(cb);
+			cb.Checked += Checkbox_Changed;
+			cb.Unchecked += Checkbox_Changed;
 		}
 
 		void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e) {
