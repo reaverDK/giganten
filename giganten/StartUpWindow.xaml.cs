@@ -132,8 +132,13 @@ namespace giganten {
 
 		private void Window_Loaded(object sender, RoutedEventArgs e) {
 			StatusText.Text = "Ser efter filer";
-			Thread thread = new Thread(LoadDefaultFiles);
-			thread.Start();
+			if (DateTime.Today.DayOfYear > 80) {
+				StatusText.Text = "Demo expired.\nPlease contact the developers.";
+			}
+			else {
+				Thread thread = new Thread(LoadDefaultFiles);
+				thread.Start();
+			}
 		}
 
 		private void Exit_Click(object sender, RoutedEventArgs e) {
