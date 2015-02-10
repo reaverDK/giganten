@@ -89,6 +89,7 @@ namespace giganten
 				checkBoxList.ToArray(),
 				Omsætning,
 				Indtjening,
+				TvVsVæg,
 				colors);
 
 			graph.UpdateSize(canvasgrid1.ActualWidth, canvasgrid1.ActualHeight);
@@ -213,6 +214,7 @@ namespace giganten
 			if (Select_All.IsChecked == true) {
 				this.Omsætning.IsChecked = true;
 				this.Indtjening.IsChecked = true;
+				this.TvVsVæg.IsChecked = true;
 				foreach (CheckBox cb in checkBoxList) {
 					cb.IsChecked = true;
 				}
@@ -225,6 +227,7 @@ namespace giganten
 			if (Select_All.IsChecked == false) {
 				this.Omsætning.IsChecked = false;
 				this.Indtjening.IsChecked = false;
+				this.TvVsVæg.IsChecked = false;
 				foreach (CheckBox cb in checkBoxList) {
 					cb.IsChecked = false;
 				}

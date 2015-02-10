@@ -113,6 +113,20 @@
 							</Polyline>
 						</Canvas>
 					</Grid>
+					<Grid>
+						<CheckBox Content="Vægbeslag / TV" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="TvVsVæg" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
+						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFE1FFBE">
+							<Polyline Stroke="Orange" StrokeThickness="4">
+								<Polyline.Points>
+									<Point X="3" Y="3"/>
+									<Point X="3" Y="20"/>
+									<Point X="20" Y="20"/>
+									<Point X="20" Y="3"/>
+									<Point X="3" Y="3"/>
+								</Polyline.Points>
+							</Polyline>
+						</Canvas>
+					</Grid>
 					<Separator Height="4" Margin="0,5,0,5"/>
 				</StackPanel>
 			</Grid>

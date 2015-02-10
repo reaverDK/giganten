@@ -40,6 +40,7 @@ namespace giganten {
 		Dictionary<string, string[]> Groups;
 		CheckBox[] CheckBoxes;
 		CheckBox CheckBoxOms;
+		CheckBox CheckBoxVs;
 		CheckBox CheckBoxInd;
 
 		Random random = new Random();
@@ -53,6 +54,7 @@ namespace giganten {
 			CheckBox[] checkboxes,
 			CheckBox checkboxoms,
 			CheckBox checkboxind,
+			CheckBox checkboxvs,
 			Color[] colors
 			) 
 		{
@@ -61,6 +63,7 @@ namespace giganten {
 			CheckBoxes = checkboxes;
 			CheckBoxOms = checkboxoms;
 			CheckBoxInd = checkboxind;
+			CheckBoxVs = checkboxvs;
 			CanvasGroupA = new CanvasGroup(a);
 			CanvasGroupB = new CanvasGroup(b);
 
@@ -106,6 +109,7 @@ namespace giganten {
 			foreach (Polyline line in canvasgroup.Lines) {
 				line.Points.Clear();
 			}
+			canvasgroup.LineVs.Points.Clear();
 			canvasgroup.LineOms.Points.Clear();
 			canvasgroup.LineInd.Points.Clear();
 
@@ -116,6 +120,7 @@ namespace giganten {
 
 			double[] omsætning = CalculateOmsætning(canvasgroup.Person, year);
 			double[] indtjening = CalculateIndtjening(canvasgroup.Person, year);
+			double[] tvvswall = CalculateTvVsWall(canvasgroup.Person, year);
 			Dictionary<String, double[]> kgmdata = CalculateKGMData(canvasgroup.Person, year);
 
 			double maxkroner = CalculateMaxKroner(omsætning);
@@ -136,6 +141,9 @@ namespace giganten {
 			canvasgroup.Percent75.Content = String.Format("{0:0.0}", maxPerc * 75);
 			canvasgroup.Percent50.Content = String.Format("{0:0.0}", maxPerc * 50);
 			canvasgroup.Percent25.Content = String.Format("{0:0.0}", maxPerc * 25);
+
+			if (CheckBoxVs.IsChecked == true)
+				DrawLines(tvvswall, canvasgroup.LineVs, 1.0, canvasgroup.Canvas);
 
 			if (CheckBoxOms.IsChecked == true)
 				DrawLines(omsætning, canvasgroup.LineOms, maxkroner, canvasgroup.Canvas);
@@ -189,6 +197,31 @@ namespace giganten {
 			}
 
 			return indtjening;
+		}
+
+		private double[] CalculateTvVsWall(string person, YearInfo year) {
+			double[] vs = new double[12];
+			string[] tvs;
+			string[] walls;
+			if(Groups.ContainsKey("TV") && Groups.ContainsKey("Vægbeslag")) {
+				tvs = Groups["TV"];
+				walls = Groups["Vægbeslag"];
+
+				for (int i = 0; i < 12; i++) {
+					if (year[i] != null) {
+						Salesman sm = year[i].GetSalesman(person);
+						if (sm != null) {
+							vs[i] = sm.PartOfSum(walls, tvs);
+						}
+						else
+							vs[i] = 0;
+					}
+					else
+						vs[i] = 0;
+				}
+			}
+
+			return vs;
 		}
 
 		private Dictionary<string, double[]> CalculateKGMData(string person, YearInfo year) {
@@ -254,12 +287,17 @@ namespace giganten {
 						));
 			}
 		}
+
+		private static void bla() {
+			
+		}
 	}
 
 	class CanvasGroup {
 		internal string Person;
 		internal Canvas Canvas;
 		internal Polyline[] Lines;
+		internal Polyline LineVs;
 		internal Polyline LineOms;
 		internal Polyline LineInd;
 
@@ -344,9 +382,12 @@ namespace giganten {
 			Percent25.Content = "25";
 			PercentLabel.Content = "Procent";
 
+			LineVs = new Polyline();
 			LineOms = new Polyline();
 			LineInd = new Polyline();
 
+			LineVs.StrokeThickness = 3;
+			LineVs.Stroke = Brushes.Orange;
 			LineOms.StrokeThickness = 3;
 			LineOms.Stroke = Brushes.Blue;
 			LineInd.StrokeThickness = 3;
@@ -374,6 +415,7 @@ namespace giganten {
 			Canvas.Children.Add(Percent25);
 			Canvas.Children.Add(PercentLabel);
 
+			Canvas.Children.Add(LineVs);
 			Canvas.Children.Add(LineOms);
 			Canvas.Children.Add(LineInd);
 

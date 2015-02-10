@@ -64,8 +64,28 @@ namespace giganten {
 		}
 
 		public double PercentOfTotal(String[] list) {
+			int count = EntriesIn(list);
+			return ((double)count)/(double)TotalSales;
+		}
+
+		/// <summary>
+		/// Returns the amount of entries under the categories in a divided by the
+		/// sum of entries in categories in both a and b.
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		public double PartOfSum(string[] a, string[] b) {
+			int acount = EntriesIn(a);
+			int bcount = EntriesIn(b);
+			if (acount == 0) return 0;
+
+			return ((double)acount) / ((double)bcount+acount);
+		}
+
+		public int EntriesIn(string[] list) {
 			int count = 0;
-			foreach (KeyValuePair<String,int> kgm in KGMs) {
+			foreach (KeyValuePair<String, int> kgm in KGMs) {
 				foreach (String comp in list) {
 					if (comp == kgm.Key) {
 						count += kgm.Value;
@@ -73,7 +93,7 @@ namespace giganten {
 					}
 				}
 			}
-			return ((double)count)/(double)TotalSales;
+			return count;
 		}
 	}
 }
