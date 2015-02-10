@@ -421,7 +421,8 @@ namespace giganten {
 
 			Color greyblue = Color.FromRgb(192,208, 224);
 			Color basegreen = Color.FromRgb(225, 255, 190);
-			LinearGradientBrush br = new LinearGradientBrush(basegreen, basegreen, 90);
+			Color white = Color.FromRgb(255, 255, 255);
+			LinearGradientBrush br = new LinearGradientBrush(white, white, 90);
 
 			Canvas.Background = br;
 		}

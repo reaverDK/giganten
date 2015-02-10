@@ -99,7 +99,7 @@ namespace giganten
 			CheckBox cb = new CheckBox();
 			Grid grid = new Grid();
 			Canvas canv = new Canvas();
-			canv.Background = new SolidColorBrush(Color.FromRgb(225, 255, 190));
+			canv.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255)); //(225, 255, 190)
 			canv.Height = 25;
 			canv.Width = 23;
 			canv.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;

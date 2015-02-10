@@ -87,7 +87,8 @@
 				<StackPanel x:Name="CheckBoxPanel" HorizontalAlignment="Left" Margin="10,141,0,10" VerticalAlignment="Stretch" Width="169">
 					<Grid>
 						<CheckBox Content="Omsætning" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Omsætning" Checked="Checkbox_Changed" Unchecked="Checkbox_Changed"/>
-						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFE1FFBE">
+						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFFFFFFF">
+							<!--FFE1FFBE-->
 							<Polyline Stroke="Blue" StrokeThickness="4">
 								<Polyline.Points>
 									<Point X="3" Y="3"/>
@@ -101,7 +102,7 @@
 					</Grid>
 					<Grid>
 						<CheckBox Content="Indtjening" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="Indtjening" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
-						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFE1FFBE">
+						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFFFFFFF">
 							<Polyline Stroke="Green" StrokeThickness="4">
 								<Polyline.Points>
 									<Point X="3" Y="3"/>
@@ -115,7 +116,7 @@
 					</Grid>
 					<Grid>
 						<CheckBox Content="Vægbeslag / TV" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="136" x:Name="TvVsVæg" Unchecked="Checkbox_Changed" Checked="Checkbox_Changed"/>
-						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFE1FFBE">
+						<Canvas HorizontalAlignment="Right" Width="23" Height="25" Background="#FFFFFFFF">
 							<Polyline Stroke="Orange" StrokeThickness="4">
 								<Polyline.Points>
 									<Point X="3" Y="3"/>
