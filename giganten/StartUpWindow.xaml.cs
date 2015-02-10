@@ -23,6 +23,7 @@ namespace giganten {
 	public partial class StartUpWindow : Window {
 		DataHandler dataHandler = null;
 		Dictionary<string, string[]> groups = new Dictionary<string, string[]>();
+		List<string[]> ratios = new List<string[]>();
 
 		public StartUpWindow() {
 			InitializeComponent();
@@ -54,7 +55,10 @@ namespace giganten {
 								state = ReadState.FindNextKGM;
 							}
 							else if (temp == "Ratio:") {
-
+								string[] ratio = new string[2];
+								ratio[0] = line.ReadSection('[', ']');
+								ratio[1] = line.ReadSection('[', ']');
+								ratios.Add(ratio);
 							}
 							break;
 						case ReadState.FindNextKGM:
@@ -166,7 +170,7 @@ namespace giganten {
 
 		public void FinishedLoading(bool success) {
 			if (success) {
-				MainWindow main = new MainWindow(dataHandler, groups);
+				MainWindow main = new MainWindow(dataHandler, groups, ratios);
 				main.Show();
 				this.Close();
 			}

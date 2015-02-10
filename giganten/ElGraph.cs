@@ -38,7 +38,9 @@ namespace giganten {
 
 		DataHandler datahandler;
 		Dictionary<string, string[]> Groups;
-		CheckBox[] CheckBoxes;
+		List<string[]> Ratios;
+		CheckBox[] GroupCheckBoxes;
+		CheckBox[] RatioCheckBoxes;
 		CheckBox CheckBoxOms;
 		CheckBox CheckBoxVs;
 		CheckBox CheckBoxInd;
@@ -48,49 +50,79 @@ namespace giganten {
 		internal const double MarginTop = 10;
 
 		public ElGraph(
-			DataHandler data, 
-			Canvas a, Canvas b, 
-			Dictionary<string, string[]> groups, 
-			CheckBox[] checkboxes,
+			DataHandler data,
+			Canvas a, Canvas b,
+			Dictionary<string, string[]> groups,
+			List<string[]> ratios,
+			CheckBox[] groupcheckboxes,
+			CheckBox[] ratiocheckboxes,
 			CheckBox checkboxoms,
 			CheckBox checkboxind,
-			CheckBox checkboxvs,
-			Color[] colors
-			) 
-		{
+			//CheckBox checkboxvs,
+			Color[] groupcolors,
+			Color[] ratiocolors
+			) {
 			datahandler = data;
 			Groups = groups;
-			CheckBoxes = checkboxes;
+			Ratios = ratios;
+			GroupCheckBoxes = groupcheckboxes;
+			RatioCheckBoxes = ratiocheckboxes;
 			CheckBoxOms = checkboxoms;
 			CheckBoxInd = checkboxind;
-			CheckBoxVs = checkboxvs;
+			//CheckBoxVs = checkboxvs;
 			CanvasGroupA = new CanvasGroup(a);
 			CanvasGroupB = new CanvasGroup(b);
 
-			if (Groups.Count != CheckBoxes.Length || Groups.Count != colors.Length)
-				throw new ArgumentException("There need to be similar numbers of KGM groups and checkboxes");
+			if (Groups.Count != GroupCheckBoxes.Length || Groups.Count != groupcolors.Length)
+				throw new ArgumentException("There need to be similar numbers of KGM groups and checkboxes and colors");
+			if (Ratios.Count != RatioCheckBoxes.Length || Ratios.Count != ratiocolors.Length)
+				throw new ArgumentException("There need to be similar numbers of ratios and checkboxes and colors");
 
-			Polyline[] LinesA = new Polyline[Groups.Count];
-			Polyline[] LinesB = new Polyline[Groups.Count];
+			// Group lines //
+			Polyline[] GroupLinesA = new Polyline[Groups.Count];
+			Polyline[] GroupLinesB = new Polyline[Groups.Count];
 
 			DoubleCollection dcol = new DoubleCollection(new double[] { 2, 2 });
 
 			for (int i = 0; i < Groups.Count; i++) {
-				LinesA[i] = new Polyline();
-				LinesB[i] = new Polyline();
+				GroupLinesA[i] = new Polyline();
+				GroupLinesB[i] = new Polyline();
 
-				LinesA[i].StrokeThickness = 3;
-				LinesB[i].StrokeThickness = 3;
+				GroupLinesA[i].StrokeThickness = 3;
+				GroupLinesB[i].StrokeThickness = 3;
 
-				LinesA[i].StrokeDashArray = dcol;
-				LinesB[i].StrokeDashArray = dcol;
+				GroupLinesA[i].StrokeDashArray = dcol;
+				GroupLinesB[i].StrokeDashArray = dcol;
 
-				LinesA[i].Stroke = new SolidColorBrush(colors[i]);
-				LinesB[i].Stroke = new SolidColorBrush(colors[i]);
+				GroupLinesA[i].Stroke = new SolidColorBrush(groupcolors[i]);
+				GroupLinesB[i].Stroke = new SolidColorBrush(groupcolors[i]);
 			}
 
-			CanvasGroupA.InitKGMLines(LinesA);
-			CanvasGroupB.InitKGMLines(LinesB);
+			CanvasGroupA.InitKGMLines(GroupLinesA);
+			CanvasGroupB.InitKGMLines(GroupLinesB);
+
+			// Ratio lines //
+			Polyline[] RatioLinesA = new Polyline[Ratios.Count];
+			Polyline[] RatioLinesB = new Polyline[Ratios.Count];
+
+			dcol = new DoubleCollection(new double[] { 1, 1 });
+
+			for (int i = 0; i < Ratios.Count; i++) {
+				RatioLinesA[i] = new Polyline();
+				RatioLinesB[i] = new Polyline();
+
+				RatioLinesA[i].StrokeThickness = 3;
+				RatioLinesB[i].StrokeThickness = 3;
+
+				RatioLinesA[i].StrokeDashArray = dcol;
+				RatioLinesB[i].StrokeDashArray = dcol;
+
+				RatioLinesA[i].Stroke = new SolidColorBrush(ratiocolors[i]);
+				RatioLinesB[i].Stroke = new SolidColorBrush(ratiocolors[i]);
+			}
+
+			CanvasGroupA.InitRatioLines(RatioLinesA);
+			CanvasGroupB.InitRatioLines(RatioLinesB);
 		}
 
 		public void UpdateSize(double width, double height) {
@@ -106,10 +138,13 @@ namespace giganten {
 		}
 
 		private void UpdateGraph(CanvasGroup canvasgroup) {
-			foreach (Polyline line in canvasgroup.Lines) {
+			foreach (Polyline line in canvasgroup.GroupLines) {
 				line.Points.Clear();
 			}
-			canvasgroup.LineVs.Points.Clear();
+			foreach (Polyline line in canvasgroup.RatioLines) {
+				line.Points.Clear();
+			}
+			//canvasgroup.LineVs.Points.Clear();
 			canvasgroup.LineOms.Points.Clear();
 			canvasgroup.LineInd.Points.Clear();
 
@@ -120,8 +155,9 @@ namespace giganten {
 
 			double[] omsætning = CalculateOmsætning(canvasgroup.Person, year);
 			double[] indtjening = CalculateIndtjening(canvasgroup.Person, year);
-			double[] tvvswall = CalculateTvVsWall(canvasgroup.Person, year);
+			//double[] tvvswall = CalculateTvVsWall(canvasgroup.Person, year);
 			Dictionary<String, double[]> kgmdata = CalculateKGMData(canvasgroup.Person, year);
+			Dictionary<String, double[]> ratiodata = CalculateRatioData(canvasgroup.Person, year);
 
 			double maxkroner = CalculateMaxKroner(omsætning);
 
@@ -142,8 +178,8 @@ namespace giganten {
 			canvasgroup.Percent50.Content = String.Format("{0:0.0}", maxPerc * 50);
 			canvasgroup.Percent25.Content = String.Format("{0:0.0}", maxPerc * 25);
 
-			if (CheckBoxVs.IsChecked == true)
-				DrawLines(tvvswall, canvasgroup.LineVs, 1.0, canvasgroup.Canvas);
+			//if (CheckBoxVs.IsChecked == true)
+			//	DrawLines(tvvswall, canvasgroup.LineVs, 1.0, canvasgroup.Canvas);
 
 			if (CheckBoxOms.IsChecked == true)
 				DrawLines(omsætning, canvasgroup.LineOms, maxkroner, canvasgroup.Canvas);
@@ -154,10 +190,18 @@ namespace giganten {
 			int n = 0;
 			foreach (KeyValuePair<String, string[]> pair in Groups) {
 				if (kgmdata.ContainsKey(pair.Key)) {
-					Polyline line = canvasgroup.Lines[n];
+					Polyline line = canvasgroup.GroupLines[n];
 					DrawLines(kgmdata[pair.Key], line, maxPerc, canvasgroup.Canvas);
 				}
 				n++;
+			}
+
+			for (int i = 0; i < Ratios.Count; i++) {
+				string rationame = Ratios[i][0] + " / " + Ratios[i][1];
+				if (ratiodata.ContainsKey(rationame)) {
+					Polyline line = canvasgroup.RatioLines[i];
+					DrawLines(ratiodata[rationame], line, 1.0, canvasgroup.Canvas);
+				}
 			}
 		}
 
@@ -199,35 +243,10 @@ namespace giganten {
 			return indtjening;
 		}
 
-		private double[] CalculateTvVsWall(string person, YearInfo year) {
-			double[] vs = new double[12];
-			string[] tvs;
-			string[] walls;
-			if(Groups.ContainsKey("TV") && Groups.ContainsKey("Vægbeslag")) {
-				tvs = Groups["TV"];
-				walls = Groups["Vægbeslag"];
-
-				for (int i = 0; i < 12; i++) {
-					if (year[i] != null) {
-						Salesman sm = year[i].GetSalesman(person);
-						if (sm != null) {
-							vs[i] = sm.PartOfSum(walls, tvs);
-						}
-						else
-							vs[i] = 0;
-					}
-					else
-						vs[i] = 0;
-				}
-			}
-
-			return vs;
-		}
-
 		private Dictionary<string, double[]> CalculateKGMData(string person, YearInfo year) {
 			Dictionary<String, double[]> kgmdata = new Dictionary<string, double[]>();
 
-			foreach (CheckBox cb in CheckBoxes) {
+			foreach (CheckBox cb in GroupCheckBoxes) {
 				if (cb.IsChecked == true) {
 					String[] kgms = Groups[(string)cb.Content];
 					double[] percentages = new double[12];
@@ -248,6 +267,43 @@ namespace giganten {
 			}
 
 			return kgmdata;
+		}
+
+		private Dictionary<string, double[]> CalculateRatioData(string person, YearInfo year) {
+			Dictionary<String, double[]> ratiodata = new Dictionary<string, double[]>();
+
+			foreach (CheckBox cb in RatioCheckBoxes) {
+				if (cb.IsChecked == true) {
+					string a = "";
+					string b = "";
+					for (int i = 0; i < Ratios.Count; i++) {
+						string rationame = Ratios[i][0] + " / " + Ratios[i][1];
+						if (rationame == (string)cb.Content) {
+							a = Ratios[i][0];
+							b = Ratios[i][1];
+						}
+					}
+
+					if (Groups.ContainsKey(a) && Groups.ContainsKey(b)) {
+						double[] ratios = new double[12];
+						for (int i = 0; i < 12; i++) {
+							if (year[i] != null) {
+								Salesman sm = year[i].GetSalesman(person);
+								if (sm != null) {
+									ratios[i] = sm.PartOfSum(Groups[a], Groups[b]);
+								}
+								else
+									ratios[i] = 0;
+							}
+							else
+								ratios[i] = 0;
+						}
+						ratiodata.Add((string)cb.Content, ratios);
+					}
+				}
+			}
+
+			return ratiodata;
 		}
 
 		private static double CalculateMaxKroner(double[] kronelist) {
@@ -289,15 +345,16 @@ namespace giganten {
 		}
 
 		private static void bla() {
-			
+
 		}
 	}
 
 	class CanvasGroup {
 		internal string Person;
 		internal Canvas Canvas;
-		internal Polyline[] Lines;
-		internal Polyline LineVs;
+		internal Polyline[] GroupLines;
+		internal Polyline[] RatioLines;
+		//internal Polyline LineVs;
 		internal Polyline LineOms;
 		internal Polyline LineInd;
 
@@ -382,12 +439,12 @@ namespace giganten {
 			Percent25.Content = "25";
 			PercentLabel.Content = "Procent";
 
-			LineVs = new Polyline();
+			//LineVs = new Polyline();
 			LineOms = new Polyline();
 			LineInd = new Polyline();
 
-			LineVs.StrokeThickness = 3;
-			LineVs.Stroke = Brushes.Orange;
+			//LineVs.StrokeThickness = 3;
+			//LineVs.Stroke = Brushes.Orange;
 			LineOms.StrokeThickness = 3;
 			LineOms.Stroke = Brushes.Blue;
 			LineInd.StrokeThickness = 3;
@@ -415,11 +472,11 @@ namespace giganten {
 			Canvas.Children.Add(Percent25);
 			Canvas.Children.Add(PercentLabel);
 
-			Canvas.Children.Add(LineVs);
+			//Canvas.Children.Add(LineVs);
 			Canvas.Children.Add(LineOms);
 			Canvas.Children.Add(LineInd);
 
-			Color greyblue = Color.FromRgb(192,208, 224);
+			Color greyblue = Color.FromRgb(192, 208, 224);
 			Color basegreen = Color.FromRgb(225, 255, 190);
 			Color white = Color.FromRgb(255, 255, 255);
 			LinearGradientBrush br = new LinearGradientBrush(white, white, 90);
@@ -428,8 +485,14 @@ namespace giganten {
 		}
 
 		internal void InitKGMLines(Polyline[] lines) {
-			Lines = lines;
-			foreach (Polyline line in Lines)
+			GroupLines = lines;
+			foreach (Polyline line in GroupLines)
+				Canvas.Children.Add(line);
+		}
+
+		internal void InitRatioLines(Polyline[] lines) {
+			RatioLines = lines;
+			foreach (Polyline line in RatioLines)
 				Canvas.Children.Add(line);
 		}
 

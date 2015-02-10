@@ -28,7 +28,9 @@ namespace giganten
 	{
 		public ObservableCollection<String> SalesmenCollection { get; private set; }
 		Dictionary<string, string[]> Groups;
-		List<CheckBox> checkBoxList = new List<CheckBox>();
+		List<string[]> Ratios;
+		List<CheckBox> GroupCheckBoxList = new List<CheckBox>();
+		List<CheckBox> RatioCheckBoxList = new List<CheckBox>();
 
 		List<string> allSalesMen = new List<string>();
 
@@ -41,10 +43,12 @@ namespace giganten
 		string salesPerson2 = null;
 		string brugernavn = null;
 		ElGraph graph;
-		Color[] colors;
+		Color[] groupcolors;
+		Color[] ratiocolors;
 
-		public MainWindow(DataHandler data, Dictionary<string, string[]> groups) {
+		public MainWindow(DataHandler data, Dictionary<string, string[]> groups, List<string[]> ratios) {
 			Groups = groups;
+			Ratios = ratios;
 			SalesmenCollection = new ObservableCollection<string>();
 			SalesmenCollection.Add("<INGEN SÆLGER VALGT>");
 			datahandler = data;
@@ -59,12 +63,17 @@ namespace giganten
 
 			LoadDepFiles();
 
-			colors = GetColors(Groups.Count);
+			groupcolors = GetColors(Groups.Count);
+			ratiocolors = GetColors(Ratios.Count);
 
 			int i = 0;
 			foreach (KeyValuePair<String, String[]> group in Groups) {
-				AddGroupCheckboxEntry(group.Key, colors[i]);
+				AddGroupCheckboxEntry(group.Key, groupcolors[i]);
 				i++;
+			}
+
+			for (i = 0; i < Ratios.Count; i++) {
+				AddRatioCheckboxEntry(Ratios[i][0] + " / " + Ratios[i][1], ratiocolors[i]);
 			}
 
 			SizeChanged += MainWindow_SizeChanged;
@@ -85,17 +94,29 @@ namespace giganten
 				datahandler, 
 				graph_Person1,
 				graph_Person2, 
-				Groups, 
-				checkBoxList.ToArray(),
+				Groups,
+				Ratios,
+				GroupCheckBoxList.ToArray(),
+				RatioCheckBoxList.ToArray(),
 				Omsætning,
 				Indtjening,
-				TvVsVæg,
-				colors);
+				groupcolors,
+				ratiocolors);
 
 			graph.UpdateSize(canvasgrid1.ActualWidth, canvasgrid1.ActualHeight);
 		}
 
-		private void AddGroupCheckboxEntry(string groupname, Color color) {
+		private void AddRatioCheckboxEntry(string name, Color color) {
+			CheckBox cb = AddCheckboxEntry(name, color, 1, 1);
+			RatioCheckBoxList.Add(cb);
+		}
+
+		private void AddGroupCheckboxEntry(string name, Color color) {
+			CheckBox cb = AddCheckboxEntry(name, color, 2, 2);
+			GroupCheckBoxList.Add(cb);
+		}
+
+		private CheckBox AddCheckboxEntry(string name, Color color, double a, double b) {
 			CheckBox cb = new CheckBox();
 			Grid grid = new Grid();
 			Canvas canv = new Canvas();
@@ -111,17 +132,17 @@ namespace giganten
 			line.Points.Add(new Point(3, 3));
 			line.Stroke = new SolidColorBrush(color);
 			line.StrokeThickness = 4;
-			line.StrokeDashArray = new DoubleCollection(new double[] { 2, 2 });
+			line.StrokeDashArray = new DoubleCollection(new double[] { a, b });
 			canv.Children.Add(line);
 
-			cb.Content = groupname;
+			cb.Content = name;
 			cb.Height = 25;
 			grid.Children.Add(cb);
 			grid.Children.Add(canv);
 			CheckBoxPanel.Children.Add(grid);
-			checkBoxList.Add(cb);
 			cb.Checked += Checkbox_Changed;
 			cb.Unchecked += Checkbox_Changed;
+			return cb;
 		}
 
 		void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e) {
@@ -175,7 +196,7 @@ namespace giganten
 					combobox_Person1.IsEnabled = false;
 					combobox_Person2.IsEnabled = false;
 				}
-				else if (combobox_Afd.Items[combobox_Afd.SelectedIndex] == "ALLE AFDELINGER")
+				else if (((string)(combobox_Afd.Items[combobox_Afd.SelectedIndex])) == "ALLE AFDELINGER")
 				{
 					combobox_Person1.IsEnabled = true;
 					combobox_Person2.IsEnabled = true;
@@ -214,8 +235,11 @@ namespace giganten
 			if (Select_All.IsChecked == true) {
 				this.Omsætning.IsChecked = true;
 				this.Indtjening.IsChecked = true;
-				this.TvVsVæg.IsChecked = true;
-				foreach (CheckBox cb in checkBoxList) {
+				//this.TvVsVæg.IsChecked = true;
+				foreach (CheckBox cb in GroupCheckBoxList) {
+					cb.IsChecked = true;
+				}
+				foreach (CheckBox cb in RatioCheckBoxList) {
 					cb.IsChecked = true;
 				}
 			}
@@ -227,8 +251,11 @@ namespace giganten
 			if (Select_All.IsChecked == false) {
 				this.Omsætning.IsChecked = false;
 				this.Indtjening.IsChecked = false;
-				this.TvVsVæg.IsChecked = false;
-				foreach (CheckBox cb in checkBoxList) {
+				//this.TvVsVæg.IsChecked = false;
+				foreach (CheckBox cb in GroupCheckBoxList) {
+					cb.IsChecked = false;
+				}
+				foreach (CheckBox cb in RatioCheckBoxList) {
 					cb.IsChecked = false;
 				}
 			}
@@ -283,9 +310,9 @@ namespace giganten
 						continue;
 					bool cont = false;
 
-					int dif = Math.Abs(colors[i].R - 225);
-					dif += Math.Abs(colors[i].G - 255);
-					dif += Math.Abs(colors[i].B - 190);
+					int dif = Math.Abs(colors[i].R - 255); //225
+					dif += Math.Abs(colors[i].G - 255); //255
+					dif += Math.Abs(colors[i].B - 255); //190
 					if (dif < 1000.0 / (double)number)
 						continue;
 
