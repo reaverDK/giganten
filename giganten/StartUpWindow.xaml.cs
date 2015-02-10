@@ -16,6 +16,7 @@ using System.Threading;
 using Nea;
 
 namespace giganten {
+	enum ReadState { FindNextEntry, FindNextKGM }
 	/// <summary>
 	/// Interaction logic for StartUpWindow.xaml
 	/// </summary>
@@ -29,27 +30,45 @@ namespace giganten {
 
 		private void LoadDefaultFiles() {
 			string[] filePaths = null;
-			string file = null;
+			string file = "config.ini";
 			//config data
 			try {
-				file = "config.ini";
 				NeaReader r = new NeaReader(new StreamReader(file));
+				ReadState state = ReadState.FindNextEntry;
+				string group = "ERROR";
+				List<string> list = new List<string>();
+
 				while (r.Peek() != -1) {
-					string group = r.ReadLine();
-					List<string> list = new List<string>();
-					while (r.Peek() != -1) {
-						string next = r.ReadUntilAny(";,",false);
-						list.Add(next);
-						if (r.Peek() == (int)',')
-							r.ReadChar();
-						if (r.Peek() == (int)';') {
-							r.ReadChar();
+					NeaReader line = new NeaReader(r.ReadLine());
+					string temp;
+
+					if ((char)line.Peek() == '#') // comment
+						continue;
+
+					switch (state) {
+						case ReadState.FindNextEntry:
+							temp = line.ReadWord();
+							if (temp == "Group:") {
+								line.SkipWhiteSpace();
+								group = line.ReadToEnd();
+								state = ReadState.FindNextKGM;
+							}
+							else if (temp == "Ratio:") {
+
+							}
 							break;
-						}
-						r.SkipWhiteSpace();
+						case ReadState.FindNextKGM:
+							line.SkipWhiteSpace();
+							if (line.Peek() != -1) {
+								list.Add(line.ReadWord());
+							}
+							else {
+								groups.Add(group, list.ToArray());
+								list.Clear();
+								state = ReadState.FindNextEntry;
+							}
+							break;
 					}
-					groups.Add(group, list.ToArray());
-					r.SkipWhiteSpace();
 				}
 				r.Close();
 			}
