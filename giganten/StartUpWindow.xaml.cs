@@ -43,6 +43,7 @@ namespace giganten {
 					NeaReader line = new NeaReader(r.ReadLine());
 					string temp;
 
+					line.SkipWhiteSpace();
 					if ((char)line.Peek() == '#') // comment
 						continue;
 
