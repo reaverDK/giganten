@@ -24,6 +24,7 @@ namespace giganten {
 		DataHandler dataHandler = null;
 		Dictionary<string, string[]> groups = new Dictionary<string, string[]>();
 		List<string[]> ratios = new List<string[]>();
+		int demoDays = 80;
 
 		public StartUpWindow() {
 			InitializeComponent();
@@ -133,10 +134,13 @@ namespace giganten {
 
 		private void Window_Loaded(object sender, RoutedEventArgs e) {
 			StatusText.Text = "Ser efter filer";
-			if (DateTime.Today.DayOfYear > 80) {
+			if (DateTime.Today.DayOfYear > demoDays)
+			{
 				StatusText.Text = "Demo expired.\nPlease contact the developers.";
 			}
 			else {
+				int dDay = demoDays - DateTime.Today.DayOfYear;
+				demoText.Text = "Demo expires in: " + dDay + " days";
 				Thread thread = new Thread(LoadDefaultFiles);
 				thread.Start();
 			}

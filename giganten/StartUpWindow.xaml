@@ -12,8 +12,9 @@
 				</Grid.ColumnDefinitions>
 				<Button x:Name="CloseButton" Content="Luk" HorizontalAlignment="Left" Margin="37,185,0,0" VerticalAlignment="Top" Width="100" Height="35" FontSize="20" FontWeight="Bold" Click="CloseButton_Click" Grid.Column="1"/>
 				<Button x:Name="LoadButton" Content="Indlæs" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="100" Height="35" FontWeight="Bold" FontSize="20" Click="LoadButton_Click" IsEnabled="False"/>
-				<TextBlock x:Name="StatusText" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="130" Width="240" FontWeight="Bold" TextAlignment="Center" FontSize="16" Grid.ColumnSpan="2"/>
+				<TextBlock x:Name="StatusText" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="109" Width="240" FontWeight="Bold" TextAlignment="Center" FontSize="16" Grid.ColumnSpan="2"/>
 				<ProgressBar x:Name="LoadingProgressBar" HorizontalAlignment="Stretch" Height="35" Margin="10,145,10,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+				<TextBlock x:Name="demoText" Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="17" Margin="10,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240"/>
 			</Grid>
 		</Border>
 		<Grid HorizontalAlignment="Stretch" Height="66" VerticalAlignment="Top">
