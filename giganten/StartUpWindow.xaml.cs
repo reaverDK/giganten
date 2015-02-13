@@ -137,6 +137,10 @@ namespace giganten {
 			if (DateTime.Today.DayOfYear > demoDays)
 			{
 				StatusText.Text = "Demo expired.\nPlease contact the developers.";
+				int dDay = demoDays - DateTime.Today.DayOfYear;
+				if (dDay < 0)
+					dDay = 0;
+				demoText.Text = "Demo expires in: " + dDay + " days";
 			}
 			else {
 				int dDay = demoDays - DateTime.Today.DayOfYear;
