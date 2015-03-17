@@ -24,7 +24,7 @@ namespace giganten {
 		DataHandler dataHandler = null;
 		Dictionary<string, string[]> groups = new Dictionary<string, string[]>();
 		List<string[]> ratios = new List<string[]>();
-		int demoDays = 80;
+		int demoDays = 100;
 
 		public StartUpWindow() {
 			InitializeComponent();
